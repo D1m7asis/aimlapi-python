@@ -28,4 +28,4 @@ class ResponseCustomToolCallOutputParam(TypedDict, total=False):
     """The type of the custom tool call output. Always `custom_tool_call_output`."""
 
     id: str
-    """The unique ID of the custom tool call output in the OpenAI platform."""
+    """The unique ID of the custom tool call output in the AI/ML API platform."""

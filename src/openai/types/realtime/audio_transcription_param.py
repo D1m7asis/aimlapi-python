@@ -28,7 +28,7 @@ class AudioTranscriptionParam(TypedDict, total=False):
     """
     An optional text to guide the model's style or continue a previous audio
     segment. For `whisper-1`, the
-    [prompt is a list of keywords](https://platform.openai.com/docs/guides/speech-to-text#prompting).
+    [prompt is a list of keywords](https://docs.aimlapi.com/docs/guides/speech-to-text#prompting).
     For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the
     prompt is a free text string, for example "expect words related to technology".
     """

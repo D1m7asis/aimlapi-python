@@ -1,7 +1,7 @@
 #!/usr/bin/env uv run
 ####################################################################
 # Sample TUI app with a push to talk interface to the Realtime API #
-# If you have `uv` installed and the `OPENAI_API_KEY`              #
+# If you have `uv` installed and the `AIML_API_KEY`              #
 # environment variable set, you can run this example with just     #
 #                                                                  #
 # `./examples/realtime/push_to_talk_app.py`                        #
@@ -37,7 +37,7 @@ from textual.widgets import Button, Static, RichLog
 from textual.reactive import reactive
 from textual.containers import Container
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 from openai.types.realtime.session import Session
 from openai.resources.realtime.realtime import AsyncRealtimeConnection
 
@@ -135,7 +135,7 @@ class RealtimeApp(App[None]):
         super().__init__()
         self.connection = None
         self.session = None
-        self.client = AsyncOpenAI()
+        self.client = AsyncAIMLAPI()
         self.audio_player = AudioPlayerAsync()
         self.last_audio_item_id = None
         self.should_send_audio = asyncio.Event()

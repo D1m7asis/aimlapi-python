@@ -38,7 +38,7 @@ class Assistants(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AssistantsWithRawResponse(self)
 
@@ -47,7 +47,7 @@ class Assistants(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AssistantsWithStreamingResponse(self)
 
@@ -77,9 +77,9 @@ class Assistants(SyncAPIResource):
 
         Args:
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           description: The description of the assistant. The maximum length is 512 characters.
@@ -97,7 +97,7 @@ class Assistants(SyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -106,14 +106,14 @@ class Assistants(SyncAPIResource):
               effort.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+              [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
               message the model generates is valid JSON.
@@ -153,7 +153,7 @@ class Assistants(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             "/assistants",
             body=maybe_transform(
@@ -203,7 +203,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -299,15 +299,15 @@ class Assistants(SyncAPIResource):
               a maximum length of 512 characters.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           name: The name of the assistant. The maximum length is 256 characters.
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -316,14 +316,14 @@ class Assistants(SyncAPIResource):
               effort.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+              [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
               message the model generates is valid JSON.
@@ -365,7 +365,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             f"/assistants/{assistant_id}",
             body=maybe_transform(
@@ -433,7 +433,7 @@ class Assistants(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/assistants",
             page=SyncCursorPage[Assistant],
@@ -480,7 +480,7 @@ class Assistants(SyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -497,7 +497,7 @@ class AsyncAssistants(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAssistantsWithRawResponse(self)
 
@@ -506,7 +506,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncAssistantsWithStreamingResponse(self)
 
@@ -536,9 +536,9 @@ class AsyncAssistants(AsyncAPIResource):
 
         Args:
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           description: The description of the assistant. The maximum length is 512 characters.
@@ -556,7 +556,7 @@ class AsyncAssistants(AsyncAPIResource):
           name: The name of the assistant. The maximum length is 256 characters.
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -565,14 +565,14 @@ class AsyncAssistants(AsyncAPIResource):
               effort.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+              [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
               message the model generates is valid JSON.
@@ -612,7 +612,7 @@ class AsyncAssistants(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             "/assistants",
             body=await async_maybe_transform(
@@ -662,7 +662,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._get(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -758,15 +758,15 @@ class AsyncAssistants(AsyncAPIResource):
               a maximum length of 512 characters.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           name: The name of the assistant. The maximum length is 256 characters.
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -775,14 +775,14 @@ class AsyncAssistants(AsyncAPIResource):
               effort.
 
           response_format: Specifies the format that the model must output. Compatible with
-              [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-              [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+              [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+              [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
               and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
               message the model generates is valid JSON.
@@ -824,7 +824,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             f"/assistants/{assistant_id}",
             body=await async_maybe_transform(
@@ -892,7 +892,7 @@ class AsyncAssistants(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._get_api_list(
             "/assistants",
             page=AsyncCursorPage[Assistant],
@@ -939,7 +939,7 @@ class AsyncAssistants(AsyncAPIResource):
         """
         if not assistant_id:
             raise ValueError(f"Expected a non-empty value for `assistant_id` but received {assistant_id!r}")
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(

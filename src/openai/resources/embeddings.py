@@ -31,7 +31,7 @@ class Embeddings(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return EmbeddingsWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class Embeddings(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return EmbeddingsWithStreamingResponse(self)
 
@@ -74,9 +74,9 @@ class Embeddings(SyncAPIResource):
               request.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           dimensions: The number of dimensions the resulting output embeddings should have. Only
@@ -85,9 +85,9 @@ class Embeddings(SyncAPIResource):
           encoding_format: The format to return the embeddings in. Can be either `float` or
               [`base64`](https://pypi.org/project/pybase64/).
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -150,7 +150,7 @@ class AsyncEmbeddings(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncEmbeddingsWithRawResponse(self)
 
@@ -159,7 +159,7 @@ class AsyncEmbeddings(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncEmbeddingsWithStreamingResponse(self)
 
@@ -193,9 +193,9 @@ class AsyncEmbeddings(AsyncAPIResource):
               request.
 
           model: ID of the model to use. You can use the
-              [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+              [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
               see all of your available models, or see our
-              [Model overview](https://platform.openai.com/docs/models) for descriptions of
+              [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
               them.
 
           dimensions: The number of dimensions the resulting output embeddings should have. Only
@@ -204,9 +204,9 @@ class AsyncEmbeddings(AsyncAPIResource):
           encoding_format: The format to return the embeddings in. Can be either `float` or
               [`base64`](https://pypi.org/project/pybase64/).
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 

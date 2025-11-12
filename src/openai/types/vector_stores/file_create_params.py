@@ -13,7 +13,7 @@ __all__ = ["FileCreateParams"]
 class FileCreateParams(TypedDict, total=False):
     file_id: Required[str]
     """
-    A [File](https://platform.openai.com/docs/api-reference/files) ID that the
+    A [File](https://docs.aimlapi.com/docs/api-reference/files) ID that the
     vector store should use. Useful for tools like `file_search` that can access
     files.
     """

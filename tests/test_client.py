@@ -18,6 +18,7 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
+import aimlapi
 from openai import OpenAI, AsyncOpenAI, APIResponseValidationError
 from openai._types import Omit
 from openai._utils import asyncify
@@ -357,9 +358,13 @@ class TestOpenAI:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(OpenAIError):
-            with update_env(**{"OPENAI_API_KEY": Omit()}):
+            with update_env(**{"AIML_API_KEY": Omit()}):
                 client2 = OpenAI(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
+
+    def test_aimlapi_aliases(self) -> None:
+        assert aimlapi.AIMLAPI is OpenAI
+        assert aimlapi.AsyncAIMLAPI is AsyncOpenAI
 
     def test_default_query_option(self) -> None:
         client = OpenAI(
@@ -575,7 +580,7 @@ class TestOpenAI:
         client.close()
 
     def test_base_url_env(self) -> None:
-        with update_env(OPENAI_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(AIML_API_BASE_URL="http://localhost:5000/from/env"):
             client = OpenAI(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
@@ -923,8 +928,13 @@ class TestOpenAI:
         client = DefaultHttpxClient()
 
         mounts = tuple(client._mounts.items())
-        assert len(mounts) == 1
-        assert mounts[0][0].pattern == "https://"
+        https_transports = [transport for pattern, transport in mounts if pattern.pattern == "https://"]
+        assert len(https_transports) == 1
+        assert isinstance(https_transports[0], httpx.HTTPTransport)
+
+        # httpx configures passthrough transports for localhost hosts when trust_env=True
+        localhost_mounts = [pattern for pattern, transport in mounts if pattern.pattern.startswith("all://")]
+        assert localhost_mounts, "expected localhost proxy bypass entries"
 
     @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
     def test_default_client_creation(self) -> None:
@@ -1317,7 +1327,7 @@ class TestAsyncOpenAI:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(OpenAIError):
-            with update_env(**{"OPENAI_API_KEY": Omit()}):
+            with update_env(**{"AIML_API_KEY": Omit()}):
                 client2 = AsyncOpenAI(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1539,7 +1549,7 @@ class TestAsyncOpenAI:
         await client.close()
 
     async def test_base_url_env(self) -> None:
-        with update_env(OPENAI_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(AIML_API_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncOpenAI(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
@@ -1900,8 +1910,12 @@ class TestAsyncOpenAI:
         client = DefaultAsyncHttpxClient()
 
         mounts = tuple(client._mounts.items())
-        assert len(mounts) == 1
-        assert mounts[0][0].pattern == "https://"
+        https_transports = [transport for pattern, transport in mounts if pattern.pattern == "https://"]
+        assert len(https_transports) == 1
+        assert isinstance(https_transports[0], httpx.AsyncHTTPTransport)
+
+        localhost_mounts = [pattern for pattern, transport in mounts if pattern.pattern.startswith("all://")]
+        assert localhost_mounts, "expected localhost proxy bypass entries"
 
     @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
     async def test_default_client_creation(self) -> None:

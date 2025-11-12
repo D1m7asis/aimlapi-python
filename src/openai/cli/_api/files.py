@@ -23,7 +23,7 @@ def register(subparser: _SubParsersAction[ArgumentParser]) -> None:
     sub.add_argument(
         "-p",
         "--purpose",
-        help="Why are you uploading this file? (see https://platform.openai.com/docs/api-reference/ for purposes)",
+        help="Why are you uploading this file? (see https://docs.aimlapi.com/docs/api-reference/ for purposes)",
         required=True,
     )
     sub.set_defaults(func=CLIFile.create, args_model=CLIFileCreateArgs)

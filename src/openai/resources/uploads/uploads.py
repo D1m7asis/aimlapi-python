@@ -51,7 +51,7 @@ class Uploads(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return UploadsWithRawResponse(self)
 
@@ -60,7 +60,7 @@ class Uploads(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return UploadsWithStreamingResponse(self)
 
@@ -179,24 +179,24 @@ class Uploads(SyncAPIResource):
     ) -> Upload:
         """
         Creates an intermediate
-        [Upload](https://platform.openai.com/docs/api-reference/uploads/object) object
+        [Upload](https://docs.aimlapi.com/docs/api-reference/uploads/object) object
         that you can add
-        [Parts](https://platform.openai.com/docs/api-reference/uploads/part-object) to.
+        [Parts](https://docs.aimlapi.com/docs/api-reference/uploads/part-object) to.
         Currently, an Upload can accept at most 8 GB in total and expires after an hour
         after you create it.
 
         Once you complete the Upload, we will create a
-        [File](https://platform.openai.com/docs/api-reference/files/object) object that
+        [File](https://docs.aimlapi.com/docs/api-reference/files/object) object that
         contains all the parts you uploaded. This File is usable in the rest of our
         platform as a regular File object.
 
         For certain `purpose` values, the correct `mime_type` must be specified. Please
         refer to documentation for the
-        [supported MIME types for your use case](https://platform.openai.com/docs/assistants/tools/file-search#supported-files).
+        [supported MIME types for your use case](https://docs.aimlapi.com/docs/assistants/tools/file-search#supported-files).
 
         For guidance on the proper filename extensions for each purpose, please follow
         the documentation on
-        [creating a File](https://platform.openai.com/docs/api-reference/files/create).
+        [creating a File](https://docs.aimlapi.com/docs/api-reference/files/create).
 
         Args:
           bytes: The number of bytes in the file you are uploading.
@@ -211,7 +211,7 @@ class Uploads(SyncAPIResource):
           purpose: The intended purpose of the uploaded file.
 
               See the
-              [documentation on File purposes](https://platform.openai.com/docs/api-reference/files/create#files-create-purpose).
+              [documentation on File purposes](https://docs.aimlapi.com/docs/api-reference/files/create#files-create-purpose).
 
           expires_after: The expiration policy for a file. By default, files with `purpose=batch` expire
               after 30 days and all other files are persisted until they are manually deleted.
@@ -291,10 +291,10 @@ class Uploads(SyncAPIResource):
     ) -> Upload:
         """
         Completes the
-        [Upload](https://platform.openai.com/docs/api-reference/uploads/object).
+        [Upload](https://docs.aimlapi.com/docs/api-reference/uploads/object).
 
         Within the returned Upload object, there is a nested
-        [File](https://platform.openai.com/docs/api-reference/files/object) object that
+        [File](https://docs.aimlapi.com/docs/api-reference/files/object) object that
         is ready to use in the rest of the platform.
 
         You can specify the order of the Parts by passing in an ordered list of the Part
@@ -347,7 +347,7 @@ class AsyncUploads(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncUploadsWithRawResponse(self)
 
@@ -356,7 +356,7 @@ class AsyncUploads(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncUploadsWithStreamingResponse(self)
 
@@ -486,24 +486,24 @@ class AsyncUploads(AsyncAPIResource):
     ) -> Upload:
         """
         Creates an intermediate
-        [Upload](https://platform.openai.com/docs/api-reference/uploads/object) object
+        [Upload](https://docs.aimlapi.com/docs/api-reference/uploads/object) object
         that you can add
-        [Parts](https://platform.openai.com/docs/api-reference/uploads/part-object) to.
+        [Parts](https://docs.aimlapi.com/docs/api-reference/uploads/part-object) to.
         Currently, an Upload can accept at most 8 GB in total and expires after an hour
         after you create it.
 
         Once you complete the Upload, we will create a
-        [File](https://platform.openai.com/docs/api-reference/files/object) object that
+        [File](https://docs.aimlapi.com/docs/api-reference/files/object) object that
         contains all the parts you uploaded. This File is usable in the rest of our
         platform as a regular File object.
 
         For certain `purpose` values, the correct `mime_type` must be specified. Please
         refer to documentation for the
-        [supported MIME types for your use case](https://platform.openai.com/docs/assistants/tools/file-search#supported-files).
+        [supported MIME types for your use case](https://docs.aimlapi.com/docs/assistants/tools/file-search#supported-files).
 
         For guidance on the proper filename extensions for each purpose, please follow
         the documentation on
-        [creating a File](https://platform.openai.com/docs/api-reference/files/create).
+        [creating a File](https://docs.aimlapi.com/docs/api-reference/files/create).
 
         Args:
           bytes: The number of bytes in the file you are uploading.
@@ -518,7 +518,7 @@ class AsyncUploads(AsyncAPIResource):
           purpose: The intended purpose of the uploaded file.
 
               See the
-              [documentation on File purposes](https://platform.openai.com/docs/api-reference/files/create#files-create-purpose).
+              [documentation on File purposes](https://docs.aimlapi.com/docs/api-reference/files/create#files-create-purpose).
 
           expires_after: The expiration policy for a file. By default, files with `purpose=batch` expire
               after 30 days and all other files are persisted until they are manually deleted.
@@ -598,10 +598,10 @@ class AsyncUploads(AsyncAPIResource):
     ) -> Upload:
         """
         Completes the
-        [Upload](https://platform.openai.com/docs/api-reference/uploads/object).
+        [Upload](https://docs.aimlapi.com/docs/api-reference/uploads/object).
 
         Within the returned Upload object, there is a nested
-        [File](https://platform.openai.com/docs/api-reference/files/object) object that
+        [File](https://docs.aimlapi.com/docs/api-reference/files/object) object that
         is ready to use in the rest of the platform.
 
         You can specify the order of the Parts by passing in an ordered list of the Part

@@ -11,7 +11,7 @@ __all__ = ["ImageFile"]
 class ImageFile(BaseModel):
     file_id: str
     """
-    The [File](https://platform.openai.com/docs/api-reference/files) ID of the image
+    The [File](https://docs.aimlapi.com/docs/api-reference/files) ID of the image
     in the message content. Set `purpose="vision"` when uploading the File if you
     need to later display the file content.
     """

@@ -2,10 +2,10 @@
 
 import asyncio
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = AsyncOpenAI()
+# gets API Key from environment variable AIML_API_KEY
+client = AsyncAIMLAPI()
 
 
 async def main() -> None:

@@ -33,7 +33,7 @@ class Translations(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return TranslationsWithRawResponse(self)
 
@@ -42,7 +42,7 @@ class Translations(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return TranslationsWithStreamingResponse(self)
 
@@ -124,7 +124,7 @@ class Translations(SyncAPIResource):
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The
-              [prompt](https://platform.openai.com/docs/guides/speech-to-text#prompting)
+              [prompt](https://docs.aimlapi.com/docs/guides/speech-to-text#prompting)
               should be in English.
 
           response_format: The format of the output, in one of these options: `json`, `text`, `srt`,
@@ -176,7 +176,7 @@ class AsyncTranslations(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTranslationsWithRawResponse(self)
 
@@ -185,7 +185,7 @@ class AsyncTranslations(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncTranslationsWithStreamingResponse(self)
 
@@ -267,7 +267,7 @@ class AsyncTranslations(AsyncAPIResource):
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The
-              [prompt](https://platform.openai.com/docs/guides/speech-to-text#prompting)
+              [prompt](https://docs.aimlapi.com/docs/guides/speech-to-text#prompting)
               should be in English.
 
           response_format: The format of the output, in one of these options: `json`, `text`, `srt`,

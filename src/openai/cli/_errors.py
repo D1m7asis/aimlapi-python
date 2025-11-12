@@ -5,10 +5,10 @@ import sys
 import pydantic
 
 from ._utils import Colors, organization_info
-from .._exceptions import APIError, OpenAIError
+from .._exceptions import APIError, AIMLAPIError
 
 
-class CLIError(OpenAIError): ...
+class CLIError(AIMLAPIError): ...
 
 
 class SilentCLIError(CLIError): ...

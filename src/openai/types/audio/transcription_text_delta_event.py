@@ -30,7 +30,7 @@ class TranscriptionTextDeltaEvent(BaseModel):
     """The log probabilities of the delta.
 
     Only included if you
-    [create a transcription](https://platform.openai.com/docs/api-reference/audio/create-transcription)
+    [create a transcription](https://docs.aimlapi.com/docs/api-reference/audio/create-transcription)
     with the `include[]` parameter set to `logprobs`.
     """
 

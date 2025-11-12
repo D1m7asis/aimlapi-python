@@ -39,7 +39,7 @@ class StepListParams(TypedDict, total=False):
     search result content.
 
     See the
-    [file search tool documentation](https://platform.openai.com/docs/assistants/tools/file-search#customizing-file-search-settings)
+    [file search tool documentation](https://docs.aimlapi.com/docs/assistants/tools/file-search#customizing-file-search-settings)
     for more information.
     """
 

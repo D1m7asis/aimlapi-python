@@ -11,7 +11,7 @@ __all__ = ["CodeInterpreterOutputImage", "Image"]
 class Image(BaseModel):
     file_id: Optional[str] = None
     """
-    The [file](https://platform.openai.com/docs/api-reference/files) ID of the
+    The [file](https://docs.aimlapi.com/docs/api-reference/files) ID of the
     image.
     """
 

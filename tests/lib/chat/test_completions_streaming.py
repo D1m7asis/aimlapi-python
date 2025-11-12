@@ -40,7 +40,7 @@ _T = TypeVar("_T")
 #
 # you can update them with
 #
-# `OPENAI_LIVE=1 pytest --inline-snapshot=fix -p no:xdist -o addopts=""`
+# `AIML_API_LIVE=1 pytest --inline-snapshot=fix -p no:xdist -o addopts=""`
 
 
 @pytest.mark.respx(base_url=base_url)
@@ -1108,7 +1108,7 @@ def _make_stream_snapshot_request(
     on_event: Callable[[ChatCompletionStream[ResponseFormatT], ChatCompletionStreamEvent[ResponseFormatT]], Any]
     | None = None,
 ) -> StreamListener[ResponseFormatT]:
-    live = os.environ.get("OPENAI_LIVE") == "1"
+    live = os.environ.get("AIML_API_LIVE") == "1"
     if live:
 
         def _on_response(response: httpx.Response) -> None:
@@ -1155,7 +1155,7 @@ def _make_raw_stream_snapshot_request(
     respx_mock: MockRouter,
     mock_client: OpenAI,
 ) -> None:
-    live = os.environ.get("OPENAI_LIVE") == "1"
+    live = os.environ.get("AIML_API_LIVE") == "1"
     if live:
 
         def _on_response(response: httpx.Response) -> None:

@@ -1,12 +1,12 @@
 from typing import List
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 from openai.types.responses.tool_param import ToolParam
 from openai.types.responses.response_input_item_param import ResponseInputItemParam
 
 
 def main() -> None:
-    client = OpenAI()
+    client = AIMLAPI()
     tools: List[ToolParam] = [
         {
             "type": "function",

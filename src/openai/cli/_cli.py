@@ -86,7 +86,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--api-version",
-        help="The Azure API version, e.g. 'https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning'",
+        help="The Azure API version, e.g. 'https://learn.microsoft.com/en-us/azure/ai-services/aimlapi/reference#rest-api-versioning'",
     )
 
     # azure

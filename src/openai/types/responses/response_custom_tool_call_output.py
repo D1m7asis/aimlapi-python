@@ -30,4 +30,4 @@ class ResponseCustomToolCallOutput(BaseModel):
     """The type of the custom tool call output. Always `custom_tool_call_output`."""
 
     id: Optional[str] = None
-    """The unique ID of the custom tool call output in the OpenAI platform."""
+    """The unique ID of the custom tool call output in the AI/ML API platform."""

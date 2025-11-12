@@ -24,7 +24,7 @@ def reset_state() -> None:
     openai.default_headers = None
     openai.default_query = None
     openai.http_client = None
-    openai.api_type = _os.environ.get("OPENAI_API_TYPE")  # type: ignore
+    openai.api_type = _os.environ.get("AIML_API_TYPE")  # type: ignore
     openai.api_version = None
     openai.azure_endpoint = None
     openai.azure_ad_token = None
@@ -38,7 +38,7 @@ def reset_state_fixture() -> None:
 
 def test_base_url_option() -> None:
     assert openai.base_url is None
-    assert openai.completions._client.base_url == URL("https://api.openai.com/v1/")
+    assert openai.completions._client.base_url == URL("https://api.aimlapi.com/v1/")
 
     openai.base_url = "http://foo.com"
 
@@ -126,11 +126,11 @@ def test_only_api_key_results_in_openai_api() -> None:
 def test_azure_api_key_env_without_api_version() -> None:
     with fresh_env():
         openai.api_type = None
-        _os.environ["AZURE_OPENAI_API_KEY"] = "example API key"
+        _os.environ["AZURE_AIML_API_KEY"] = "example API key"
 
         with pytest.raises(
             ValueError,
-            match=r"Must provide either the `api_version` argument or the `OPENAI_API_VERSION` environment variable",
+            match=r"Must provide either the `api_version` argument or the `AIML_API_VERSION` environment variable",
         ):
             openai.completions._client  # noqa: B018
 
@@ -138,12 +138,12 @@ def test_azure_api_key_env_without_api_version() -> None:
 def test_azure_api_key_and_version_env() -> None:
     with fresh_env():
         openai.api_type = None
-        _os.environ["AZURE_OPENAI_API_KEY"] = "example API key"
-        _os.environ["OPENAI_API_VERSION"] = "example-version"
+        _os.environ["AZURE_AIML_API_KEY"] = "example API key"
+        _os.environ["AIML_API_VERSION"] = "example-version"
 
         with pytest.raises(
             ValueError,
-            match=r"Must provide one of the `base_url` or `azure_endpoint` arguments, or the `AZURE_OPENAI_ENDPOINT` environment variable",
+            match=r"Must provide one of the `base_url` or `azure_endpoint` arguments, or the `AZURE_AIML_API_ENDPOINT` environment variable",
         ):
             openai.completions._client  # noqa: B018
 
@@ -151,9 +151,9 @@ def test_azure_api_key_and_version_env() -> None:
 def test_azure_api_key_version_and_endpoint_env() -> None:
     with fresh_env():
         openai.api_type = None
-        _os.environ["AZURE_OPENAI_API_KEY"] = "example API key"
-        _os.environ["OPENAI_API_VERSION"] = "example-version"
-        _os.environ["AZURE_OPENAI_ENDPOINT"] = "https://www.example"
+        _os.environ["AZURE_AIML_API_KEY"] = "example API key"
+        _os.environ["AIML_API_VERSION"] = "example-version"
+        _os.environ["AZURE_AIML_API_ENDPOINT"] = "https://www.example"
 
         openai.completions._client  # noqa: B018
 
@@ -163,9 +163,9 @@ def test_azure_api_key_version_and_endpoint_env() -> None:
 def test_azure_azure_ad_token_version_and_endpoint_env() -> None:
     with fresh_env():
         openai.api_type = None
-        _os.environ["AZURE_OPENAI_AD_TOKEN"] = "example AD token"
-        _os.environ["OPENAI_API_VERSION"] = "example-version"
-        _os.environ["AZURE_OPENAI_ENDPOINT"] = "https://www.example"
+        _os.environ["AZURE_AIML_API_AD_TOKEN"] = "example AD token"
+        _os.environ["AIML_API_VERSION"] = "example-version"
+        _os.environ["AZURE_AIML_API_ENDPOINT"] = "https://www.example"
 
         client = openai.completions._client
         assert isinstance(client, AzureOpenAI)
@@ -175,8 +175,8 @@ def test_azure_azure_ad_token_version_and_endpoint_env() -> None:
 def test_azure_azure_ad_token_provider_version_and_endpoint_env() -> None:
     with fresh_env():
         openai.api_type = None
-        _os.environ["OPENAI_API_VERSION"] = "example-version"
-        _os.environ["AZURE_OPENAI_ENDPOINT"] = "https://www.example"
+        _os.environ["AIML_API_VERSION"] = "example-version"
+        _os.environ["AZURE_AIML_API_ENDPOINT"] = "https://www.example"
         openai.azure_ad_token_provider = lambda: "token"
 
         client = openai.completions._client

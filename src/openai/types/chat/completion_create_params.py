@@ -38,19 +38,19 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far.
 
-    Depending on the [model](https://platform.openai.com/docs/models) you use,
+    Depending on the [model](https://docs.aimlapi.com/docs/models) you use,
     different message types (modalities) are supported, like
-    [text](https://platform.openai.com/docs/guides/text-generation),
-    [images](https://platform.openai.com/docs/guides/vision), and
-    [audio](https://platform.openai.com/docs/guides/audio).
+    [text](https://docs.aimlapi.com/docs/guides/text-generation),
+    [images](https://docs.aimlapi.com/docs/guides/vision), and
+    [audio](https://docs.aimlapi.com/docs/guides/audio).
     """
 
     model: Required[Union[str, ChatModel]]
     """Model ID used to generate the response, like `gpt-4o` or `o3`.
 
-    OpenAI offers a wide range of models with different capabilities, performance
+    AI/ML API offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
-    [model guide](https://platform.openai.com/docs/models) to browse and compare
+    [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
     available models.
     """
 
@@ -58,7 +58,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     """Parameters for audio output.
 
     Required when audio output is requested with `modalities: ["audio"]`.
-    [Learn more](https://platform.openai.com/docs/guides/audio).
+    [Learn more](https://docs.aimlapi.com/docs/guides/audio).
     """
 
     frequency_penalty: Optional[float]
@@ -113,18 +113,18 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     """
     An upper bound for the number of tokens that can be generated for a completion,
     including visible output tokens and
-    [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+    [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
     """
 
     max_tokens: Optional[int]
     """
     The maximum number of [tokens](/tokenizer) that can be generated in the chat
     completion. This value can be used to control
-    [costs](https://openai.com/api/pricing/) for text generated via API.
+    [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
     This value is now deprecated in favor of `max_completion_tokens`, and is not
     compatible with
-    [o-series models](https://platform.openai.com/docs/guides/reasoning).
+    [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
     """
 
     metadata: Optional[Metadata]
@@ -145,7 +145,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     `["text"]`
 
     The `gpt-4o-audio-preview` model can also be used to
-    [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+    [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
     this model generate both text and audio responses, you can use:
 
     `["text", "audio"]`
@@ -161,7 +161,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     parallel_tool_calls: bool
     """
     Whether to enable
-    [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+    [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
     during tool use.
     """
 
@@ -180,15 +180,15 @@ class CompletionCreateParamsBase(TypedDict, total=False):
 
     prompt_cache_key: str
     """
-    Used by OpenAI to cache responses for similar requests to optimize your cache
+    Used by AI/ML API to cache responses for similar requests to optimize your cache
     hit rates. Replaces the `user` field.
-    [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+    [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
     """
 
     reasoning_effort: Optional[ReasoningEffort]
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -203,7 +203,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables the older JSON mode, which
     ensures the message the model generates is valid JSON. Using `json_schema` is
@@ -213,10 +213,10 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     safety_identifier: str
     """
     A stable identifier used to help detect users of your application that may be
-    violating OpenAI's usage policies. The IDs should be a string that uniquely
+    violating AI/ML API's usage policies. The IDs should be a string that uniquely
     identifies each user. We recommend hashing their username or email address, in
     order to avoid sending us any identifying information.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
     """
 
     seed: Optional[int]
@@ -236,8 +236,8 @@ class CompletionCreateParamsBase(TypedDict, total=False):
       will use 'default'.
     - If set to 'default', then the request will be processed with the standard
       pricing and performance for the selected model.
-    - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-      '[priority](https://openai.com/api-priority-processing/)', then the request
+    - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+      '[priority](https://aimlapi.com/api-priority-processing/)', then the request
       will be processed with the corresponding service tier.
     - When not set, the default behavior is 'auto'.
 
@@ -257,8 +257,8 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     store: Optional[bool]
     """
     Whether or not to store the output of this chat completion request for use in
-    our [model distillation](https://platform.openai.com/docs/guides/distillation)
-    or [evals](https://platform.openai.com/docs/guides/evals) products.
+    our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+    or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
     Supports text and image inputs. Note: image inputs over 8MB will be dropped.
     """
@@ -291,8 +291,8 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     """A list of tools the model may call.
 
     You can provide either
-    [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-    or [function tools](https://platform.openai.com/docs/guides/function-calling).
+    [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+    or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
     """
 
     top_logprobs: Optional[int]
@@ -316,8 +316,8 @@ class CompletionCreateParamsBase(TypedDict, total=False):
 
     Use `prompt_cache_key` instead to maintain caching optimizations. A stable
     identifier for your end-users. Used to boost cache hit rates by better bucketing
-    similar requests and to help OpenAI detect and prevent abuse.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+    similar requests and to help AI/ML API detect and prevent abuse.
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
     """
 
     verbosity: Optional[Literal["low", "medium", "high"]]
@@ -332,7 +332,7 @@ class CompletionCreateParamsBase(TypedDict, total=False):
     """
     This tool searches the web for relevant results to use in a response. Learn more
     about the
-    [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+    [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
     """
 
 
@@ -356,7 +356,7 @@ class Function(TypedDict, total=False):
     parameters: FunctionParameters
     """The parameters the functions accepts, described as a JSON Schema object.
 
-    See the [guide](https://platform.openai.com/docs/guides/function-calling) for
+    See the [guide](https://docs.aimlapi.com/docs/guides/function-calling) for
     examples, and the
     [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
     documentation about the format.
@@ -414,9 +414,9 @@ class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase, total=False
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
     for more information, along with the
-    [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+    [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
     guide for more information on how to handle the streaming events.
     """
 
@@ -428,9 +428,9 @@ class CompletionCreateParamsStreaming(CompletionCreateParamsBase):
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
     for more information, along with the
-    [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+    [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
     guide for more information on how to handle the streaming events.
     """
 

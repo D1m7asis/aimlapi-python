@@ -19,7 +19,7 @@ def sync_main() -> None:
 
     token_provider: AzureADTokenProvider = get_bearer_token_provider(DefaultAzureCredential(), scopes)
 
-    client = AzureOpenAI(
+    client = AzureAIMLAPI(
         api_version=api_version,
         azure_endpoint=endpoint,
         azure_ad_token_provider=token_provider,
@@ -43,7 +43,7 @@ async def async_main() -> None:
 
     token_provider: AsyncAzureADTokenProvider = get_bearer_token_provider(DefaultAzureCredential(), scopes)
 
-    client = AsyncAzureOpenAI(
+    client = AsyncAzureAIMLAPI(
         api_version=api_version,
         azure_endpoint=endpoint,
         azure_ad_token_provider=token_provider,

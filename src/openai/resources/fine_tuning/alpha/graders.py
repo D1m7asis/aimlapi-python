@@ -25,7 +25,7 @@ class Graders(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return GradersWithRawResponse(self)
 
@@ -34,7 +34,7 @@ class Graders(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return GradersWithStreamingResponse(self)
 
@@ -59,13 +59,13 @@ class Graders(SyncAPIResource):
 
           model_sample: The model sample to be evaluated. This value will be used to populate the
               `sample` namespace. See
-              [the guide](https://platform.openai.com/docs/guides/graders) for more details.
+              [the guide](https://docs.aimlapi.com/docs/guides/graders) for more details.
               The `output_json` variable will be populated if the model sample is a valid JSON
               string.
 
           item: The dataset item provided to the grader. This will be used to populate the
               `item` namespace. See
-              [the guide](https://platform.openai.com/docs/guides/graders) for more details.
+              [the guide](https://docs.aimlapi.com/docs/guides/graders) for more details.
 
           extra_headers: Send extra headers
 
@@ -133,7 +133,7 @@ class AsyncGraders(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncGradersWithRawResponse(self)
 
@@ -142,7 +142,7 @@ class AsyncGraders(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncGradersWithStreamingResponse(self)
 
@@ -167,13 +167,13 @@ class AsyncGraders(AsyncAPIResource):
 
           model_sample: The model sample to be evaluated. This value will be used to populate the
               `sample` namespace. See
-              [the guide](https://platform.openai.com/docs/guides/graders) for more details.
+              [the guide](https://docs.aimlapi.com/docs/guides/graders) for more details.
               The `output_json` variable will be populated if the model sample is a valid JSON
               string.
 
           item: The dataset item provided to the grader. This will be used to populate the
               `item` namespace. See
-              [the guide](https://platform.openai.com/docs/guides/graders) for more details.
+              [the guide](https://docs.aimlapi.com/docs/guides/graders) for more details.
 
           extra_headers: Send extra headers
 

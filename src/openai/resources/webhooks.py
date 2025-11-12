@@ -27,7 +27,7 @@ class Webhooks(SyncAPIResource):
         *,
         secret: str | None = None,
     ) -> UnwrapWebhookEvent:
-        """Validates that the given payload was sent by OpenAI and parses the payload."""
+        """Validates that the given payload was sent by AI/ML API and parses the payload."""
         if secret is None:
             secret = self._client.webhook_secret
 
@@ -49,7 +49,7 @@ class Webhooks(SyncAPIResource):
         secret: str | None = None,
         tolerance: int = 300,
     ) -> None:
-        """Validates whether or not the webhook payload was sent by OpenAI.
+        """Validates whether or not the webhook payload was sent by AI/ML API.
 
         Args:
             payload: The webhook payload
@@ -62,8 +62,8 @@ class Webhooks(SyncAPIResource):
 
         if secret is None:
             raise ValueError(
-                "The webhook secret must either be set using the env var, OPENAI_WEBHOOK_SECRET, "
-                "on the client class, OpenAI(webhook_secret='123'), or passed to this function"
+                "The webhook secret must either be set using the env var, AIML_API_WEBHOOK_SECRET, "
+                "on the client class, AI/ML API(webhook_secret='123'), or passed to this function"
             )
 
         signature_header = get_required_header(headers, "webhook-signature")
@@ -102,7 +102,7 @@ class Webhooks(SyncAPIResource):
 
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
 
-        # Prepare the signed payload (OpenAI uses webhookId.timestamp.payload format)
+        # Prepare the signed payload (AI/ML API uses webhookId.timestamp.payload format)
         signed_payload = f"{webhook_id}.{timestamp}.{body}"
         expected_signature = base64.b64encode(
             hmac.new(decoded_secret, signed_payload.encode(), hashlib.sha256).digest()
@@ -123,7 +123,7 @@ class AsyncWebhooks(AsyncAPIResource):
         *,
         secret: str | None = None,
     ) -> UnwrapWebhookEvent:
-        """Validates that the given payload was sent by OpenAI and parses the payload."""
+        """Validates that the given payload was sent by AI/ML API and parses the payload."""
         if secret is None:
             secret = self._client.webhook_secret
 
@@ -146,7 +146,7 @@ class AsyncWebhooks(AsyncAPIResource):
         secret: str | None = None,
         tolerance: int = 300,
     ) -> None:
-        """Validates whether or not the webhook payload was sent by OpenAI.
+        """Validates whether or not the webhook payload was sent by AI/ML API.
 
         Args:
             payload: The webhook payload
@@ -159,8 +159,8 @@ class AsyncWebhooks(AsyncAPIResource):
 
         if secret is None:
             raise ValueError(
-                "The webhook secret must either be set using the env var, OPENAI_WEBHOOK_SECRET, "
-                "on the client class, OpenAI(webhook_secret='123'), or passed to this function"
+                "The webhook secret must either be set using the env var, AIML_API_WEBHOOK_SECRET, "
+                "on the client class, AI/ML API(webhook_secret='123'), or passed to this function"
             ) from None
 
         signature_header = get_required_header(headers, "webhook-signature")
@@ -199,7 +199,7 @@ class AsyncWebhooks(AsyncAPIResource):
 
         body = payload.decode("utf-8") if isinstance(payload, bytes) else payload
 
-        # Prepare the signed payload (OpenAI uses webhookId.timestamp.payload format)
+        # Prepare the signed payload (AI/ML API uses webhookId.timestamp.payload format)
         signed_payload = f"{webhook_id}.{timestamp}.{body}"
         expected_signature = base64.b64encode(
             hmac.new(decoded_secret, signed_payload.encode(), hashlib.sha256).digest()

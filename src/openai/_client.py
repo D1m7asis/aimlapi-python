@@ -28,7 +28,7 @@ from ._compat import cached_property
 from ._models import FinalRequestOptions
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import OpenAIError, APIStatusError
+from ._exceptions import AIMLAPIError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -78,10 +78,21 @@ if TYPE_CHECKING:
     from .resources.conversations.conversations import Conversations, AsyncConversations
     from .resources.vector_stores.vector_stores import VectorStores, AsyncVectorStores
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "OpenAI", "AsyncOpenAI", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "AIMLAPI",
+    "AsyncAIMLAPI",
+    "OpenAI",
+    "AsyncOpenAI",
+    "Client",
+    "AsyncClient",
+]
 
 
-class OpenAI(SyncAPIClient):
+class AIMLAPI(SyncAPIClient):
     # client options
     api_key: str
     organization: str | None
@@ -123,19 +134,19 @@ class OpenAI(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous OpenAI client instance.
+        """Construct a new synchronous AI/ML API client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `OPENAI_API_KEY`
-        - `organization` from `OPENAI_ORG_ID`
-        - `project` from `OPENAI_PROJECT_ID`
-        - `webhook_secret` from `OPENAI_WEBHOOK_SECRET`
+        - `api_key` from `AIML_API_KEY`
+        - `organization` from `AIML_API_ORG_ID`
+        - `project` from `AIML_API_PROJECT_ID`
+        - `webhook_secret` from `AIML_API_WEBHOOK_SECRET`
         """
         if api_key is None:
-            api_key = os.environ.get("OPENAI_API_KEY")
+            api_key = os.environ.get("AIML_API_KEY")
         if api_key is None:
-            raise OpenAIError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable"
+            raise AIMLAPIError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the AIML_API_KEY environment variable"
             )
         if callable(api_key):
             self.api_key = ""
@@ -145,23 +156,23 @@ class OpenAI(SyncAPIClient):
             self._api_key_provider = None
 
         if organization is None:
-            organization = os.environ.get("OPENAI_ORG_ID")
+            organization = os.environ.get("AIML_API_ORG_ID")
         self.organization = organization
 
         if project is None:
-            project = os.environ.get("OPENAI_PROJECT_ID")
+            project = os.environ.get("AIML_API_PROJECT_ID")
         self.project = project
 
         if webhook_secret is None:
-            webhook_secret = os.environ.get("OPENAI_WEBHOOK_SECRET")
+            webhook_secret = os.environ.get("AIML_API_WEBHOOK_SECRET")
         self.webhook_secret = webhook_secret
 
         self.websocket_base_url = websocket_base_url
 
         if base_url is None:
-            base_url = os.environ.get("OPENAI_BASE_URL")
+            base_url = os.environ.get("AIML_API_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.openai.com/v1"
+            base_url = "https://api.aimlapi.com/v1"
 
         super().__init__(
             version=__version__,
@@ -297,12 +308,12 @@ class OpenAI(SyncAPIClient):
         return Videos(self)
 
     @cached_property
-    def with_raw_response(self) -> OpenAIWithRawResponse:
-        return OpenAIWithRawResponse(self)
+    def with_raw_response(self) -> AIMLAPIWithRawResponse:
+        return AIMLAPIWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OpenAIWithStreamedResponse:
-        return OpenAIWithStreamedResponse(self)
+    def with_streaming_response(self) -> AIMLAPIWithStreamedResponse:
+        return AIMLAPIWithStreamedResponse(self)
 
     @property
     @override
@@ -333,8 +344,8 @@ class OpenAI(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
-            "OpenAI-Organization": self.organization if self.organization is not None else Omit(),
-            "OpenAI-Project": self.project if self.project is not None else Omit(),
+            "AIMLAPI-Organization": self.organization if self.organization is not None else Omit(),
+            "AIMLAPI-Project": self.project if self.project is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -432,7 +443,7 @@ class OpenAI(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=data)
 
 
-class AsyncOpenAI(AsyncAPIClient):
+class AsyncAIMLAPI(AsyncAPIClient):
     # client options
     api_key: str
     organization: str | None
@@ -474,19 +485,19 @@ class AsyncOpenAI(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncOpenAI client instance.
+        """Construct a new async AI/ML API client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `OPENAI_API_KEY`
-        - `organization` from `OPENAI_ORG_ID`
-        - `project` from `OPENAI_PROJECT_ID`
-        - `webhook_secret` from `OPENAI_WEBHOOK_SECRET`
+        - `api_key` from `AIML_API_KEY`
+        - `organization` from `AIML_API_ORG_ID`
+        - `project` from `AIML_API_PROJECT_ID`
+        - `webhook_secret` from `AIML_API_WEBHOOK_SECRET`
         """
         if api_key is None:
-            api_key = os.environ.get("OPENAI_API_KEY")
+            api_key = os.environ.get("AIML_API_KEY")
         if api_key is None:
-            raise OpenAIError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable"
+            raise AIMLAPIError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the AIML_API_KEY environment variable"
             )
         if callable(api_key):
             self.api_key = ""
@@ -496,23 +507,23 @@ class AsyncOpenAI(AsyncAPIClient):
             self._api_key_provider = None
 
         if organization is None:
-            organization = os.environ.get("OPENAI_ORG_ID")
+            organization = os.environ.get("AIML_API_ORG_ID")
         self.organization = organization
 
         if project is None:
-            project = os.environ.get("OPENAI_PROJECT_ID")
+            project = os.environ.get("AIML_API_PROJECT_ID")
         self.project = project
 
         if webhook_secret is None:
-            webhook_secret = os.environ.get("OPENAI_WEBHOOK_SECRET")
+            webhook_secret = os.environ.get("AIML_API_WEBHOOK_SECRET")
         self.webhook_secret = webhook_secret
 
         self.websocket_base_url = websocket_base_url
 
         if base_url is None:
-            base_url = os.environ.get("OPENAI_BASE_URL")
+            base_url = os.environ.get("AIML_API_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.openai.com/v1"
+            base_url = "https://api.aimlapi.com/v1"
 
         super().__init__(
             version=__version__,
@@ -648,12 +659,12 @@ class AsyncOpenAI(AsyncAPIClient):
         return AsyncVideos(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncOpenAIWithRawResponse:
-        return AsyncOpenAIWithRawResponse(self)
+    def with_raw_response(self) -> AsyncAIMLAPIWithRawResponse:
+        return AsyncAIMLAPIWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOpenAIWithStreamedResponse:
-        return AsyncOpenAIWithStreamedResponse(self)
+    def with_streaming_response(self) -> AsyncAIMLAPIWithStreamedResponse:
+        return AsyncAIMLAPIWithStreamedResponse(self)
 
     @property
     @override
@@ -684,8 +695,8 @@ class AsyncOpenAI(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
-            "OpenAI-Organization": self.organization if self.organization is not None else Omit(),
-            "OpenAI-Project": self.project if self.project is not None else Omit(),
+            "AIMLAPI-Organization": self.organization if self.organization is not None else Omit(),
+            "AIMLAPI-Project": self.project if self.project is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -783,10 +794,10 @@ class AsyncOpenAI(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=data)
 
 
-class OpenAIWithRawResponse:
-    _client: OpenAI
+class AIMLAPIWithRawResponse:
+    _client: AIMLAPI
 
-    def __init__(self, client: OpenAI) -> None:
+    def __init__(self, client: AIMLAPI) -> None:
         self._client = client
 
     @cached_property
@@ -904,10 +915,10 @@ class OpenAIWithRawResponse:
         return VideosWithRawResponse(self._client.videos)
 
 
-class AsyncOpenAIWithRawResponse:
-    _client: AsyncOpenAI
+class AsyncAIMLAPIWithRawResponse:
+    _client: AsyncAIMLAPI
 
-    def __init__(self, client: AsyncOpenAI) -> None:
+    def __init__(self, client: AsyncAIMLAPI) -> None:
         self._client = client
 
     @cached_property
@@ -1025,10 +1036,10 @@ class AsyncOpenAIWithRawResponse:
         return AsyncVideosWithRawResponse(self._client.videos)
 
 
-class OpenAIWithStreamedResponse:
-    _client: OpenAI
+class AIMLAPIWithStreamedResponse:
+    _client: AIMLAPI
 
-    def __init__(self, client: OpenAI) -> None:
+    def __init__(self, client: AIMLAPI) -> None:
         self._client = client
 
     @cached_property
@@ -1146,10 +1157,10 @@ class OpenAIWithStreamedResponse:
         return VideosWithStreamingResponse(self._client.videos)
 
 
-class AsyncOpenAIWithStreamedResponse:
-    _client: AsyncOpenAI
+class AsyncAIMLAPIWithStreamedResponse:
+    _client: AsyncAIMLAPI
 
-    def __init__(self, client: AsyncOpenAI) -> None:
+    def __init__(self, client: AsyncAIMLAPI) -> None:
         self._client = client
 
     @cached_property
@@ -1267,6 +1278,19 @@ class AsyncOpenAIWithStreamedResponse:
         return AsyncVideosWithStreamingResponse(self._client.videos)
 
 
-Client = OpenAI
+Client = AIMLAPI
 
-AsyncClient = AsyncOpenAI
+AsyncClient = AsyncAIMLAPI
+
+# Backwards compatible aliases using the historical OpenAI naming.
+OpenAI = AIMLAPI
+
+AsyncOpenAI = AsyncAIMLAPI
+
+OpenAIWithRawResponse = AIMLAPIWithRawResponse
+
+AsyncOpenAIWithRawResponse = AsyncAIMLAPIWithRawResponse
+
+OpenAIWithStreamedResponse = AIMLAPIWithStreamedResponse
+
+AsyncOpenAIWithStreamedResponse = AsyncAIMLAPIWithStreamedResponse

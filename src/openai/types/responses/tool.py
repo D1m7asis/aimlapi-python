@@ -121,7 +121,7 @@ class Mcp(BaseModel):
 
     One of `server_url` or `connector_id` must be provided. Learn more about service
     connectors
-    [here](https://platform.openai.com/docs/guides/tools-remote-mcp#connectors).
+    [here](https://docs.aimlapi.com/docs/guides/tools-remote-mcp#connectors).
 
     Currently supported `connector_id` values are:
 

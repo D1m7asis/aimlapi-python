@@ -2,9 +2,9 @@
 
 import asyncio
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI()
+client = AsyncAIMLAPI()
 
 
 async def main() -> None:

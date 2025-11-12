@@ -29,7 +29,7 @@ class Batches(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return BatchesWithRawResponse(self)
 
@@ -38,7 +38,7 @@ class Batches(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return BatchesWithStreamingResponse(self)
 
@@ -71,11 +71,11 @@ class Batches(SyncAPIResource):
 
           input_file_id: The ID of an uploaded file that contains requests for the new batch.
 
-              See [upload file](https://platform.openai.com/docs/api-reference/files/create)
+              See [upload file](https://docs.aimlapi.com/docs/api-reference/files/create)
               for how to upload a file.
 
               Your input file must be formatted as a
-              [JSONL file](https://platform.openai.com/docs/api-reference/batch/request-input),
+              [JSONL file](https://docs.aimlapi.com/docs/api-reference/batch/request-input),
               and must be uploaded with the purpose `batch`. The file can contain up to 50,000
               requests, and can be up to 200 MB in size.
 
@@ -244,7 +244,7 @@ class AsyncBatches(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncBatchesWithRawResponse(self)
 
@@ -253,7 +253,7 @@ class AsyncBatches(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncBatchesWithStreamingResponse(self)
 
@@ -286,11 +286,11 @@ class AsyncBatches(AsyncAPIResource):
 
           input_file_id: The ID of an uploaded file that contains requests for the new batch.
 
-              See [upload file](https://platform.openai.com/docs/api-reference/files/create)
+              See [upload file](https://docs.aimlapi.com/docs/api-reference/files/create)
               for how to upload a file.
 
               Your input file must be formatted as a
-              [JSONL file](https://platform.openai.com/docs/api-reference/batch/request-input),
+              [JSONL file](https://docs.aimlapi.com/docs/api-reference/batch/request-input),
               and must be uploaded with the purpose `batch`. The file can contain up to 50,000
               requests, and can be up to 200 MB in size.
 

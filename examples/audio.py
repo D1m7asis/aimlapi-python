@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-# gets OPENAI_API_KEY from your environment variables
-openai = OpenAI()
+# gets AIML_API_KEY from your environment variables
+openai = AIMLAPI()
 
 speech_file_path = Path(__file__).parent / "speech.mp3"
 

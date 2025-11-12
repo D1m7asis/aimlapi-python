@@ -29,7 +29,7 @@ class Batch(BaseModel):
     """The Unix timestamp (in seconds) for when the batch was created."""
 
     endpoint: str
-    """The OpenAI API endpoint used by the batch."""
+    """The AI/ML API endpoint used by the batch."""
 
     input_file_id: str
     """The ID of the input file for the batch."""
@@ -84,9 +84,9 @@ class Batch(BaseModel):
     model: Optional[str] = None
     """Model ID used to process the batch, like `gpt-5-2025-08-07`.
 
-    OpenAI offers a wide range of models with different capabilities, performance
+    AI/ML API offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
-    [model guide](https://platform.openai.com/docs/models) to browse and compare
+    [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
     available models.
     """
 

@@ -16,7 +16,7 @@ class ChatCompletionStreamOptionsParam(TypedDict, total=False):
     attacks. These obfuscation fields are included by default, but add a small
     amount of overhead to the data stream. You can set `include_obfuscation` to
     false to optimize for bandwidth if you trust the network links between your
-    application and the OpenAI API.
+    application and the AI/ML API.
     """
 
     include_usage: bool

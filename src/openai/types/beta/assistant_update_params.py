@@ -84,9 +84,9 @@ class AssistantUpdateParams(TypedDict, total=False):
     """ID of the model to use.
 
     You can use the
-    [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+    [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
     see all of your available models, or see our
-    [Model overview](https://platform.openai.com/docs/models) for descriptions of
+    [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
     them.
     """
 
@@ -96,7 +96,7 @@ class AssistantUpdateParams(TypedDict, total=False):
     reasoning_effort: Optional[ReasoningEffort]
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -108,14 +108,14 @@ class AssistantUpdateParams(TypedDict, total=False):
     response_format: Optional[AssistantResponseFormatOptionParam]
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+    [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
     message the model generates is valid JSON.
@@ -165,7 +165,7 @@ class ToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: SequenceNotStr[str]
     """
     Overrides the list of
-    [file](https://platform.openai.com/docs/api-reference/files) IDs made available
+    [file](https://docs.aimlapi.com/docs/api-reference/files) IDs made available
     to the `code_interpreter` tool. There can be a maximum of 20 files associated
     with the tool.
     """
@@ -175,7 +175,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: SequenceNotStr[str]
     """
     Overrides the
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     attached to this assistant. There can be a maximum of 1 vector store attached to
     the assistant.
     """

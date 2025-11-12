@@ -3,7 +3,7 @@ import asyncio
 
 from azure.identity.aio import DefaultAzureCredential, get_bearer_token_provider
 
-from openai import AsyncAzureOpenAI
+from aimlapi import AsyncAzureAIMLAPI
 
 # Azure OpenAI Realtime Docs
 
@@ -21,8 +21,8 @@ async def main() -> None:
     """
 
     credential = DefaultAzureCredential()
-    client = AsyncAzureOpenAI(
-        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+    client = AsyncAzureAIMLAPI(
+        azure_endpoint=os.environ["AZURE_AIML_API_ENDPOINT"],
         azure_ad_token_provider=get_bearer_token_provider(credential, "https://cognitiveservices.azure.com/.default"),
         api_version="2024-10-01-preview",
     )

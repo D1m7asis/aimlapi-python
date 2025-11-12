@@ -2,11 +2,11 @@
 
 import asyncio
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 from openai.helpers import Microphone
 
-# gets OPENAI_API_KEY from your environment variables
-openai = AsyncOpenAI()
+# gets AIML_API_KEY from your environment variables
+openai = AsyncAIMLAPI()
 
 
 async def main() -> None:

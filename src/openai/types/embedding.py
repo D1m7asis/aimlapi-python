@@ -13,7 +13,7 @@ class Embedding(BaseModel):
     """The embedding vector, which is a list of floats.
 
     The length of vector depends on the model as listed in the
-    [embedding guide](https://platform.openai.com/docs/guides/embeddings).
+    [embedding guide](https://docs.aimlapi.com/docs/guides/embeddings).
     """
 
     index: int

@@ -28,7 +28,7 @@ class Moderations(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return ModerationsWithRawResponse(self)
 
@@ -37,7 +37,7 @@ class Moderations(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return ModerationsWithStreamingResponse(self)
 
@@ -56,16 +56,16 @@ class Moderations(SyncAPIResource):
         """Classifies if text and/or image inputs are potentially harmful.
 
         Learn more in
-        the [moderation guide](https://platform.openai.com/docs/guides/moderation).
+        the [moderation guide](https://docs.aimlapi.com/docs/guides/moderation).
 
         Args:
           input: Input (or inputs) to classify. Can be a single string, an array of strings, or
               an array of multi-modal input objects similar to other models.
 
           model: The content moderation model you would like to use. Learn more in
-              [the moderation guide](https://platform.openai.com/docs/guides/moderation), and
+              [the moderation guide](https://docs.aimlapi.com/docs/guides/moderation), and
               learn about available models
-              [here](https://platform.openai.com/docs/models#moderation).
+              [here](https://docs.aimlapi.com/docs/models#moderation).
 
           extra_headers: Send extra headers
 
@@ -98,7 +98,7 @@ class AsyncModerations(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncModerationsWithRawResponse(self)
 
@@ -107,7 +107,7 @@ class AsyncModerations(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncModerationsWithStreamingResponse(self)
 
@@ -126,16 +126,16 @@ class AsyncModerations(AsyncAPIResource):
         """Classifies if text and/or image inputs are potentially harmful.
 
         Learn more in
-        the [moderation guide](https://platform.openai.com/docs/guides/moderation).
+        the [moderation guide](https://docs.aimlapi.com/docs/guides/moderation).
 
         Args:
           input: Input (or inputs) to classify. Can be a single string, an array of strings, or
               an array of multi-modal input objects similar to other models.
 
           model: The content moderation model you would like to use. Learn more in
-              [the moderation guide](https://platform.openai.com/docs/guides/moderation), and
+              [the moderation guide](https://docs.aimlapi.com/docs/guides/moderation), and
               learn about available models
-              [here](https://platform.openai.com/docs/models#moderation).
+              [here](https://docs.aimlapi.com/docs/models#moderation).
 
           extra_headers: Send extra headers
 

@@ -3,9 +3,9 @@
 import base64
 from pathlib import Path
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 
 def main() -> None:

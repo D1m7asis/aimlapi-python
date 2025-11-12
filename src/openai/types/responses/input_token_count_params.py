@@ -43,9 +43,9 @@ class InputTokenCountParams(TypedDict, total=False):
     model: Optional[str]
     """Model ID used to generate the response, like `gpt-4o` or `o3`.
 
-    OpenAI offers a wide range of models with different capabilities, performance
+    AI/ML API offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
-    [model guide](https://platform.openai.com/docs/models) to browse and compare
+    [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
     available models.
     """
 
@@ -56,14 +56,14 @@ class InputTokenCountParams(TypedDict, total=False):
     """The unique ID of the previous response to the model.
 
     Use this to create multi-turn conversations. Learn more about
-    [conversation state](https://platform.openai.com/docs/guides/conversation-state).
+    [conversation state](https://docs.aimlapi.com/docs/guides/conversation-state).
     Cannot be used in conjunction with `conversation`.
     """
 
     reasoning: Optional[Reasoning]
     """
     **gpt-5 and o-series models only** Configuration options for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning).
     """
 
     text: Optional[Text]
@@ -71,8 +71,8 @@ class InputTokenCountParams(TypedDict, total=False):
 
     Can be plain text or structured JSON data. Learn more:
 
-    - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-    - [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+    - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+    - [Structured Outputs](https://docs.aimlapi.com/docs/guides/structured-outputs)
     """
 
     tool_choice: Optional[ToolChoice]
@@ -108,7 +108,7 @@ class Text(TypedDict, total=False):
 
     Configuring `{ "type": "json_schema" }` enables Structured Outputs, which
     ensures the model will match your supplied JSON schema. Learn more in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     The default format is `{ "type": "text" }` with no additional options.
 

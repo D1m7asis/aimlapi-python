@@ -157,7 +157,7 @@ class AudioInput(BaseModel):
     `null` to turn off once on. Input audio transcription is not native to the
     model, since the model consumes audio directly. Transcription runs
     asynchronously through
-    [the /audio/transcriptions endpoint](https://platform.openai.com/docs/api-reference/audio/createTranscription)
+    [the /audio/transcriptions endpoint](https://docs.aimlapi.com/docs/api-reference/audio/createTranscription)
     and should be treated as guidance of input audio content rather than precisely
     what the model heard. The client can optionally set the language and prompt for
     transcription, these offer additional guidance to the transcription service.
@@ -305,7 +305,7 @@ class ToolMcpTool(BaseModel):
 
     One of `server_url` or `connector_id` must be provided. Learn more about service
     connectors
-    [here](https://platform.openai.com/docs/guides/tools-remote-mcp#connectors).
+    [here](https://docs.aimlapi.com/docs/guides/tools-remote-mcp#connectors).
 
     Currently supported `connector_id` values are:
 
@@ -435,7 +435,7 @@ class RealtimeSessionCreateResponse(BaseModel):
     prompt: Optional[ResponsePrompt] = None
     """
     Reference to a prompt template and its variables.
-    [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
+    [Learn more](https://docs.aimlapi.com/docs/guides/text?api-mode=responses#reusable-prompts).
     """
 
     tool_choice: Optional[ToolChoice] = None

@@ -27,7 +27,7 @@ class UploadCreateParams(TypedDict, total=False):
     """The intended purpose of the uploaded file.
 
     See the
-    [documentation on File purposes](https://platform.openai.com/docs/api-reference/files/create#files-create-purpose).
+    [documentation on File purposes](https://docs.aimlapi.com/docs/api-reference/files/create#files-create-purpose).
     """
 
     expires_after: ExpiresAfter

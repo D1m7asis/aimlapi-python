@@ -114,9 +114,9 @@ class ImageGenerateParamsBase(TypedDict, total=False):
 
     user: str
     """
-    A unique identifier representing your end-user, which can help OpenAI to monitor
+    A unique identifier representing your end-user, which can help AI/ML API monitor
     and detect abuse.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
     """
 
 
@@ -125,7 +125,7 @@ class ImageGenerateParamsNonStreaming(ImageGenerateParamsBase, total=False):
     """Generate the image in streaming mode.
 
     Defaults to `false`. See the
-    [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+    [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
     for more information. This parameter is only supported for `gpt-image-1`.
     """
 
@@ -135,7 +135,7 @@ class ImageGenerateParamsStreaming(ImageGenerateParamsBase):
     """Generate the image in streaming mode.
 
     Defaults to `false`. See the
-    [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+    [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
     for more information. This parameter is only supported for `gpt-image-1`.
     """
 

@@ -171,7 +171,7 @@ class SamplingParams(BaseModel):
     reasoning_effort: Optional[ReasoningEffort] = None
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -186,7 +186,7 @@ class SamplingParams(BaseModel):
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables the older JSON mode, which
     ensures the message the model generates is valid JSON. Using `json_schema` is

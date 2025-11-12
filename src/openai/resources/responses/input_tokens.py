@@ -30,7 +30,7 @@ class InputTokens(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return InputTokensWithRawResponse(self)
 
@@ -39,7 +39,7 @@ class InputTokens(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return InputTokensWithStreamingResponse(self)
 
@@ -80,27 +80,27 @@ class InputTokens(SyncAPIResource):
               will not be carried over to the next response. This makes it simple to swap out
               system (or developer) messages in new responses.
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           parallel_tool_calls: Whether to allow the model to run tool calls in parallel.
 
           previous_response_id: The unique ID of the previous response to the model. Use this to create
               multi-turn conversations. Learn more about
-              [conversation state](https://platform.openai.com/docs/guides/conversation-state).
+              [conversation state](https://docs.aimlapi.com/docs/guides/conversation-state).
               Cannot be used in conjunction with `conversation`.
 
           reasoning: **gpt-5 and o-series models only** Configuration options for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           text: Configuration options for a text response from the model. Can be plain text or
               structured JSON data. Learn more:
 
-              - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-              - [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+              - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+              - [Structured Outputs](https://docs.aimlapi.com/docs/guides/structured-outputs)
 
           tool_choice: How the model should select which tool (or tools) to use when generating a
               response. See the `tools` parameter to see how to specify which tools the model
@@ -155,7 +155,7 @@ class AsyncInputTokens(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncInputTokensWithRawResponse(self)
 
@@ -164,7 +164,7 @@ class AsyncInputTokens(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncInputTokensWithStreamingResponse(self)
 
@@ -205,27 +205,27 @@ class AsyncInputTokens(AsyncAPIResource):
               will not be carried over to the next response. This makes it simple to swap out
               system (or developer) messages in new responses.
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           parallel_tool_calls: Whether to allow the model to run tool calls in parallel.
 
           previous_response_id: The unique ID of the previous response to the model. Use this to create
               multi-turn conversations. Learn more about
-              [conversation state](https://platform.openai.com/docs/guides/conversation-state).
+              [conversation state](https://docs.aimlapi.com/docs/guides/conversation-state).
               Cannot be used in conjunction with `conversation`.
 
           reasoning: **gpt-5 and o-series models only** Configuration options for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           text: Configuration options for a text response from the model. Can be plain text or
               structured JSON data. Learn more:
 
-              - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-              - [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+              - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+              - [Structured Outputs](https://docs.aimlapi.com/docs/guides/structured-outputs)
 
           tool_choice: How the model should select which tool (or tools) to use when generating a
               response. See the `tools` parameter to see how to specify which tools the model

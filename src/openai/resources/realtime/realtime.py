@@ -30,7 +30,7 @@ from ..._utils import (
 from ..._compat import cached_property
 from ..._models import construct_type_unchecked
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._exceptions import OpenAIError
+from ..._exceptions import AIMLAPIError
 from ..._base_client import _merge_mappings
 from .client_secrets import (
     ClientSecrets,
@@ -52,7 +52,7 @@ if TYPE_CHECKING:
     from websockets.sync.client import ClientConnection as WebsocketConnection
     from websockets.asyncio.client import ClientConnection as AsyncWebsocketConnection
 
-    from ..._client import OpenAI, AsyncOpenAI
+    from ..._client import AIMLAPI, AsyncAIMLAPI
 
 __all__ = ["Realtime", "AsyncRealtime"]
 
@@ -76,7 +76,7 @@ class Realtime(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return RealtimeWithRawResponse(self)
 
@@ -85,7 +85,7 @@ class Realtime(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return RealtimeWithStreamingResponse(self)
 
@@ -136,7 +136,7 @@ class AsyncRealtime(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncRealtimeWithRawResponse(self)
 
@@ -145,7 +145,7 @@ class AsyncRealtime(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncRealtimeWithStreamingResponse(self)
 
@@ -329,7 +329,7 @@ class AsyncRealtimeConnectionManager:
     def __init__(
         self,
         *,
-        client: AsyncOpenAI,
+        client: AsyncAIMLAPI,
         call_id: str | Omit = omit,
         model: str | Omit = omit,
         extra_query: Query,
@@ -360,7 +360,7 @@ class AsyncRealtimeConnectionManager:
         try:
             from websockets.asyncio.client import connect
         except ImportError as exc:
-            raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
+            raise AIMLAPIError("You need to install `aimlapi[realtime]` to use this method") from exc
 
         extra_query = self.__extra_query
         await self.__client._refresh_api_key()
@@ -371,7 +371,7 @@ class AsyncRealtimeConnectionManager:
         if is_async_azure_client(self.__client):
             model = self.__model
             if not model:
-                raise OpenAIError("`model` is required for Azure Realtime API")
+                raise AIMLAPIError("`model` is required for Azure Realtime API")
             else:
                 url, auth_headers = await self.__client._configure_realtime(model, extra_query)
         else:
@@ -518,7 +518,7 @@ class RealtimeConnectionManager:
     def __init__(
         self,
         *,
-        client: OpenAI,
+        client: AIMLAPI,
         call_id: str | Omit = omit,
         model: str | Omit = omit,
         extra_query: Query,
@@ -549,7 +549,7 @@ class RealtimeConnectionManager:
         try:
             from websockets.sync.client import connect
         except ImportError as exc:
-            raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
+            raise AIMLAPIError("You need to install `aimlapi[realtime]` to use this method") from exc
 
         extra_query = self.__extra_query
         self.__client._refresh_api_key()
@@ -560,7 +560,7 @@ class RealtimeConnectionManager:
         if is_azure_client(self.__client):
             model = self.__model
             if not model:
-                raise OpenAIError("`model` is required for Azure Realtime API")
+                raise AIMLAPIError("`model` is required for Azure Realtime API")
             else:
                 url, auth_headers = self.__client._configure_realtime(model, extra_query)
         else:
@@ -835,7 +835,7 @@ class RealtimeOutputAudioBufferResource(BaseRealtimeConnectionResource):
         stop generating audio and emit a `output_audio_buffer.cleared` event. This
         event should be preceded by a `response.cancel` client event to stop the
         generation of the current response.
-        [Learn more](https://platform.openai.com/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).
+        [Learn more](https://docs.aimlapi.com/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).
         """
         self._connection.send(
             cast(RealtimeClientEventParam, strip_not_given({"type": "output_audio_buffer.clear", "event_id": event_id}))
@@ -1072,7 +1072,7 @@ class AsyncRealtimeOutputAudioBufferResource(BaseAsyncRealtimeConnectionResource
         stop generating audio and emit a `output_audio_buffer.cleared` event. This
         event should be preceded by a `response.cancel` client event to stop the
         generation of the current response.
-        [Learn more](https://platform.openai.com/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).
+        [Learn more](https://docs.aimlapi.com/docs/guides/realtime-conversations#client-and-server-events-for-audio-in-webrtc).
         """
         await self._connection.send(
             cast(RealtimeClientEventParam, strip_not_given({"type": "output_audio_buffer.clear", "event_id": event_id}))

@@ -1,38 +1,38 @@
-# OpenAI Python API library
+# AI/ML API Python SDK
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/openai.svg?label=pypi%20(stable))](https://pypi.org/project/openai/)
+[![PyPI version](https://img.shields.io/pypi/v/aimlapi.svg?label=pypi%20(stable))](https://pypi.org/project/aimlapi/)
 
-The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.9+
+The AI/ML API Python SDK provides convenient access to the [AI/ML API](https://aimlapi.com/) from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
+It is generated from our [OpenAPI specification](https://github.com/aimlapi/aimlapi-openapi) with [Stainless](https://stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [platform.openai.com](https://platform.openai.com/docs/api-reference). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.aimlapi.com](https://docs.aimlapi.com/). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
 # install from PyPI
-pip install openai
+pip install aimlapi
 ```
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
-The primary API for interacting with OpenAI models is the [Responses API](https://platform.openai.com/docs/api-reference/responses). You can generate text from the model with the code below.
+The primary API for interacting with AI/ML API models is the [Responses API](https://docs.aimlapi.com/api-reference/responses). You can generate text from the model with the code below.
 
 ```python
 import os
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI(
+client = AIMLAPI(
     # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.environ.get("AIML_API_KEY"),
 )
 
 response = client.responses.create(
@@ -44,12 +44,12 @@ response = client.responses.create(
 print(response.output_text)
 ```
 
-The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can use that API to generate text from the model with the code below.
+The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://docs.aimlapi.com/api-reference/chat-completions). You can use that API to generate text from the model with the code below.
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 completion = client.chat.completions.create(
     model="gpt-4o",
@@ -67,9 +67,9 @@ print(completion.choices[0].message.content)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `OPENAI_API_KEY="My API Key"` to your `.env` file
+to add `AIML_API_KEY="My API Key"` to your `.env` file
 so that your API key is not stored in source control.
-[Get an API key here](https://platform.openai.com/settings/organization/api-keys).
+[Get an API key here](https://aimlapi.com/).
 
 ### Vision
 
@@ -97,9 +97,9 @@ With the image as a base64 encoded string:
 
 ```python
 import base64
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 prompt = "What is in this image?"
 with open("path/to/image.png", "rb") as image_file:
@@ -126,11 +126,11 @@ Simply import `AsyncOpenAI` instead of `OpenAI` and use `await` with each API ca
 ```python
 import os
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI(
+client = AsyncAIMLAPI(
     # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.environ.get("AIML_API_KEY"),
 )
 
 
@@ -161,8 +161,8 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 
 ```python
 import asyncio
-from openai import DefaultAioHttpClient
-from openai import AsyncOpenAI
+from aimlapi import DefaultAioHttpClient
+from aimlapi import AsyncAIMLAPI
 
 
 async def main() -> None:
@@ -189,9 +189,9 @@ asyncio.run(main())
 We provide support for streaming responses using Server Side Events (SSE).
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 stream = client.responses.create(
     model="gpt-4o",
@@ -207,7 +207,7 @@ The async client uses the exact same interface.
 
 ```python
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 client = AsyncOpenAI()
 
@@ -228,17 +228,17 @@ asyncio.run(main())
 
 ## Realtime API
 
-The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://platform.openai.com/docs/guides/function-calling) through a WebSocket connection.
+The Realtime API enables you to build low-latency, multi-modal conversational experiences. It currently supports text and audio as both input and output, as well as [function calling](https://docs.aimlapi.com/docs/guides/function-calling) through a WebSocket connection.
 
 Under the hood the SDK uses the [`websockets`](https://websockets.readthedocs.io/en/stable/) library to manage connections.
 
-The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://platform.openai.com/docs/api-reference/realtime-client-events) and a guide can be found [here](https://platform.openai.com/docs/guides/realtime).
+The Realtime API works through a combination of client-sent events and server-sent events. Clients can send events to do things like update session configuration or send text and audio inputs. Server events confirm when audio responses have completed, or when a text response from the model has been received. A full event reference can be found [here](https://docs.aimlapi.com/api-reference/realtime-client-events) and a guide can be found [here](https://docs.aimlapi.com/docs/guides/realtime).
 
 Basic text based example:
 
 ```py
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 async def main():
     client = AsyncOpenAI()
@@ -274,7 +274,7 @@ However the real magic of the Realtime API is handling audio inputs / outputs, s
 
 ### Realtime error handling
 
-Whenever an error occurs, the Realtime API will send an [`error` event](https://platform.openai.com/docs/guides/realtime-model-capabilities#error-handling) and the connection will stay open and remain usable. This means you need to handle it yourself, as _no errors are raised directly_ by the SDK when an `error` event comes in.
+Whenever an error occurs, the Realtime API will send an [`error` event](https://docs.aimlapi.com/docs/guides/realtime-model-capabilities#error-handling) and the connection will stay open and remain usable. This means you need to handle it yourself, as _no errors are raised directly_ by the SDK when an `error` event comes in.
 
 ```py
 client = AsyncOpenAI()
@@ -305,9 +305,9 @@ List methods in the OpenAI API are paginated.
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 all_jobs = []
 # Automatically fetches more pages as needed.
@@ -323,7 +323,7 @@ Or, asynchronously:
 
 ```python
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 client = AsyncOpenAI()
 
@@ -374,9 +374,9 @@ for job in first_page.data:
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 response = client.chat.responses.create(
     input=[
@@ -396,9 +396,9 @@ Request parameters that correspond to file uploads can be passed as `bytes`, or 
 
 ```python
 from pathlib import Path
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 client.files.create(
     file=Path("input.jsonl"),
@@ -412,7 +412,7 @@ The async client uses the exact same interface. If you pass a [`PathLike`](https
 
 Verifying webhook signatures is _optional but encouraged_.
 
-For more information about webhooks, see [the API docs](https://platform.openai.com/docs/guides/webhooks).
+For more information about webhooks, see [the API docs](https://docs.aimlapi.com/docs/guides/webhooks).
 
 ### Parsing webhook payloads
 
@@ -421,11 +421,11 @@ For most use cases, you will likely want to verify the webhook and parse the pay
 Note that the `body` parameter must be the raw JSON string sent from the server (do not parse it first). The `.unwrap()` method will parse this JSON for you into an event object after verifying the webhook was sent from OpenAI.
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 from flask import Flask, request
 
 app = Flask(__name__)
-client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
+client = AIMLAPI()  # AIML_API_WEBHOOK_SECRET environment variable is used by default
 
 
 @app.route("/webhook", methods=["POST"])
@@ -460,11 +460,11 @@ Note that the `body` parameter must be the raw JSON string sent from the server 
 
 ```python
 import json
-from openai import OpenAI
+from aimlapi import AIMLAPI
 from flask import Flask, request
 
 app = Flask(__name__)
-client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
+client = AIMLAPI()  # AIML_API_WEBHOOK_SECRET environment variable is used by default
 
 
 @app.route("/webhook", methods=["POST"])
@@ -499,9 +499,9 @@ All errors inherit from `openai.APIError`.
 
 ```python
 import openai
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 try:
     client.fine_tuning.jobs.create(
@@ -534,7 +534,7 @@ Error codes are as follows:
 
 ## Request IDs
 
-> For more information on debugging requests, see [these docs](https://platform.openai.com/docs/api-reference/debugging-requests)
+> For more information on debugging requests, see [these docs](https://docs.aimlapi.com/docs/api-reference/debugging-requests)
 
 All object responses in the SDK provide a `_request_id` property which is added from the `x-request-id` response header so that you can quickly log failing requests and report them back to OpenAI.
 
@@ -574,7 +574,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 # Configure the default for all requests:
 client = OpenAI(
@@ -600,7 +600,7 @@ By default requests time out after 10 minutes. You can configure this with a `ti
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 # Configure the default for all requests:
 client = OpenAI(
@@ -635,10 +635,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `OPENAI_LOG` to `info`.
+You can enable logging by setting the environment variable `AIML_API_LOG` to `info`.
 
 ```shell
-$ export OPENAI_LOG=info
+$ export AIML_API_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -660,9 +660,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
@@ -755,10 +755,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from openai import OpenAI, DefaultHttpxClient
+from aimlapi import AIMLAPI, DefaultHttpxClient
 
 client = OpenAI(
-    # Or use the `OPENAI_BASE_URL` env var
+    # Or use the `AIML_API_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083/v1",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -778,7 +778,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 with OpenAI() as client:
   # make requests here
@@ -797,9 +797,9 @@ class instead of the `OpenAI` class.
 > won't always be correct.
 
 ```py
-from openai import AzureOpenAI
+from aimlapi import AzureOpenAI
 
-# gets the API Key from environment variable AZURE_OPENAI_API_KEY
+# gets the API Key from environment variable AZURE_AIML_API_KEY
 client = AzureOpenAI(
     # https://learn.microsoft.com/azure/ai-services/openai/reference#rest-api-versioning
     api_version="2023-07-01-preview",
@@ -821,10 +821,10 @@ print(completion.to_json())
 
 In addition to the options provided in the base `OpenAI` client, the following options are provided:
 
-- `azure_endpoint` (or the `AZURE_OPENAI_ENDPOINT` environment variable)
+- `azure_endpoint` (or the `AZURE_AIML_API_ENDPOINT` environment variable)
 - `azure_deployment`
-- `api_version` (or the `OPENAI_API_VERSION` environment variable)
-- `azure_ad_token` (or the `AZURE_OPENAI_AD_TOKEN` environment variable)
+- `api_version` (or the `AIML_API_VERSION` environment variable)
+- `azure_ad_token` (or the `AZURE_AIML_API_AD_TOKEN` environment variable)
 - `azure_ad_token_provider`
 
 An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://github.com/openai/openai-python/blob/main/examples/azure_ad.py).

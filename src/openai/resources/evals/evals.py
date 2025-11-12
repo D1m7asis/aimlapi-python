@@ -45,7 +45,7 @@ class Evals(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return EvalsWithRawResponse(self)
 
@@ -54,7 +54,7 @@ class Evals(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return EvalsWithStreamingResponse(self)
 
@@ -78,7 +78,7 @@ class Evals(SyncAPIResource):
         data source, which dictates the schema of the data used in the evaluation. After
         creating an evaluation, you can run it on different models and model parameters.
         We support several types of graders and datasources. For more information, see
-        the [Evals guide](https://platform.openai.com/docs/guides/evals).
+        the [Evals guide](https://docs.aimlapi.com/docs/guides/evals).
 
         Args:
           data_source_config: The configuration for the data source used for the evaluation runs. Dictates the
@@ -309,7 +309,7 @@ class AsyncEvals(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncEvalsWithRawResponse(self)
 
@@ -318,7 +318,7 @@ class AsyncEvals(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncEvalsWithStreamingResponse(self)
 
@@ -342,7 +342,7 @@ class AsyncEvals(AsyncAPIResource):
         data source, which dictates the schema of the data used in the evaluation. After
         creating an evaluation, you can run it on different models and model parameters.
         We support several types of graders and datasources. For more information, see
-        the [Evals guide](https://platform.openai.com/docs/guides/evals).
+        the [Evals guide](https://docs.aimlapi.com/docs/guides/evals).
 
         Args:
           data_source_config: The configuration for the data source used for the evaluation runs. Dictates the

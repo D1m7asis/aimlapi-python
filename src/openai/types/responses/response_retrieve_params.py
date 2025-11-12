@@ -25,7 +25,7 @@ class ResponseRetrieveParamsBase(TypedDict, total=False):
     attacks. These obfuscation fields are included by default, but add a small
     amount of overhead to the data stream. You can set `include_obfuscation` to
     false to optimize for bandwidth if you trust the network links between your
-    application and the OpenAI API.
+    application and the AI/ML API.
     """
 
     starting_after: int
@@ -39,7 +39,7 @@ class ResponseRetrieveParamsNonStreaming(ResponseRetrieveParamsBase, total=False
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/responses-streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/responses-streaming)
     for more information.
     """
 
@@ -51,7 +51,7 @@ class ResponseRetrieveParamsStreaming(ResponseRetrieveParamsBase):
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/responses-streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/responses-streaming)
     for more information.
     """
 

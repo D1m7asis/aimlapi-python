@@ -13,7 +13,7 @@ from ._utils import is_mapping, extract_type_var_from_base
 from ._exceptions import APIError
 
 if TYPE_CHECKING:
-    from ._client import OpenAI, AsyncOpenAI
+    from ._client import AIMLAPI, AsyncAIMLAPI
 
 
 _T = TypeVar("_T")
@@ -31,7 +31,7 @@ class Stream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: OpenAI,
+        client: AIMLAPI,
     ) -> None:
         self.response = response
         self._cast_to = cast_to
@@ -131,7 +131,7 @@ class AsyncStream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: AsyncOpenAI,
+        client: AsyncAIMLAPI,
     ) -> None:
         self.response = response
         self._cast_to = cast_to

@@ -4,7 +4,7 @@ from typing import List
 import rich
 from pydantic import BaseModel
 
-from openai._client import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 
 class Step(BaseModel):
@@ -18,7 +18,7 @@ class MathResponse(BaseModel):
 
 
 async def main() -> None:
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
     id = None
 
     async with await client.responses.create(

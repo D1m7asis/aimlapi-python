@@ -40,7 +40,7 @@ class ChatCompletionAssistantMessageParam(TypedDict, total=False):
     audio: Optional[Audio]
     """
     Data about a previous audio response from the model.
-    [Learn more](https://platform.openai.com/docs/guides/audio).
+    [Learn more](https://docs.aimlapi.com/docs/guides/audio).
     """
 
     content: Union[str, Iterable[ContentArrayOfContentPart], None]

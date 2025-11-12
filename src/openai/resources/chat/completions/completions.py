@@ -68,7 +68,7 @@ class Completions(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return CompletionsWithRawResponse(self)
 
@@ -77,7 +77,7 @@ class Completions(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return CompletionsWithStreamingResponse(self)
 
@@ -131,13 +131,13 @@ class Completions(SyncAPIResource):
         into a JSON schema, send it to the API and parse the response content back into the given model.
 
         This method will also automatically parse `function` tool calls if:
-        - You use the `openai.pydantic_function_tool()` helper method
+        - You use the `aimlapi.pydantic_function_tool()` helper method
         - You mark your tool schema with `"strict": True`
 
         Example usage:
         ```py
         from pydantic import BaseModel
-        from openai import OpenAI
+        from openai import AIMLAPI
 
 
         class Step(BaseModel):
@@ -150,7 +150,7 @@ class Completions(SyncAPIResource):
             final_answer: str
 
 
-        client = OpenAI()
+        client = AIMLAPI()
         completion = client.chat.completions.parse(
             model="gpt-4o-2024-08-06",
             messages=[
@@ -281,40 +281,40 @@ class Completions(SyncAPIResource):
     ) -> ChatCompletion:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -354,15 +354,15 @@ class Completions(SyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -377,7 +377,7 @@ class Completions(SyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -387,7 +387,7 @@ class Completions(SyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -397,12 +397,12 @@ class Completions(SyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -415,17 +415,17 @@ class Completions(SyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -440,8 +440,8 @@ class Completions(SyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -456,8 +456,8 @@ class Completions(SyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -465,9 +465,9 @@ class Completions(SyncAPIResource):
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           stream_options: Options for streaming response. Only set this when you set `stream: true`.
@@ -488,8 +488,8 @@ class Completions(SyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -504,8 +504,8 @@ class Completions(SyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -513,7 +513,7 @@ class Completions(SyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -572,49 +572,49 @@ class Completions(SyncAPIResource):
     ) -> Stream[ChatCompletionChunk]:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           stream: If set to true, the model response data will be streamed to the client as it is
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -654,15 +654,15 @@ class Completions(SyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -677,7 +677,7 @@ class Completions(SyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -687,7 +687,7 @@ class Completions(SyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -697,12 +697,12 @@ class Completions(SyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -715,17 +715,17 @@ class Completions(SyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -740,8 +740,8 @@ class Completions(SyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -756,8 +756,8 @@ class Completions(SyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -779,8 +779,8 @@ class Completions(SyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -795,8 +795,8 @@ class Completions(SyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -804,7 +804,7 @@ class Completions(SyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -863,49 +863,49 @@ class Completions(SyncAPIResource):
     ) -> ChatCompletion | Stream[ChatCompletionChunk]:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           stream: If set to true, the model response data will be streamed to the client as it is
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -945,15 +945,15 @@ class Completions(SyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -968,7 +968,7 @@ class Completions(SyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -978,7 +978,7 @@ class Completions(SyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -988,12 +988,12 @@ class Completions(SyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -1006,17 +1006,17 @@ class Completions(SyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -1031,8 +1031,8 @@ class Completions(SyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -1047,8 +1047,8 @@ class Completions(SyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -1070,8 +1070,8 @@ class Completions(SyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -1086,8 +1086,8 @@ class Completions(SyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -1095,7 +1095,7 @@ class Completions(SyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -1446,7 +1446,7 @@ class Completions(SyncAPIResource):
                     print(event.delta, flush=True, end="")
         ```
 
-        When the context manager is entered, a `ChatCompletionStream` instance is returned which, like `.create(stream=True)` is an iterator. The full list of events that are yielded by the iterator are outlined in [these docs](https://github.com/openai/openai-python/blob/main/helpers.md#chat-completions-events).
+        When the context manager is entered, a `ChatCompletionStream` instance is returned which, like `.create(stream=True)` is an iterator. The full list of events that are yielded by the iterator are outlined in [these docs](https://github.com/aimlapi/aimlapi-python/blob/main/helpers.md#chat-completions-events).
 
         When the context manager exits, the response will be closed, however the `stream` instance is still available outside
         the context manager.
@@ -1515,7 +1515,7 @@ class AsyncCompletions(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncCompletionsWithRawResponse(self)
 
@@ -1524,7 +1524,7 @@ class AsyncCompletions(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncCompletionsWithStreamingResponse(self)
 
@@ -1578,13 +1578,13 @@ class AsyncCompletions(AsyncAPIResource):
         into a JSON schema, send it to the API and parse the response content back into the given model.
 
         This method will also automatically parse `function` tool calls if:
-        - You use the `openai.pydantic_function_tool()` helper method
+        - You use the `aimlapi.pydantic_function_tool()` helper method
         - You mark your tool schema with `"strict": True`
 
         Example usage:
         ```py
         from pydantic import BaseModel
-        from openai import AsyncOpenAI
+        from openai import AsyncAIMLAPI
 
 
         class Step(BaseModel):
@@ -1597,7 +1597,7 @@ class AsyncCompletions(AsyncAPIResource):
             final_answer: str
 
 
-        client = AsyncOpenAI()
+        client = AsyncAIMLAPI()
         completion = await client.chat.completions.parse(
             model="gpt-4o-2024-08-06",
             messages=[
@@ -1728,40 +1728,40 @@ class AsyncCompletions(AsyncAPIResource):
     ) -> ChatCompletion:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -1801,15 +1801,15 @@ class AsyncCompletions(AsyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -1824,7 +1824,7 @@ class AsyncCompletions(AsyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -1834,7 +1834,7 @@ class AsyncCompletions(AsyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -1844,12 +1844,12 @@ class AsyncCompletions(AsyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -1862,17 +1862,17 @@ class AsyncCompletions(AsyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -1887,8 +1887,8 @@ class AsyncCompletions(AsyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -1903,8 +1903,8 @@ class AsyncCompletions(AsyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -1912,9 +1912,9 @@ class AsyncCompletions(AsyncAPIResource):
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           stream_options: Options for streaming response. Only set this when you set `stream: true`.
@@ -1935,8 +1935,8 @@ class AsyncCompletions(AsyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -1951,8 +1951,8 @@ class AsyncCompletions(AsyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -1960,7 +1960,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -2019,49 +2019,49 @@ class AsyncCompletions(AsyncAPIResource):
     ) -> AsyncStream[ChatCompletionChunk]:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           stream: If set to true, the model response data will be streamed to the client as it is
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -2101,15 +2101,15 @@ class AsyncCompletions(AsyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -2124,7 +2124,7 @@ class AsyncCompletions(AsyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -2134,7 +2134,7 @@ class AsyncCompletions(AsyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -2144,12 +2144,12 @@ class AsyncCompletions(AsyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -2162,17 +2162,17 @@ class AsyncCompletions(AsyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -2187,8 +2187,8 @@ class AsyncCompletions(AsyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -2203,8 +2203,8 @@ class AsyncCompletions(AsyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -2226,8 +2226,8 @@ class AsyncCompletions(AsyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -2242,8 +2242,8 @@ class AsyncCompletions(AsyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -2251,7 +2251,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -2310,49 +2310,49 @@ class AsyncCompletions(AsyncAPIResource):
     ) -> ChatCompletion | AsyncStream[ChatCompletionChunk]:
         """
         **Starting a new project?** We recommend trying
-        [Responses](https://platform.openai.com/docs/api-reference/responses) to take
-        advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
+        [Responses](https://docs.aimlapi.com/docs/api-reference/responses) to take
+        advantage of the latest AI/ML API platform features. Compare
+        [Chat Completions with Responses](https://docs.aimlapi.com/docs/guides/responses-vs-chat-completions?api-mode=responses).
 
         ---
 
         Creates a model response for the given chat conversation. Learn more in the
-        [text generation](https://platform.openai.com/docs/guides/text-generation),
-        [vision](https://platform.openai.com/docs/guides/vision), and
-        [audio](https://platform.openai.com/docs/guides/audio) guides.
+        [text generation](https://docs.aimlapi.com/docs/guides/text-generation),
+        [vision](https://docs.aimlapi.com/docs/guides/vision), and
+        [audio](https://docs.aimlapi.com/docs/guides/audio) guides.
 
         Parameter support can differ depending on the model used to generate the
         response, particularly for newer reasoning models. Parameters that are only
         supported for reasoning models are noted below. For the current state of
         unsupported parameters in reasoning models,
-        [refer to the reasoning guide](https://platform.openai.com/docs/guides/reasoning).
+        [refer to the reasoning guide](https://docs.aimlapi.com/docs/guides/reasoning).
 
         Args:
           messages: A list of messages comprising the conversation so far. Depending on the
-              [model](https://platform.openai.com/docs/models) you use, different message
+              [model](https://docs.aimlapi.com/docs/models) you use, different message
               types (modalities) are supported, like
-              [text](https://platform.openai.com/docs/guides/text-generation),
-              [images](https://platform.openai.com/docs/guides/vision), and
-              [audio](https://platform.openai.com/docs/guides/audio).
+              [text](https://docs.aimlapi.com/docs/guides/text-generation),
+              [images](https://docs.aimlapi.com/docs/guides/vision), and
+              [audio](https://docs.aimlapi.com/docs/guides/audio).
 
-          model: Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI offers a
+          model: Model ID used to generate the response, like `gpt-4o` or `o3`. AI/ML API offers a
               wide range of models with different capabilities, performance characteristics,
               and price points. Refer to the
-              [model guide](https://platform.openai.com/docs/models) to browse and compare
+              [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
               available models.
 
           stream: If set to true, the model response data will be streamed to the client as it is
               generated using
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
               See the
-              [Streaming section below](https://platform.openai.com/docs/api-reference/chat/streaming)
+              [Streaming section below](https://docs.aimlapi.com/docs/api-reference/chat/streaming)
               for more information, along with the
-              [streaming responses](https://platform.openai.com/docs/guides/streaming-responses)
+              [streaming responses](https://docs.aimlapi.com/docs/guides/streaming-responses)
               guide for more information on how to handle the streaming events.
 
           audio: Parameters for audio output. Required when audio output is requested with
               `modalities: ["audio"]`.
-              [Learn more](https://platform.openai.com/docs/guides/audio).
+              [Learn more](https://docs.aimlapi.com/docs/guides/audio).
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -2392,15 +2392,15 @@ class AsyncCompletions(AsyncAPIResource):
 
           max_completion_tokens: An upper bound for the number of tokens that can be generated for a completion,
               including visible output tokens and
-              [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+              [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
 
           max_tokens: The maximum number of [tokens](/tokenizer) that can be generated in the chat
               completion. This value can be used to control
-              [costs](https://openai.com/api/pricing/) for text generated via API.
+              [costs](https://aimlapi.com/api/pricing/) for text generated via API.
 
               This value is now deprecated in favor of `max_completion_tokens`, and is not
               compatible with
-              [o-series models](https://platform.openai.com/docs/guides/reasoning).
+              [o-series models](https://docs.aimlapi.com/docs/guides/reasoning).
 
           metadata: Set of 16 key-value pairs that can be attached to an object. This can be useful
               for storing additional information about the object in a structured format, and
@@ -2415,7 +2415,7 @@ class AsyncCompletions(AsyncAPIResource):
               `["text"]`
 
               The `gpt-4o-audio-preview` model can also be used to
-              [generate audio](https://platform.openai.com/docs/guides/audio). To request that
+              [generate audio](https://docs.aimlapi.com/docs/guides/audio). To request that
               this model generate both text and audio responses, you can use:
 
               `["text", "audio"]`
@@ -2425,7 +2425,7 @@ class AsyncCompletions(AsyncAPIResource):
               choices. Keep `n` as `1` to minimize costs.
 
           parallel_tool_calls: Whether to enable
-              [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+              [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
               during tool use.
 
           prediction: Static predicted output content, such as the content of a text file that is
@@ -2435,12 +2435,12 @@ class AsyncCompletions(AsyncAPIResource):
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
 
-          prompt_cache_key: Used by OpenAI to cache responses for similar requests to optimize your cache
+          prompt_cache_key: Used by AI/ML API to cache responses for similar requests to optimize your cache
               hit rates. Replaces the `user` field.
-              [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+              [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
 
           reasoning_effort: Constrains effort on reasoning for
-              [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+              [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
               supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
               effort can result in faster responses and fewer tokens used on reasoning in a
               response.
@@ -2453,17 +2453,17 @@ class AsyncCompletions(AsyncAPIResource):
               Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
               Outputs which ensures the model will match your supplied JSON schema. Learn more
               in the
-              [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+              [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
               Setting to `{ "type": "json_object" }` enables the older JSON mode, which
               ensures the message the model generates is valid JSON. Using `json_schema` is
               preferred for models that support it.
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
-              violating OpenAI's usage policies. The IDs should be a string that uniquely
+              violating AI/ML API's usage policies. The IDs should be a string that uniquely
               identifies each user. We recommend hashing their username or email address, in
               order to avoid sending us any identifying information.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           seed: This feature is in Beta. If specified, our system will make a best effort to
               sample deterministically, such that repeated requests with the same `seed` and
@@ -2478,8 +2478,8 @@ class AsyncCompletions(AsyncAPIResource):
                 will use 'default'.
               - If set to 'default', then the request will be processed with the standard
                 pricing and performance for the selected model.
-              - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-                '[priority](https://openai.com/api-priority-processing/)', then the request
+              - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+                '[priority](https://aimlapi.com/api-priority-processing/)', then the request
                 will be processed with the corresponding service tier.
               - When not set, the default behavior is 'auto'.
 
@@ -2494,8 +2494,8 @@ class AsyncCompletions(AsyncAPIResource):
               returned text will not contain the stop sequence.
 
           store: Whether or not to store the output of this chat completion request for use in
-              our [model distillation](https://platform.openai.com/docs/guides/distillation)
-              or [evals](https://platform.openai.com/docs/guides/evals) products.
+              our [model distillation](https://docs.aimlapi.com/docs/guides/distillation)
+              or [evals](https://docs.aimlapi.com/docs/guides/evals) products.
 
               Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
@@ -2517,8 +2517,8 @@ class AsyncCompletions(AsyncAPIResource):
               are present.
 
           tools: A list of tools the model may call. You can provide either
-              [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)
-              or [function tools](https://platform.openai.com/docs/guides/function-calling).
+              [custom tools](https://docs.aimlapi.com/docs/guides/function-calling#custom-tools)
+              or [function tools](https://docs.aimlapi.com/docs/guides/function-calling).
 
           top_logprobs: An integer between 0 and 20 specifying the number of most likely tokens to
               return at each token position, each with an associated log probability.
@@ -2533,8 +2533,8 @@ class AsyncCompletions(AsyncAPIResource):
           user: This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use
               `prompt_cache_key` instead to maintain caching optimizations. A stable
               identifier for your end-users. Used to boost cache hit rates by better bucketing
-              similar requests and to help OpenAI detect and prevent abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+              similar requests and to help AI/ML API detect and prevent abuse.
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
 
           verbosity: Constrains the verbosity of the model's response. Lower values will result in
               more concise responses, while higher values will result in more verbose
@@ -2542,7 +2542,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           web_search_options: This tool searches the web for relevant results to use in a response. Learn more
               about the
-              [web search tool](https://platform.openai.com/docs/guides/tools-web-search?api-mode=chat).
+              [web search tool](https://docs.aimlapi.com/docs/guides/tools-web-search?api-mode=chat).
 
           extra_headers: Send extra headers
 
@@ -2893,7 +2893,7 @@ class AsyncCompletions(AsyncAPIResource):
                     print(event.delta, flush=True, end="")
         ```
 
-        When the context manager is entered, an `AsyncChatCompletionStream` instance is returned which, like `.create(stream=True)` is an async iterator. The full list of events that are yielded by the iterator are outlined in [these docs](https://github.com/openai/openai-python/blob/main/helpers.md#chat-completions-events).
+        When the context manager is entered, an `AsyncChatCompletionStream` instance is returned which, like `.create(stream=True)` is an async iterator. The full list of events that are yielded by the iterator are outlined in [these docs](https://github.com/aimlapi/aimlapi-python/blob/main/helpers.md#chat-completions-events).
 
         When the context manager exits, the response will be closed, however the `stream` instance is still available outside
         the context manager.

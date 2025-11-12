@@ -30,7 +30,7 @@ class Threads(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return ThreadsWithRawResponse(self)
 
@@ -39,7 +39,7 @@ class Threads(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return ThreadsWithStreamingResponse(self)
 
@@ -68,7 +68,7 @@ class Threads(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._get(
             f"/chatkit/threads/{thread_id}",
             options=make_request_options(
@@ -117,7 +117,7 @@ class Threads(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._get_api_list(
             "/chatkit/threads",
             page=SyncConversationCursorPage[ChatKitThread],
@@ -165,7 +165,7 @@ class Threads(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._delete(
             f"/chatkit/threads/{thread_id}",
             options=make_request_options(
@@ -213,7 +213,7 @@ class Threads(SyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._get_api_list(
             f"/chatkit/threads/{thread_id}/items",
             page=SyncConversationCursorPage[Data],
@@ -243,7 +243,7 @@ class AsyncThreads(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncThreadsWithRawResponse(self)
 
@@ -252,7 +252,7 @@ class AsyncThreads(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncThreadsWithStreamingResponse(self)
 
@@ -281,7 +281,7 @@ class AsyncThreads(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return await self._get(
             f"/chatkit/threads/{thread_id}",
             options=make_request_options(
@@ -330,7 +330,7 @@ class AsyncThreads(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._get_api_list(
             "/chatkit/threads",
             page=AsyncConversationCursorPage[ChatKitThread],
@@ -378,7 +378,7 @@ class AsyncThreads(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return await self._delete(
             f"/chatkit/threads/{thread_id}",
             options=make_request_options(
@@ -426,7 +426,7 @@ class AsyncThreads(AsyncAPIResource):
         """
         if not thread_id:
             raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        extra_headers = {"OpenAI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "chatkit_beta=v1", **(extra_headers or {})}
         return self._get_api_list(
             f"/chatkit/threads/{thread_id}/items",
             page=AsyncConversationCursorPage[Data],

@@ -4,21 +4,21 @@ from typing import TYPE_CHECKING, Any
 from typing_extensions import override
 
 from .._utils import LazyProxy
-from .._exceptions import OpenAIError
+from .._exceptions import AIMLAPIError
 
 INSTRUCTIONS = """
 
-You tried to access openai.{symbol}, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+You tried to access openai.{symbol}, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/aimlapi/aimlapi-python for the API.
 
 You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
 
-Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+Alternatively, you can pin your installation to the old version, e.g. `pip install aimlapi==0.28`
 
-A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+A detailed migration guide is available here: https://github.com/aimlapi/aimlapi-python/discussions/742
 """
 
 
-class APIRemovedInV1(OpenAIError):
+class APIRemovedInV1(AIMLAPIError):
     def __init__(self, *, symbol: str) -> None:
         super().__init__(INSTRUCTIONS.format(symbol=symbol))
 
@@ -59,7 +59,7 @@ SYMBOLS = [
 
 # we explicitly tell type checkers that nothing is exported
 # from this file so that when we re-export the old symbols
-# in `openai/__init__.py` they aren't added to the auto-complete
+# in `aimlapi/__init__.py` they aren't added to the auto-complete
 # suggestions given by editors
 if TYPE_CHECKING:
     __all__: list[str] = []

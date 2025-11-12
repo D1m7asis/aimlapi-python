@@ -107,7 +107,7 @@ class BaseModel(pydantic.BaseModel):
 
     if TYPE_CHECKING:
         _request_id: Optional[str] = None
-        """The ID of the request, returned via the X-Request-ID header. Useful for debugging requests and reporting issues to OpenAI.
+        """The ID of the request, returned via the X-Request-ID header. Useful for debugging requests and reporting issues to AI/ML API.
 
         This will **only** be set for the top-level response object, it will not be defined for nested objects. For example:
         

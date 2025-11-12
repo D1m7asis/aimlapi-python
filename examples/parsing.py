@@ -3,7 +3,7 @@ from typing import List
 import rich
 from pydantic import BaseModel
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 
 class Step(BaseModel):
@@ -16,7 +16,7 @@ class MathResponse(BaseModel):
     final_answer: str
 
 
-client = OpenAI()
+client = AIMLAPI()
 
 completion = client.chat.completions.parse(
     model="gpt-4o-2024-08-06",

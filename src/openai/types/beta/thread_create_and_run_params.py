@@ -42,7 +42,7 @@ class ThreadCreateAndRunParamsBase(TypedDict, total=False):
     assistant_id: Required[str]
     """
     The ID of the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+    [assistant](https://docs.aimlapi.com/docs/api-reference/assistants) to use to
     execute this run.
     """
 
@@ -82,7 +82,7 @@ class ThreadCreateAndRunParamsBase(TypedDict, total=False):
 
     model: Union[str, ChatModel, None]
     """
-    The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+    The ID of the [Model](https://docs.aimlapi.com/docs/api-reference/models) to
     be used to execute this run. If a value is provided here, it will override the
     model associated with the assistant. If not, the model associated with the
     assistant will be used.
@@ -91,21 +91,21 @@ class ThreadCreateAndRunParamsBase(TypedDict, total=False):
     parallel_tool_calls: bool
     """
     Whether to enable
-    [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+    [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
     during tool use.
     """
 
     response_format: Optional[AssistantResponseFormatOptionParam]
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+    [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
     message the model generates is valid JSON.
@@ -220,7 +220,7 @@ class ThreadMessage(TypedDict, total=False):
 class ThreadToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: SequenceNotStr[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://docs.aimlapi.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -268,7 +268,7 @@ class ThreadToolResourcesFileSearchVectorStore(TypedDict, total=False):
 
     file_ids: SequenceNotStr[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs to
+    A list of [file](https://docs.aimlapi.com/docs/api-reference/files) IDs to
     add to the vector store. There can be a maximum of 10000 files in a vector
     store.
     """
@@ -288,7 +288,7 @@ class ThreadToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: SequenceNotStr[str]
     """
     The
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     attached to this thread. There can be a maximum of 1 vector store attached to
     the thread.
     """
@@ -296,7 +296,7 @@ class ThreadToolResourcesFileSearch(TypedDict, total=False):
     vector_stores: Iterable[ThreadToolResourcesFileSearchVectorStore]
     """
     A helper to create a
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     with file_ids and attach it to this thread. There can be a maximum of 1 vector
     store attached to the thread.
     """
@@ -311,7 +311,7 @@ class ThreadToolResources(TypedDict, total=False):
 class Thread(TypedDict, total=False):
     messages: Iterable[ThreadMessage]
     """
-    A list of [messages](https://platform.openai.com/docs/api-reference/messages) to
+    A list of [messages](https://docs.aimlapi.com/docs/api-reference/messages) to
     start the thread with.
     """
 
@@ -337,7 +337,7 @@ class Thread(TypedDict, total=False):
 class ToolResourcesCodeInterpreter(TypedDict, total=False):
     file_ids: SequenceNotStr[str]
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://docs.aimlapi.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -347,7 +347,7 @@ class ToolResourcesFileSearch(TypedDict, total=False):
     vector_store_ids: SequenceNotStr[str]
     """
     The ID of the
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     attached to this assistant. There can be a maximum of 1 vector store attached to
     the assistant.
     """

@@ -17,6 +17,6 @@ class ItemRetrieveParams(TypedDict, total=False):
     """Additional fields to include in the response.
 
     See the `include` parameter for
-    [listing Conversation items above](https://platform.openai.com/docs/api-reference/conversations/list-items#conversations_list_items-include)
+    [listing Conversation items above](https://docs.aimlapi.com/docs/api-reference/conversations/list-items#conversations_list_items-include)
     for more information.
     """

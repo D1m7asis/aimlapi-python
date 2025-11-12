@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-# gets OPENAI_API_KEY from your environment variables
-openai = OpenAI()
+# gets AIML_API_KEY from your environment variables
+openai = AIMLAPI()
 
 prompt = "An astronaut lounging in a tropical resort in space, pixel art"
 model = "dall-e-3"

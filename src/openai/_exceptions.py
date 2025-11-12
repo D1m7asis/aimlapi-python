@@ -25,14 +25,20 @@ __all__ = [
     "LengthFinishReasonError",
     "ContentFilterFinishReasonError",
     "InvalidWebhookSignatureError",
+    "AIMLAPIError",
+    "OpenAIError",
 ]
 
 
-class OpenAIError(Exception):
-    pass
+class AIMLAPIError(Exception):
+    """Base error for all AI/ML API failures."""
 
 
-class APIError(OpenAIError):
+# Backwards compatibility alias for legacy OpenAI imports.
+OpenAIError = AIMLAPIError
+
+
+class APIError(AIMLAPIError):
     message: str
     request: httpx.Request
 
@@ -133,7 +139,7 @@ class InternalServerError(APIStatusError):
     pass
 
 
-class LengthFinishReasonError(OpenAIError):
+class LengthFinishReasonError(AIMLAPIError):
     completion: ChatCompletion
     """The completion that caused this error.
 
@@ -150,7 +156,7 @@ class LengthFinishReasonError(OpenAIError):
         self.completion = completion
 
 
-class ContentFilterFinishReasonError(OpenAIError):
+class ContentFilterFinishReasonError(AIMLAPIError):
     def __init__(self) -> None:
         super().__init__(
             f"Could not parse response content as the request was rejected by the content filter",

@@ -9,13 +9,26 @@ from typing_extensions import override
 from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
-from ._client import Client, OpenAI, Stream, Timeout, Transport, AsyncClient, AsyncOpenAI, AsyncStream, RequestOptions
+from ._client import (
+    Client,
+    AIMLAPI,
+    Stream,
+    Timeout,
+    Transport,
+    AsyncClient,
+    AsyncAIMLAPI,
+    AsyncStream,
+    RequestOptions,
+    OpenAI,
+    AsyncOpenAI,
+)
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
+    AIMLAPIError,
     OpenAIError,
     ConflictError,
     NotFoundError,
@@ -49,6 +62,7 @@ __all__ = [
     "not_given",
     "Omit",
     "omit",
+    "AIMLAPIError",
     "OpenAIError",
     "APIError",
     "APIStatusError",
@@ -72,6 +86,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
+    "AIMLAPI",
+    "AsyncAIMLAPI",
     "OpenAI",
     "AsyncOpenAI",
     "file_from_path",
@@ -82,6 +98,10 @@ __all__ = [
     "DefaultHttpxClient",
     "DefaultAsyncHttpxClient",
     "DefaultAioHttpClient",
+    "AzureOpenAI",
+    "AsyncAzureOpenAI",
+    "AzureAIMLAPI",
+    "AsyncAzureAIMLAPI",
 ]
 
 if not _t.TYPE_CHECKING:
@@ -89,7 +109,12 @@ if not _t.TYPE_CHECKING:
 
 from .lib import azure as _azure, pydantic_function_tool as pydantic_function_tool
 from .version import VERSION as VERSION
-from .lib.azure import AzureOpenAI as AzureOpenAI, AsyncAzureOpenAI as AsyncAzureOpenAI
+from .lib.azure import (
+    AzureAIMLAPI as AzureAIMLAPI,
+    AsyncAzureAIMLAPI as AsyncAzureAIMLAPI,
+    AzureOpenAI as AzureOpenAI,
+    AsyncAzureOpenAI as AsyncAzureOpenAI,
+)
 from .lib._old_api import *
 from .lib.streaming import (
     AssistantEventHandler as AssistantEventHandler,
@@ -141,18 +166,18 @@ http_client: _httpx.Client | None = None
 
 _ApiType = _te.Literal["openai", "azure"]
 
-api_type: _ApiType | None = _t.cast(_ApiType, _os.environ.get("OPENAI_API_TYPE"))
+api_type: _ApiType | None = _t.cast(_ApiType, _os.environ.get("AIML_API_TYPE"))
 
-api_version: str | None = _os.environ.get("OPENAI_API_VERSION")
+api_version: str | None = _os.environ.get("AIML_API_VERSION")
 
-azure_endpoint: str | None = _os.environ.get("AZURE_OPENAI_ENDPOINT")
+azure_endpoint: str | None = _os.environ.get("AZURE_AIML_API_ENDPOINT")
 
-azure_ad_token: str | None = _os.environ.get("AZURE_OPENAI_AD_TOKEN")
+azure_ad_token: str | None = _os.environ.get("AZURE_AIML_API_AD_TOKEN")
 
 azure_ad_token_provider: _azure.AzureADTokenProvider | None = None
 
 
-class _ModuleClient(OpenAI):
+class _ModuleClient(AIMLAPI):
     # Note: we have to use type: ignores here as overriding class members
     # with properties is technically unsafe but it is fine for our use case
 
@@ -268,50 +293,50 @@ class _ModuleClient(OpenAI):
         http_client = value
 
 
-class _AzureModuleClient(_ModuleClient, AzureOpenAI):  # type: ignore
+class _AzureModuleClient(_ModuleClient, AzureAIMLAPI):  # type: ignore
     ...
 
 
-class _AmbiguousModuleClientUsageError(OpenAIError):
+class _AmbiguousModuleClientUsageError(AIMLAPIError):
     def __init__(self) -> None:
         super().__init__(
-            "Ambiguous use of module client; please set `openai.api_type` or the `OPENAI_API_TYPE` environment variable to `openai` or `azure`"
+            "Ambiguous use of module client; please set `aimlapi.api_type` or the `AIML_API_TYPE` environment variable to `openai` or `azure`"
         )
 
 
 def _has_openai_credentials() -> bool:
-    return _os.environ.get("OPENAI_API_KEY") is not None
+    return _os.environ.get("AIML_API_KEY") is not None
 
 
 def _has_azure_credentials() -> bool:
-    return azure_endpoint is not None or _os.environ.get("AZURE_OPENAI_API_KEY") is not None
+    return azure_endpoint is not None or _os.environ.get("AZURE_AIML_API_KEY") is not None
 
 
 def _has_azure_ad_credentials() -> bool:
     return (
-        _os.environ.get("AZURE_OPENAI_AD_TOKEN") is not None
+        _os.environ.get("AZURE_AIML_API_AD_TOKEN") is not None
         or azure_ad_token is not None
         or azure_ad_token_provider is not None
     )
 
 
-_client: OpenAI | None = None
+_client: AIMLAPI | None = None
 
 
-def _load_client() -> OpenAI:  # type: ignore[reportUnusedFunction]
+def _load_client() -> AIMLAPI:  # type: ignore[reportUnusedFunction]
     global _client
 
     if _client is None:
         global api_type, azure_endpoint, azure_ad_token, api_version
 
         if azure_endpoint is None:
-            azure_endpoint = _os.environ.get("AZURE_OPENAI_ENDPOINT")
+            azure_endpoint = _os.environ.get("AZURE_AIML_API_ENDPOINT")
 
         if azure_ad_token is None:
-            azure_ad_token = _os.environ.get("AZURE_OPENAI_AD_TOKEN")
+            azure_ad_token = _os.environ.get("AZURE_AIML_API_AD_TOKEN")
 
         if api_version is None:
-            api_version = _os.environ.get("OPENAI_API_VERSION")
+            api_version = _os.environ.get("AIML_API_VERSION")
 
         if api_type is None:
             has_openai = _has_openai_credentials()
@@ -322,7 +347,7 @@ def _load_client() -> OpenAI:  # type: ignore[reportUnusedFunction]
                 raise _AmbiguousModuleClientUsageError()
 
             if (azure_ad_token is not None or azure_ad_token_provider is not None) and _os.environ.get(
-                "AZURE_OPENAI_API_KEY"
+                "AZURE_AIML_API_KEY"
             ) is not None:
                 raise _AmbiguousModuleClientUsageError()
 

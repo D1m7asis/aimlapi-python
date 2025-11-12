@@ -45,7 +45,7 @@ class SessionCreateParams(TypedDict, total=False):
     `null` to turn off once on. Input audio transcription is not native to the
     model, since the model consumes audio directly. Transcription runs
     asynchronously through
-    [the /audio/transcriptions endpoint](https://platform.openai.com/docs/api-reference/audio/createTranscription)
+    [the /audio/transcriptions endpoint](https://docs.aimlapi.com/docs/api-reference/audio/createTranscription)
     and should be treated as guidance of input audio content rather than precisely
     what the model heard. The client can optionally set the language and prompt for
     transcription, these offer additional guidance to the transcription service.
@@ -203,7 +203,7 @@ class InputAudioTranscription(TypedDict, total=False):
     """
     An optional text to guide the model's style or continue a previous audio
     segment. For `whisper-1`, the
-    [prompt is a list of keywords](https://platform.openai.com/docs/guides/speech-to-text#prompting).
+    [prompt is a list of keywords](https://docs.aimlapi.com/docs/guides/speech-to-text#prompting).
     For `gpt-4o-transcribe` models, the prompt is a free text string, for example
     "expect words related to technology".
     """

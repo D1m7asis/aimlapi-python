@@ -19,7 +19,7 @@ class ToolChoiceTypes(BaseModel):
     """The type of hosted tool the model should to use.
 
     Learn more about
-    [built-in tools](https://platform.openai.com/docs/guides/tools).
+    [built-in tools](https://docs.aimlapi.com/docs/guides/tools).
 
     Allowed values are:
 

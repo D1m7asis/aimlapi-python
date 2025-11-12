@@ -35,7 +35,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     background: Optional[bool]
     """
     Whether to run the model response in the background.
-    [Learn more](https://platform.openai.com/docs/guides/background).
+    [Learn more](https://docs.aimlapi.com/docs/guides/background).
     """
 
     conversation: Optional[Conversation]
@@ -73,11 +73,11 @@ class ResponseCreateParamsBase(TypedDict, total=False):
 
     Learn more:
 
-    - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-    - [Image inputs](https://platform.openai.com/docs/guides/images)
-    - [File inputs](https://platform.openai.com/docs/guides/pdf-files)
-    - [Conversation state](https://platform.openai.com/docs/guides/conversation-state)
-    - [Function calling](https://platform.openai.com/docs/guides/function-calling)
+    - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+    - [Image inputs](https://docs.aimlapi.com/docs/guides/images)
+    - [File inputs](https://docs.aimlapi.com/docs/guides/pdf-files)
+    - [Conversation state](https://docs.aimlapi.com/docs/guides/conversation-state)
+    - [Function calling](https://docs.aimlapi.com/docs/guides/function-calling)
     """
 
     instructions: Optional[str]
@@ -92,7 +92,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     """
     An upper bound for the number of tokens that can be generated for a response,
     including visible output tokens and
-    [reasoning tokens](https://platform.openai.com/docs/guides/reasoning).
+    [reasoning tokens](https://docs.aimlapi.com/docs/guides/reasoning).
     """
 
     max_tool_calls: Optional[int]
@@ -116,9 +116,9 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     model: ResponsesModel
     """Model ID used to generate the response, like `gpt-4o` or `o3`.
 
-    OpenAI offers a wide range of models with different capabilities, performance
+    AI/ML API offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
-    [model guide](https://platform.openai.com/docs/models) to browse and compare
+    [model guide](https://docs.aimlapi.com/docs/models) to browse and compare
     available models.
     """
 
@@ -129,37 +129,37 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     """The unique ID of the previous response to the model.
 
     Use this to create multi-turn conversations. Learn more about
-    [conversation state](https://platform.openai.com/docs/guides/conversation-state).
+    [conversation state](https://docs.aimlapi.com/docs/guides/conversation-state).
     Cannot be used in conjunction with `conversation`.
     """
 
     prompt: Optional[ResponsePromptParam]
     """
     Reference to a prompt template and its variables.
-    [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
+    [Learn more](https://docs.aimlapi.com/docs/guides/text?api-mode=responses#reusable-prompts).
     """
 
     prompt_cache_key: str
     """
-    Used by OpenAI to cache responses for similar requests to optimize your cache
+    Used by AI/ML API to cache responses for similar requests to optimize your cache
     hit rates. Replaces the `user` field.
-    [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+    [Learn more](https://docs.aimlapi.com/docs/guides/prompt-caching).
     """
 
     reasoning: Optional[Reasoning]
     """**gpt-5 and o-series models only**
 
     Configuration options for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning).
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning).
     """
 
     safety_identifier: str
     """
     A stable identifier used to help detect users of your application that may be
-    violating OpenAI's usage policies. The IDs should be a string that uniquely
+    violating AI/ML API's usage policies. The IDs should be a string that uniquely
     identifies each user. We recommend hashing their username or email address, in
     order to avoid sending us any identifying information.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
     """
 
     service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority"]]
@@ -170,8 +170,8 @@ class ResponseCreateParamsBase(TypedDict, total=False):
       will use 'default'.
     - If set to 'default', then the request will be processed with the standard
       pricing and performance for the selected model.
-    - If set to '[flex](https://platform.openai.com/docs/guides/flex-processing)' or
-      '[priority](https://openai.com/api-priority-processing/)', then the request
+    - If set to '[flex](https://docs.aimlapi.com/docs/guides/flex-processing)' or
+      '[priority](https://aimlapi.com/api-priority-processing/)', then the request
       will be processed with the corresponding service tier.
     - When not set, the default behavior is 'auto'.
 
@@ -200,8 +200,8 @@ class ResponseCreateParamsBase(TypedDict, total=False):
 
     Can be plain text or structured JSON data. Learn more:
 
-    - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-    - [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+    - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+    - [Structured Outputs](https://docs.aimlapi.com/docs/guides/structured-outputs)
     """
 
     tool_choice: ToolChoice
@@ -218,19 +218,19 @@ class ResponseCreateParamsBase(TypedDict, total=False):
 
     We support the following categories of tools:
 
-    - **Built-in tools**: Tools that are provided by OpenAI that extend the model's
+    - **Built-in tools**: Tools that are provided by AI/ML API that extend the model's
       capabilities, like
-      [web search](https://platform.openai.com/docs/guides/tools-web-search) or
-      [file search](https://platform.openai.com/docs/guides/tools-file-search).
+      [web search](https://docs.aimlapi.com/docs/guides/tools-web-search) or
+      [file search](https://docs.aimlapi.com/docs/guides/tools-file-search).
       Learn more about
-      [built-in tools](https://platform.openai.com/docs/guides/tools).
+      [built-in tools](https://docs.aimlapi.com/docs/guides/tools).
     - **MCP Tools**: Integrations with third-party systems via custom MCP servers or
       predefined connectors such as Google Drive and SharePoint. Learn more about
-      [MCP Tools](https://platform.openai.com/docs/guides/tools-connectors-mcp).
+      [MCP Tools](https://docs.aimlapi.com/docs/guides/tools-connectors-mcp).
     - **Function calls (custom tools)**: Functions that are defined by you, enabling
       the model to call your own code with strongly typed arguments and outputs.
       Learn more about
-      [function calling](https://platform.openai.com/docs/guides/function-calling).
+      [function calling](https://docs.aimlapi.com/docs/guides/function-calling).
       You can also use custom tools to call your own code.
     """
 
@@ -264,8 +264,8 @@ class ResponseCreateParamsBase(TypedDict, total=False):
 
     Use `prompt_cache_key` instead to maintain caching optimizations. A stable
     identifier for your end-users. Used to boost cache hit rates by better bucketing
-    similar requests and to help OpenAI detect and prevent abuse.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+    similar requests and to help AI/ML API detect and prevent abuse.
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#safety-identifiers).
     """
 
 
@@ -281,7 +281,7 @@ class StreamOptions(TypedDict, total=False):
     attacks. These obfuscation fields are included by default, but add a small
     amount of overhead to the data stream. You can set `include_obfuscation` to
     false to optimize for bandwidth if you trust the network links between your
-    application and the OpenAI API.
+    application and the AI/ML API.
     """
 
 
@@ -302,7 +302,7 @@ class ResponseCreateParamsNonStreaming(ResponseCreateParamsBase, total=False):
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/responses-streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/responses-streaming)
     for more information.
     """
 
@@ -314,7 +314,7 @@ class ResponseCreateParamsStreaming(ResponseCreateParamsBase):
     generated using
     [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
     See the
-    [Streaming section below](https://platform.openai.com/docs/api-reference/responses-streaming)
+    [Streaming section below](https://docs.aimlapi.com/docs/api-reference/responses-streaming)
     for more information.
     """
 

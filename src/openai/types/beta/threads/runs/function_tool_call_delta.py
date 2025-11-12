@@ -19,7 +19,7 @@ class Function(BaseModel):
     """The output of the function.
 
     This will be `null` if the outputs have not been
-    [submitted](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs)
+    [submitted](https://docs.aimlapi.com/docs/api-reference/runs/submitToolOutputs)
     yet.
     """
 

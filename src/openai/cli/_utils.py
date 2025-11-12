@@ -4,7 +4,7 @@ import sys
 
 import openai
 
-from .. import OpenAI, _load_client
+from .. import AIMLAPI, _load_client
 from .._compat import model_json
 from .._models import BaseModel
 
@@ -20,7 +20,7 @@ class Colors:
     UNDERLINE = "\033[4m"
 
 
-def get_client() -> OpenAI:
+def get_client() -> AIMLAPI:
     return _load_client()
 
 

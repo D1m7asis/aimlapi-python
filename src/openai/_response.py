@@ -29,7 +29,7 @@ from ._utils import is_given, extract_type_arg, is_annotated_type, is_type_alias
 from ._models import BaseModel, is_basemodel, add_request_id
 from ._constants import RAW_RESPONSE_HEADER, OVERRIDE_CAST_TO_HEADER
 from ._streaming import Stream, AsyncStream, is_stream_class_type, extract_stream_chunk_type
-from ._exceptions import OpenAIError, APIResponseValidationError
+from ._exceptions import AIMLAPIError, APIResponseValidationError
 
 if TYPE_CHECKING:
     from ._models import FinalRequestOptions
@@ -574,11 +574,11 @@ class AsyncStreamedBinaryAPIResponse(AsyncAPIResponse[bytes]):
 class MissingStreamClassError(TypeError):
     def __init__(self) -> None:
         super().__init__(
-            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `openai._streaming` for reference",
+            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `aimlapi._streaming` for reference",
         )
 
 
-class StreamAlreadyConsumed(OpenAIError):
+class StreamAlreadyConsumed(AIMLAPIError):
     """
     Attempted to read or stream content, but the content has already
     been streamed.

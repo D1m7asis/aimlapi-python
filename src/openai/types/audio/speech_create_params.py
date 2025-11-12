@@ -16,7 +16,7 @@ class SpeechCreateParams(TypedDict, total=False):
 
     model: Required[Union[str, SpeechModel]]
     """
-    One of the available [TTS models](https://platform.openai.com/docs/models#tts):
+    One of the available [TTS models](https://docs.aimlapi.com/docs/models#tts):
     `tts-1`, `tts-1-hd` or `gpt-4o-mini-tts`.
     """
 
@@ -28,7 +28,7 @@ class SpeechCreateParams(TypedDict, total=False):
     Supported voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `fable`, `onyx`,
     `nova`, `sage`, `shimmer`, and `verse`. Previews of the voices are available in
     the
-    [Text to speech guide](https://platform.openai.com/docs/guides/text-to-speech#voice-options).
+    [Text to speech guide](https://docs.aimlapi.com/docs/guides/text-to-speech#voice-options).
     """
 
     instructions: str

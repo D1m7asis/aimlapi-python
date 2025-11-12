@@ -27,7 +27,7 @@ class Sessions(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return SessionsWithRawResponse(self)
 
@@ -36,7 +36,7 @@ class Sessions(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return SessionsWithStreamingResponse(self)
 
@@ -103,7 +103,7 @@ class Sessions(SyncAPIResource):
               `null` to turn off once on. Input audio transcription is not native to the
               model, since the model consumes audio directly. Transcription runs
               asynchronously through
-              [the /audio/transcriptions endpoint](https://platform.openai.com/docs/api-reference/audio/createTranscription)
+              [the /audio/transcriptions endpoint](https://docs.aimlapi.com/docs/api-reference/audio/createTranscription)
               and should be treated as guidance of input audio content rather than precisely
               what the model heard. The client can optionally set the language and prompt for
               transcription, these offer additional guidance to the transcription service.
@@ -173,7 +173,7 @@ class Sessions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             "/realtime/sessions",
             body=maybe_transform(
@@ -211,7 +211,7 @@ class AsyncSessions(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSessionsWithRawResponse(self)
 
@@ -220,7 +220,7 @@ class AsyncSessions(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncSessionsWithStreamingResponse(self)
 
@@ -287,7 +287,7 @@ class AsyncSessions(AsyncAPIResource):
               `null` to turn off once on. Input audio transcription is not native to the
               model, since the model consumes audio directly. Transcription runs
               asynchronously through
-              [the /audio/transcriptions endpoint](https://platform.openai.com/docs/api-reference/audio/createTranscription)
+              [the /audio/transcriptions endpoint](https://docs.aimlapi.com/docs/api-reference/audio/createTranscription)
               and should be treated as guidance of input audio content rather than precisely
               what the model heard. The client can optionally set the language and prompt for
               transcription, these offer additional guidance to the transcription service.
@@ -357,7 +357,7 @@ class AsyncSessions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             "/realtime/sessions",
             body=await async_maybe_transform(

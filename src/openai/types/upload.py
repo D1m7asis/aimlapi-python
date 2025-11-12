@@ -31,7 +31,7 @@ class Upload(BaseModel):
     purpose: str
     """The intended purpose of the file.
 
-    [Please refer here](https://platform.openai.com/docs/api-reference/files/object#files/object-purpose)
+    [Please refer here](https://docs.aimlapi.com/docs/api-reference/files/object#files/object-purpose)
     for acceptable values.
     """
 
@@ -39,4 +39,4 @@ class Upload(BaseModel):
     """The status of the Upload."""
 
     file: Optional[FileObject] = None
-    """The `File` object represents a document that has been uploaded to OpenAI."""
+    """The `File` object represents a document that has been uploaded to AI/ML API."""

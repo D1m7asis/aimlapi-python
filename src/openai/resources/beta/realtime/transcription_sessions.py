@@ -27,7 +27,7 @@ class TranscriptionSessions(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return TranscriptionSessionsWithRawResponse(self)
 
@@ -36,7 +36,7 @@ class TranscriptionSessions(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return TranscriptionSessionsWithStreamingResponse(self)
 
@@ -111,7 +111,7 @@ class TranscriptionSessions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return self._post(
             "/realtime/transcription_sessions",
             body=maybe_transform(
@@ -140,7 +140,7 @@ class AsyncTranscriptionSessions(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTranscriptionSessionsWithRawResponse(self)
 
@@ -149,7 +149,7 @@ class AsyncTranscriptionSessions(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncTranscriptionSessionsWithStreamingResponse(self)
 
@@ -224,7 +224,7 @@ class AsyncTranscriptionSessions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"OpenAI-Beta": "assistants=v2", **(extra_headers or {})}
+        extra_headers = {"AIMLAPI-Beta": "assistants=v2", **(extra_headers or {})}
         return await self._post(
             "/realtime/transcription_sessions",
             body=await async_maybe_transform(

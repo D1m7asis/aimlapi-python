@@ -31,7 +31,7 @@ _SequenceT = TypeVar("_SequenceT", bound=Sequence[object])
 CallableT = TypeVar("CallableT", bound=Callable[..., Any])
 
 if TYPE_CHECKING:
-    from ..lib.azure import AzureOpenAI, AsyncAzureOpenAI
+    from ..lib.azure import AzureAIMLAPI, AsyncAzureAIMLAPI
 
 
 def flatten(t: Iterable[Iterable[_T]]) -> list[_T]:
@@ -425,13 +425,13 @@ def json_safe(data: object) -> object:
     return data
 
 
-def is_azure_client(client: object) -> TypeGuard[AzureOpenAI]:
-    from ..lib.azure import AzureOpenAI
+def is_azure_client(client: object) -> TypeGuard[AzureAIMLAPI]:
+    from ..lib.azure import AzureAIMLAPI
 
-    return isinstance(client, AzureOpenAI)
+    return isinstance(client, AzureAIMLAPI)
 
 
-def is_async_azure_client(client: object) -> TypeGuard[AsyncAzureOpenAI]:
-    from ..lib.azure import AsyncAzureOpenAI
+def is_async_azure_client(client: object) -> TypeGuard[AsyncAzureAIMLAPI]:
+    from ..lib.azure import AsyncAzureAIMLAPI
 
-    return isinstance(client, AsyncAzureOpenAI)
+    return isinstance(client, AsyncAzureAIMLAPI)

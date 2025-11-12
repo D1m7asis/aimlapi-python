@@ -115,7 +115,7 @@ class DataSourceCreateEvalResponsesRunDataSourceSourceResponses(TypedDict, total
     reasoning_effort: Optional[ReasoningEffort]
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -239,7 +239,7 @@ class DataSourceCreateEvalResponsesRunDataSourceSamplingParamsText(TypedDict, to
 
     Configuring `{ "type": "json_schema" }` enables Structured Outputs, which
     ensures the model will match your supplied JSON schema. Learn more in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     The default format is `{ "type": "text" }` with no additional options.
 
@@ -258,7 +258,7 @@ class DataSourceCreateEvalResponsesRunDataSourceSamplingParams(TypedDict, total=
     reasoning_effort: Optional[ReasoningEffort]
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -278,8 +278,8 @@ class DataSourceCreateEvalResponsesRunDataSourceSamplingParams(TypedDict, total=
 
     Can be plain text or structured JSON data. Learn more:
 
-    - [Text inputs and outputs](https://platform.openai.com/docs/guides/text)
-    - [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+    - [Text inputs and outputs](https://docs.aimlapi.com/docs/guides/text)
+    - [Structured Outputs](https://docs.aimlapi.com/docs/guides/structured-outputs)
     """
 
     tools: Iterable[ToolParam]
@@ -289,15 +289,15 @@ class DataSourceCreateEvalResponsesRunDataSourceSamplingParams(TypedDict, total=
 
     The two categories of tools you can provide the model are:
 
-    - **Built-in tools**: Tools that are provided by OpenAI that extend the model's
+    - **Built-in tools**: Tools that are provided by AI/ML API that extend the model's
       capabilities, like
-      [web search](https://platform.openai.com/docs/guides/tools-web-search) or
-      [file search](https://platform.openai.com/docs/guides/tools-file-search).
+      [web search](https://docs.aimlapi.com/docs/guides/tools-web-search) or
+      [file search](https://docs.aimlapi.com/docs/guides/tools-file-search).
       Learn more about
-      [built-in tools](https://platform.openai.com/docs/guides/tools).
+      [built-in tools](https://docs.aimlapi.com/docs/guides/tools).
     - **Function calls (custom tools)**: Functions that are defined by you, enabling
       the model to call your own code. Learn more about
-      [function calling](https://platform.openai.com/docs/guides/function-calling).
+      [function calling](https://docs.aimlapi.com/docs/guides/function-calling).
     """
 
     top_p: float

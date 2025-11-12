@@ -31,7 +31,7 @@ class VectorStoreCreateParams(TypedDict, total=False):
 
     file_ids: SequenceNotStr[str]
     """
-    A list of [File](https://platform.openai.com/docs/api-reference/files) IDs that
+    A list of [File](https://docs.aimlapi.com/docs/api-reference/files) IDs that
     the vector store should use. Useful for tools like `file_search` that can access
     files.
     """

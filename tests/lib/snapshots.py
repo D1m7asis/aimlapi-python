@@ -22,7 +22,7 @@ def make_snapshot_request(
     mock_client: OpenAI,
     path: str,
 ) -> _T:
-    live = os.environ.get("OPENAI_LIVE") == "1"
+    live = os.environ.get("AIML_API_LIVE") == "1"
     if live:
 
         def _on_response(response: httpx.Response) -> None:
@@ -65,7 +65,7 @@ async def make_async_snapshot_request(
     mock_client: AsyncOpenAI,
     path: str,
 ) -> _T:
-    live = os.environ.get("OPENAI_LIVE") == "1"
+    live = os.environ.get("AIML_API_LIVE") == "1"
     if live:
 
         async def _on_response(response: httpx.Response) -> None:

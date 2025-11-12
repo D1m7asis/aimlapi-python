@@ -17,7 +17,7 @@ class ParsedFunction(Function):
     """
     The arguments to call the function with.
 
-    If you used `openai.pydantic_function_tool()` then this will be an
+    If you used `aimlapi.pydantic_function_tool()` then this will be an
     instance of the given `BaseModel`.
 
     Otherwise, this will be the parsed JSON arguments.

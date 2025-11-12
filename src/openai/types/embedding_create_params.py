@@ -29,9 +29,9 @@ class EmbeddingCreateParams(TypedDict, total=False):
     """ID of the model to use.
 
     You can use the
-    [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+    [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
     see all of your available models, or see our
-    [Model overview](https://platform.openai.com/docs/models) for descriptions of
+    [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
     them.
     """
 
@@ -49,7 +49,7 @@ class EmbeddingCreateParams(TypedDict, total=False):
 
     user: str
     """
-    A unique identifier representing your end-user, which can help OpenAI to monitor
+    A unique identifier representing your end-user, which can help AI/ML API monitor
     and detect abuse.
-    [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+    [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
     """

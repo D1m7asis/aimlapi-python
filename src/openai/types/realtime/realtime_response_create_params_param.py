@@ -86,7 +86,7 @@ class RealtimeResponseCreateParamsParam(TypedDict, total=False):
     prompt: Optional[ResponsePromptParam]
     """
     Reference to a prompt template and its variables.
-    [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
+    [Learn more](https://docs.aimlapi.com/docs/guides/text?api-mode=responses#reusable-prompts).
     """
 
     tool_choice: ToolChoice

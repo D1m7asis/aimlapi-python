@@ -48,7 +48,7 @@ class Videos(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return VideosWithRawResponse(self)
 
@@ -57,7 +57,7 @@ class Videos(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return VideosWithStreamingResponse(self)
 
@@ -181,7 +181,7 @@ class Videos(SyncAPIResource):
             video = response.parse()
             if video.status == "in_progress" or video.status == "queued":
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("aimlapi-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:
@@ -401,7 +401,7 @@ class AsyncVideos(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncVideosWithRawResponse(self)
 
@@ -410,7 +410,7 @@ class AsyncVideos(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncVideosWithStreamingResponse(self)
 
@@ -534,7 +534,7 @@ class AsyncVideos(AsyncAPIResource):
             video = response.parse()
             if video.status == "in_progress" or video.status == "queued":
                 if not is_given(poll_interval_ms):
-                    from_header = response.headers.get("openai-poll-after-ms")
+                    from_header = response.headers.get("aimlapi-poll-after-ms")
                     if from_header is not None:
                         poll_interval_ms = int(from_header)
                     else:

@@ -45,7 +45,7 @@ class Calls(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return CallsWithRawResponse(self)
 
@@ -54,7 +54,7 @@ class Calls(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return CallsWithStreamingResponse(self)
 
@@ -181,7 +181,7 @@ class Calls(SyncAPIResource):
               request both `text` and `audio` at the same time.
 
           prompt: Reference to a prompt template and its variables.
-              [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
+              [Learn more](https://docs.aimlapi.com/docs/guides/text?api-mode=responses#reusable-prompts).
 
           tool_choice: How the model chooses tools. Provide one of the string modes or force a specific
               function/MCP tool.
@@ -365,7 +365,7 @@ class AsyncCalls(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncCallsWithRawResponse(self)
 
@@ -374,7 +374,7 @@ class AsyncCalls(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncCallsWithStreamingResponse(self)
 
@@ -501,7 +501,7 @@ class AsyncCalls(AsyncAPIResource):
               request both `text` and `audio` at the same time.
 
           prompt: Reference to a prompt template and its variables.
-              [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
+              [Learn more](https://docs.aimlapi.com/docs/guides/text?api-mode=responses#reusable-prompts).
 
           tool_choice: How the model chooses tools. Provide one of the string modes or force a specific
               function/MCP tool.

@@ -43,7 +43,7 @@ class RunStep(BaseModel):
     assistant_id: str
     """
     The ID of the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants)
+    [assistant](https://docs.aimlapi.com/docs/api-reference/assistants)
     associated with the run step.
     """
 
@@ -86,7 +86,7 @@ class RunStep(BaseModel):
 
     run_id: str
     """
-    The ID of the [run](https://platform.openai.com/docs/api-reference/runs) that
+    The ID of the [run](https://docs.aimlapi.com/docs/api-reference/runs) that
     this run step is a part of.
     """
 
@@ -101,7 +101,7 @@ class RunStep(BaseModel):
 
     thread_id: str
     """
-    The ID of the [thread](https://platform.openai.com/docs/api-reference/threads)
+    The ID of the [thread](https://docs.aimlapi.com/docs/api-reference/threads)
     that was run.
     """
 

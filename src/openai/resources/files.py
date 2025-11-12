@@ -39,7 +39,7 @@ class Files(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return FilesWithRawResponse(self)
 
@@ -48,7 +48,7 @@ class Files(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return FilesWithStreamingResponse(self)
 
@@ -73,17 +73,17 @@ class Files(SyncAPIResource):
 
         - The Assistants API supports files up to 2 million tokens and of specific file
           types. See the
-          [Assistants Tools guide](https://platform.openai.com/docs/assistants/tools)
+          [Assistants Tools guide](https://docs.aimlapi.com/docs/assistants/tools)
           for details.
         - The Fine-tuning API only supports `.jsonl` files. The input also has certain
           required formats for fine-tuning
-          [chat](https://platform.openai.com/docs/api-reference/fine-tuning/chat-input)
+          [chat](https://docs.aimlapi.com/docs/api-reference/fine-tuning/chat-input)
           or
-          [completions](https://platform.openai.com/docs/api-reference/fine-tuning/completions-input)
+          [completions](https://docs.aimlapi.com/docs/api-reference/fine-tuning/completions-input)
           models.
         - The Batch API only supports `.jsonl` files up to 200 MB in size. The input
           also has a specific required
-          [format](https://platform.openai.com/docs/api-reference/batch/request-input).
+          [format](https://docs.aimlapi.com/docs/api-reference/batch/request-input).
 
         Please [contact us](https://help.openai.com/) if you need to increase these
         storage limits.
@@ -355,7 +355,7 @@ class AsyncFiles(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncFilesWithRawResponse(self)
 
@@ -364,7 +364,7 @@ class AsyncFiles(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncFilesWithStreamingResponse(self)
 
@@ -389,17 +389,17 @@ class AsyncFiles(AsyncAPIResource):
 
         - The Assistants API supports files up to 2 million tokens and of specific file
           types. See the
-          [Assistants Tools guide](https://platform.openai.com/docs/assistants/tools)
+          [Assistants Tools guide](https://docs.aimlapi.com/docs/assistants/tools)
           for details.
         - The Fine-tuning API only supports `.jsonl` files. The input also has certain
           required formats for fine-tuning
-          [chat](https://platform.openai.com/docs/api-reference/fine-tuning/chat-input)
+          [chat](https://docs.aimlapi.com/docs/api-reference/fine-tuning/chat-input)
           or
-          [completions](https://platform.openai.com/docs/api-reference/fine-tuning/completions-input)
+          [completions](https://docs.aimlapi.com/docs/api-reference/fine-tuning/completions-input)
           models.
         - The Batch API only supports `.jsonl` files up to 200 MB in size. The input
           also has a specific required
-          [format](https://platform.openai.com/docs/api-reference/batch/request-input).
+          [format](https://docs.aimlapi.com/docs/api-reference/batch/request-input).
 
         Please [contact us](https://help.openai.com/) if you need to increase these
         storage limits.

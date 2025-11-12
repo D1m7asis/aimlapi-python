@@ -88,7 +88,7 @@ def install() -> Path:
 
     platform = "apple-darwin" if sys.platform == "darwin" else "unknown-linux-gnu"
 
-    dir_name = _cache_dir() / "openai-python"
+    dir_name = _cache_dir() / "aimlapi-python"
     install_dir = dir_name / ".install"
     target_dir = install_dir / "bin"
 

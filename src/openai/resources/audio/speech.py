@@ -32,7 +32,7 @@ class Speech(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return SpeechWithRawResponse(self)
 
@@ -41,7 +41,7 @@ class Speech(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return SpeechWithStreamingResponse(self)
 
@@ -71,13 +71,13 @@ class Speech(SyncAPIResource):
           input: The text to generate audio for. The maximum length is 4096 characters.
 
           model:
-              One of the available [TTS models](https://platform.openai.com/docs/models#tts):
+              One of the available [TTS models](https://docs.aimlapi.com/docs/models#tts):
               `tts-1`, `tts-1-hd` or `gpt-4o-mini-tts`.
 
           voice: The voice to use when generating the audio. Supported voices are `alloy`, `ash`,
               `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, and
               `verse`. Previews of the voices are available in the
-              [Text to speech guide](https://platform.openai.com/docs/guides/text-to-speech#voice-options).
+              [Text to speech guide](https://docs.aimlapi.com/docs/guides/text-to-speech#voice-options).
 
           instructions: Control the voice of your generated audio with additional instructions. Does not
               work with `tts-1` or `tts-1-hd`.
@@ -128,7 +128,7 @@ class AsyncSpeech(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSpeechWithRawResponse(self)
 
@@ -137,7 +137,7 @@ class AsyncSpeech(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncSpeechWithStreamingResponse(self)
 
@@ -167,13 +167,13 @@ class AsyncSpeech(AsyncAPIResource):
           input: The text to generate audio for. The maximum length is 4096 characters.
 
           model:
-              One of the available [TTS models](https://platform.openai.com/docs/models#tts):
+              One of the available [TTS models](https://docs.aimlapi.com/docs/models#tts):
               `tts-1`, `tts-1-hd` or `gpt-4o-mini-tts`.
 
           voice: The voice to use when generating the audio. Supported voices are `alloy`, `ash`,
               `ballad`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage`, `shimmer`, and
               `verse`. Previews of the voices are available in the
-              [Text to speech guide](https://platform.openai.com/docs/guides/text-to-speech#voice-options).
+              [Text to speech guide](https://docs.aimlapi.com/docs/guides/text-to-speech#voice-options).
 
           instructions: Control the voice of your generated audio with additional instructions. Does not
               work with `tts-1` or `tts-1-hd`.

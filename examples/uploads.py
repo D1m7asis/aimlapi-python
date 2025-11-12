@@ -3,12 +3,12 @@ from pathlib import Path
 
 import rich
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 # generate this file using `./generate_file.sh`
 file = Path("/tmp/big_test_file.txt")
 
-client = OpenAI()
+client = AIMLAPI()
 
 
 def from_disk() -> None:

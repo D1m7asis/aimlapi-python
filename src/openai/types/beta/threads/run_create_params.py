@@ -31,7 +31,7 @@ class RunCreateParamsBase(TypedDict, total=False):
     assistant_id: Required[str]
     """
     The ID of the
-    [assistant](https://platform.openai.com/docs/api-reference/assistants) to use to
+    [assistant](https://docs.aimlapi.com/docs/api-reference/assistants) to use to
     execute this run.
     """
 
@@ -43,7 +43,7 @@ class RunCreateParamsBase(TypedDict, total=False):
     search result content.
 
     See the
-    [file search tool documentation](https://platform.openai.com/docs/assistants/tools/file-search#customizing-file-search-settings)
+    [file search tool documentation](https://docs.aimlapi.com/docs/assistants/tools/file-search#customizing-file-search-settings)
     for more information.
     """
 
@@ -60,7 +60,7 @@ class RunCreateParamsBase(TypedDict, total=False):
     instructions: Optional[str]
     """
     Overrides the
-    [instructions](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+    [instructions](https://docs.aimlapi.com/docs/api-reference/assistants/createAssistant)
     of the assistant. This is useful for modifying the behavior on a per-run basis.
     """
 
@@ -94,7 +94,7 @@ class RunCreateParamsBase(TypedDict, total=False):
 
     model: Union[str, ChatModel, None]
     """
-    The ID of the [Model](https://platform.openai.com/docs/api-reference/models) to
+    The ID of the [Model](https://docs.aimlapi.com/docs/api-reference/models) to
     be used to execute this run. If a value is provided here, it will override the
     model associated with the assistant. If not, the model associated with the
     assistant will be used.
@@ -103,14 +103,14 @@ class RunCreateParamsBase(TypedDict, total=False):
     parallel_tool_calls: bool
     """
     Whether to enable
-    [parallel function calling](https://platform.openai.com/docs/guides/function-calling#configuring-parallel-function-calling)
+    [parallel function calling](https://docs.aimlapi.com/docs/guides/function-calling#configuring-parallel-function-calling)
     during tool use.
     """
 
     reasoning_effort: Optional[ReasoningEffort]
     """
     Constrains effort on reasoning for
-    [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently
+    [reasoning models](https://docs.aimlapi.com/docs/guides/reasoning). Currently
     supported values are `minimal`, `low`, `medium`, and `high`. Reducing reasoning
     effort can result in faster responses and fewer tokens used on reasoning in a
     response.
@@ -122,14 +122,14 @@ class RunCreateParamsBase(TypedDict, total=False):
     response_format: Optional[AssistantResponseFormatOptionParam]
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+    [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
     message the model generates is valid JSON.

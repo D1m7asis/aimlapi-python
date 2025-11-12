@@ -14,7 +14,7 @@ __all__ = ["Assistant", "ToolResources", "ToolResourcesCodeInterpreter", "ToolRe
 class ToolResourcesCodeInterpreter(BaseModel):
     file_ids: Optional[List[str]] = None
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://docs.aimlapi.com/docs/api-reference/files) IDs made
     available to the `code_interpreter`` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -24,7 +24,7 @@ class ToolResourcesFileSearch(BaseModel):
     vector_store_ids: Optional[List[str]] = None
     """
     The ID of the
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     attached to this assistant. There can be a maximum of 1 vector store attached to
     the assistant.
     """
@@ -66,9 +66,9 @@ class Assistant(BaseModel):
     """ID of the model to use.
 
     You can use the
-    [List models](https://platform.openai.com/docs/api-reference/models/list) API to
+    [List models](https://docs.aimlapi.com/docs/api-reference/models/list) API to
     see all of your available models, or see our
-    [Model overview](https://platform.openai.com/docs/models) for descriptions of
+    [Model overview](https://docs.aimlapi.com/docs/models) for descriptions of
     them.
     """
 
@@ -88,14 +88,14 @@ class Assistant(BaseModel):
     response_format: Optional[AssistantResponseFormatOption] = None
     """Specifies the format that the model must output.
 
-    Compatible with [GPT-4o](https://platform.openai.com/docs/models#gpt-4o),
-    [GPT-4 Turbo](https://platform.openai.com/docs/models#gpt-4-turbo-and-gpt-4),
+    Compatible with [GPT-4o](https://docs.aimlapi.com/docs/models#gpt-4o),
+    [GPT-4 Turbo](https://docs.aimlapi.com/docs/models#gpt-4-turbo-and-gpt-4),
     and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema. Learn more
     in the
-    [Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).
+    [Structured Outputs guide](https://docs.aimlapi.com/docs/guides/structured-outputs).
 
     Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the
     message the model generates is valid JSON.

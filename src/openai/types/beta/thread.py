@@ -12,7 +12,7 @@ __all__ = ["Thread", "ToolResources", "ToolResourcesCodeInterpreter", "ToolResou
 class ToolResourcesCodeInterpreter(BaseModel):
     file_ids: Optional[List[str]] = None
     """
-    A list of [file](https://platform.openai.com/docs/api-reference/files) IDs made
+    A list of [file](https://docs.aimlapi.com/docs/api-reference/files) IDs made
     available to the `code_interpreter` tool. There can be a maximum of 20 files
     associated with the tool.
     """
@@ -22,7 +22,7 @@ class ToolResourcesFileSearch(BaseModel):
     vector_store_ids: Optional[List[str]] = None
     """
     The
-    [vector store](https://platform.openai.com/docs/api-reference/vector-stores/object)
+    [vector store](https://docs.aimlapi.com/docs/api-reference/vector-stores/object)
     attached to this thread. There can be a maximum of 1 vector store attached to
     the thread.
     """

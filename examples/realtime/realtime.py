@@ -1,7 +1,7 @@
 #!/usr/bin/env rye run python
 import asyncio
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 # Azure OpenAI Realtime Docs
 
@@ -18,7 +18,7 @@ async def main() -> None:
     Enter "q" to quit the conversation.
     """
 
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
     async with client.realtime.connect(
         model="gpt-realtime",
     ) as connection:

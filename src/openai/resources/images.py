@@ -31,7 +31,7 @@ class Images(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return ImagesWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class Images(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return ImagesWithStreamingResponse(self)
 
@@ -80,9 +80,9 @@ class Images(SyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -213,12 +213,12 @@ class Images(SyncAPIResource):
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -274,7 +274,7 @@ class Images(SyncAPIResource):
               characters for `dall-e-2`, and 32000 characters for `gpt-image-1`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -329,9 +329,9 @@ class Images(SyncAPIResource):
               (landscape), `1024x1536` (portrait), or `auto` (default value) for
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -387,7 +387,7 @@ class Images(SyncAPIResource):
               characters for `dall-e-2`, and 32000 characters for `gpt-image-1`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -442,9 +442,9 @@ class Images(SyncAPIResource):
               (landscape), `1024x1536` (portrait), or `auto` (default value) for
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -551,7 +551,7 @@ class Images(SyncAPIResource):
     ) -> ImagesResponse:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -609,7 +609,7 @@ class Images(SyncAPIResource):
               one of `1024x1024`, `1792x1024`, or `1024x1792` for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           style: The style of the generated images. This parameter is only supported for
@@ -617,9 +617,9 @@ class Images(SyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -661,7 +661,7 @@ class Images(SyncAPIResource):
     ) -> Stream[ImageGenStreamEvent]:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -669,7 +669,7 @@ class Images(SyncAPIResource):
               for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -727,9 +727,9 @@ class Images(SyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -771,7 +771,7 @@ class Images(SyncAPIResource):
     ) -> ImagesResponse | Stream[ImageGenStreamEvent]:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -779,7 +779,7 @@ class Images(SyncAPIResource):
               for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -837,9 +837,9 @@ class Images(SyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -918,7 +918,7 @@ class AsyncImages(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/openai/openai-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#accessing-raw-response-data-eg-headers
         """
         return AsyncImagesWithRawResponse(self)
 
@@ -927,7 +927,7 @@ class AsyncImages(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/openai/openai-python#with_streaming_response
+        For more information, see https://www.github.com/aimlapi/aimlapi-python#with_streaming_response
         """
         return AsyncImagesWithStreamingResponse(self)
 
@@ -967,9 +967,9 @@ class AsyncImages(AsyncAPIResource):
           size: The size of the generated images. Must be one of `256x256`, `512x512`, or
               `1024x1024`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1100,12 +1100,12 @@ class AsyncImages(AsyncAPIResource):
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1161,7 +1161,7 @@ class AsyncImages(AsyncAPIResource):
               characters for `dall-e-2`, and 32000 characters for `gpt-image-1`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -1216,9 +1216,9 @@ class AsyncImages(AsyncAPIResource):
               (landscape), `1024x1536` (portrait), or `auto` (default value) for
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1274,7 +1274,7 @@ class AsyncImages(AsyncAPIResource):
               characters for `dall-e-2`, and 32000 characters for `gpt-image-1`.
 
           stream: Edit the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -1329,9 +1329,9 @@ class AsyncImages(AsyncAPIResource):
               (landscape), `1024x1536` (portrait), or `auto` (default value) for
               `gpt-image-1`, and one of `256x256`, `512x512`, or `1024x1024` for `dall-e-2`.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1438,7 +1438,7 @@ class AsyncImages(AsyncAPIResource):
     ) -> ImagesResponse:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -1496,7 +1496,7 @@ class AsyncImages(AsyncAPIResource):
               one of `1024x1024`, `1792x1024`, or `1024x1792` for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           style: The style of the generated images. This parameter is only supported for
@@ -1504,9 +1504,9 @@ class AsyncImages(AsyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1548,7 +1548,7 @@ class AsyncImages(AsyncAPIResource):
     ) -> AsyncStream[ImageGenStreamEvent]:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -1556,7 +1556,7 @@ class AsyncImages(AsyncAPIResource):
               for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -1614,9 +1614,9 @@ class AsyncImages(AsyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
@@ -1658,7 +1658,7 @@ class AsyncImages(AsyncAPIResource):
     ) -> ImagesResponse | AsyncStream[ImageGenStreamEvent]:
         """
         Creates an image given a prompt.
-        [Learn more](https://platform.openai.com/docs/guides/images).
+        [Learn more](https://docs.aimlapi.com/docs/guides/images).
 
         Args:
           prompt: A text description of the desired image(s). The maximum length is 32000
@@ -1666,7 +1666,7 @@ class AsyncImages(AsyncAPIResource):
               for `dall-e-3`.
 
           stream: Generate the image in streaming mode. Defaults to `false`. See the
-              [Image generation guide](https://platform.openai.com/docs/guides/image-generation)
+              [Image generation guide](https://docs.aimlapi.com/docs/guides/image-generation)
               for more information. This parameter is only supported for `gpt-image-1`.
 
           background: Allows to set transparency for the background of the generated image(s). This
@@ -1724,9 +1724,9 @@ class AsyncImages(AsyncAPIResource):
               towards generating hyper-real and dramatic images. Natural causes the model to
               produce more natural, less hyper-real looking images.
 
-          user: A unique identifier representing your end-user, which can help OpenAI to monitor
+          user: A unique identifier representing your end-user, which can help AI/ML API monitor
               and detect abuse.
-              [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#end-user-ids).
+              [Learn more](https://docs.aimlapi.com/docs/guides/safety-best-practices#end-user-ids).
 
           extra_headers: Send extra headers
 
