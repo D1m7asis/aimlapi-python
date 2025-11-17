@@ -6,7 +6,7 @@ import rich
 from aimlapi import AIMLAPI
 
 # generate this file using `./generate_file.sh`
-file = Path("/tmp/big_test_file.txt")
+file = Path(r"C:\GitHub\aimlapi-python\examples\big_test_file.txt")
 
 client = AIMLAPI()
 

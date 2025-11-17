@@ -8,7 +8,7 @@ AI/ML API error:
 
 This feature requires additional dependencies:
 
-    $ pip install aimlapi[{extra}]
+    $ pip install openai[{extra}]
 
 """
 

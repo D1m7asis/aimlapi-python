@@ -36,7 +36,7 @@ $ pip install -r requirements-dev.lock
 
 Most of the SDK is generated code. Modifications to code will be persisted between generations, but may
 result in merge conflicts between manual patches and changes from the generator. The generator will never
-modify the contents of the `src/openai/lib/` and `examples/` directories.
+modify the contents of the `src/aimlapi/lib/` and `examples/` directories.
 
 ## Adding and running examples
 
@@ -62,7 +62,7 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ pip install git+ssh://git@github.com/openai/openai-python.git
+$ pip install git+ssh://git@github.com/aimlapi/aimlapi-python.git
 ```
 
 Alternatively, you can build from source and install the wheel file:

@@ -5,6 +5,6 @@ read_size=$((file_size*3/4))
 
 echo "wanted=$wanted_size file=$file_size read=$read_size"
 
-dd if=/dev/urandom bs=$read_size count=1 | base64 > /tmp/small_test_file.txt
+dd if=/dev/urandom bs=$read_size count=1 | base64 > C:\GitHub\aimlapi-python\examples
 
 truncate -s "$wanted_size" /tmp/big_test_file.txt 

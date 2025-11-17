@@ -2,7 +2,7 @@
 
 import asyncio
 
-from aimlapi import AIMLAPI, AsyncOpenAI
+from aimlapi import AIMLAPI, AsyncAIMLAPI
 
 # This script assumes you have the AIML_API_KEY environment variable set to a valid OpenAI API key.
 #

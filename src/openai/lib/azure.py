@@ -172,7 +172,7 @@ class AzureAIMLAPI(BaseAzureClient[httpx.Client, Stream[Any]], AIMLAPI):
         """Construct a new synchronous Azure AI/ML API client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `AZURE_AIML_API_KEY`
+        - `api_key` from `AIML_API_KEY`
         - `organization` from `AIML_API_ORG_ID`
         - `project` from `AIML_API_PROJECT_ID`
         - `azure_ad_token` from `AZURE_AIML_API_AD_TOKEN`
@@ -190,14 +190,14 @@ class AzureAIMLAPI(BaseAzureClient[httpx.Client, Stream[Any]], AIMLAPI):
                 Not supported with Assistants APIs.
         """
         if api_key is None:
-            api_key = os.environ.get("AZURE_AIML_API_KEY")
+            api_key = os.environ.get("AIML_API_KEY")
 
         if azure_ad_token is None:
             azure_ad_token = os.environ.get("AZURE_AIML_API_AD_TOKEN")
 
         if api_key is None and azure_ad_token is None and azure_ad_token_provider is None:
             raise AIMLAPIError(
-                "Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_AIML_API_KEY` or `AZURE_AIML_API_AD_TOKEN` environment variables."
+                "Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AIML_API_KEY` or `AZURE_AIML_API_AD_TOKEN` environment variables."
             )
 
         if api_version is None:
@@ -215,7 +215,7 @@ class AzureAIMLAPI(BaseAzureClient[httpx.Client, Stream[Any]], AIMLAPI):
 
         if base_url is None:
             if azure_endpoint is None:
-                azure_endpoint = os.environ.get("AZURE_AIML_API_ENDPOINT")
+                azure_endpoint = os.environ.get("AZURE_AIML_API_ENDPOINT") or "https://api.aimlapi.com"
 
             if azure_endpoint is None:
                 raise ValueError(
@@ -223,9 +223,9 @@ class AzureAIMLAPI(BaseAzureClient[httpx.Client, Stream[Any]], AIMLAPI):
                 )
 
             if azure_deployment is not None:
-                base_url = f"{azure_endpoint.rstrip('/')}/aimlapi/deployments/{azure_deployment}"
+                base_url = f"{azure_endpoint.rstrip('/')}/openai/deployments/{azure_deployment}"
             else:
-                base_url = f"{azure_endpoint.rstrip('/')}/aimlapi"
+                base_url = f"{azure_endpoint.rstrip('/')}/openai"
         else:
             if azure_endpoint is not None:
                 raise ValueError("base_url and azure_endpoint are mutually exclusive")
@@ -453,7 +453,7 @@ class AsyncAzureAIMLAPI(BaseAzureClient[httpx.AsyncClient, AsyncStream[Any]], As
         """Construct a new asynchronous Azure AI/ML API client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `AZURE_AIML_API_KEY`
+        - `api_key` from `AIML_API_KEY`
         - `organization` from `AIML_API_ORG_ID`
         - `project` from `AIML_API_PROJECT_ID`
         - `azure_ad_token` from `AZURE_AIML_API_AD_TOKEN`
@@ -471,14 +471,14 @@ class AsyncAzureAIMLAPI(BaseAzureClient[httpx.AsyncClient, AsyncStream[Any]], As
                 Not supported with Assistants APIs.
         """
         if api_key is None:
-            api_key = os.environ.get("AZURE_AIML_API_KEY")
+            api_key = os.environ.get("AIML_API_KEY")
 
         if azure_ad_token is None:
             azure_ad_token = os.environ.get("AZURE_AIML_API_AD_TOKEN")
 
         if api_key is None and azure_ad_token is None and azure_ad_token_provider is None:
             raise AIMLAPIError(
-                "Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_AIML_API_KEY` or `AZURE_AIML_API_AD_TOKEN` environment variables."
+                "Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AIML_API_KEY` or `AZURE_AIML_API_AD_TOKEN` environment variables."
             )
 
         if api_version is None:

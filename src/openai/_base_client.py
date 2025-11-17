@@ -492,6 +492,29 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
             else:
                 raise RuntimeError(f"Unexpected JSON data type, {type(json_data)}, cannot merge with `extra_body`")
 
+        # --- AIMLAPI: cleanup tools before sending request --- #
+        if isinstance(json_data, dict):
+            tools = json_data.get("tools")
+            if isinstance(tools, list):
+                for tool in tools:
+                    if not isinstance(tool, dict):
+                        continue
+                    if tool.get("type") != "function":
+                        continue
+
+                    fn = tool.get("function")
+                    if not isinstance(fn, dict):
+                        continue
+
+                    # strict нужен только внутри SDK (для .parse), на бэкенд не шлём
+                    fn.pop("strict", None)
+
+                    params = fn.get("parameters")
+                    if isinstance(params, dict):
+                        params.pop("title", None)
+                        params.pop("$defs", None)
+        # --- end AIMLAPI cleanup --- #
+
         headers = self._build_headers(options, retries_taken=retries_taken)
         params = _merge_mappings(self.default_query, options.params)
         content_type = headers.get("Content-Type")
@@ -1437,7 +1460,21 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         self,
         options: FinalRequestOptions,  # noqa: ARG002
     ) -> FinalRequestOptions:
-        """Hook for mutating the given options"""
+        """Hook for mutating the given options before building the HTTP request."""
+
+        body = options.json
+
+        # Tools are inside "tools" in the JSON body
+        if isinstance(body, dict):
+            tools = body.get("tools")
+            if isinstance(tools, list):
+                for tool in tools:
+                    if isinstance(tool, dict) and tool.get("type") == "function":
+                        fn = tool.get("function")
+                        if isinstance(fn, dict):
+                            # Remove strict so AIMLAPI backend won't throw "Unrecognized key 'strict'"
+                            fn.pop("strict", None)
+
         return options
 
     async def _prepare_request(

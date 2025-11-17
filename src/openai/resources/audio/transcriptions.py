@@ -437,49 +437,50 @@ class Transcriptions(SyncAPIResource):
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         temperature: float | Omit = omit,
         timestamp_granularities: List[Literal["word", "segment"]] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> str | Transcription | TranscriptionDiarized | TranscriptionVerbose | Stream[TranscriptionStreamEvent]:
-        body = deepcopy_minimal(
-            {
-                "file": file,
-                "model": model,
-                "chunking_strategy": chunking_strategy,
-                "include": include,
-                "known_speaker_names": known_speaker_names,
-                "known_speaker_references": known_speaker_references,
-                "language": language,
-                "prompt": prompt,
-                "response_format": response_format,
-                "stream": stream,
-                "temperature": temperature,
-                "timestamp_granularities": timestamp_granularities,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
+    ) -> Dict[str, Any]:
+        """
+        Provider-specific STT for AIMLAPI.
+
+        Маппим OpenAI-подобный интерфейс (file + model) на наш /stt/create:
+        - файл уходит в поле `audio`
+        - модель уходит в form-data как `model`
+        """
+
+        # form-data поля (только то, что реально поддерживает наш /stt/create)
+        data: Dict[str, Any] = {"model": str(model)}
+
+        # опционально можно поддержать language / prompt, если бэкенд это понимает:
+        if not isinstance(language, Omit):
+            data["language"] = language
+        if not isinstance(prompt, Omit):
+            data["prompt"] = prompt
+
+        # файл под ключом `audio`, как в твоём примере
+        files = {"audio": file}
+
+        # даём понять, что это multipart; boundary httpx подставит сам
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+
         return self._post(  # type: ignore[return-value]
-            "/audio/transcriptions",
-            body=maybe_transform(
-                body,
-                transcription_create_params.TranscriptionCreateParamsStreaming
-                if stream
-                else transcription_create_params.TranscriptionCreateParamsNonStreaming,
-            ),
+            "/stt/create",
+            # form fields
+            body=data,
+            # file field
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
-            cast_to=_get_response_format_type(response_format),
-            stream=stream or False,
-            stream_cls=Stream[TranscriptionStreamEvent],
+            # тут уже не пытаемся парсить в OpenAI Transcription-тип, просто возвращаем raw JSON
+            cast_to=object,
+            # streaming пока не поддерживаем для этого эндпоинта
+            stream=False,
         )
 
 
@@ -877,49 +878,37 @@ class AsyncTranscriptions(AsyncAPIResource):
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         temperature: float | Omit = omit,
         timestamp_granularities: List[Literal["word", "segment"]] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Transcription | TranscriptionVerbose | TranscriptionDiarized | str | AsyncStream[TranscriptionStreamEvent]:
-        body = deepcopy_minimal(
-            {
-                "file": file,
-                "model": model,
-                "chunking_strategy": chunking_strategy,
-                "include": include,
-                "known_speaker_names": known_speaker_names,
-                "known_speaker_references": known_speaker_references,
-                "language": language,
-                "prompt": prompt,
-                "response_format": response_format,
-                "stream": stream,
-                "temperature": temperature,
-                "timestamp_granularities": timestamp_granularities,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
+    ) -> Dict[str, Any]:
+        """
+        Async-обёртка над /stt/create для AIMLAPI.
+        """
+
+        data: Dict[str, Any] = {"model": str(model)}
+
+        if not isinstance(language, Omit):
+            data["language"] = language
+        if not isinstance(prompt, Omit):
+            data["prompt"] = prompt
+
+        files = {"audio": file}
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+
         return await self._post(
-            "/audio/transcriptions",
-            body=await async_maybe_transform(
-                body,
-                transcription_create_params.TranscriptionCreateParamsStreaming
-                if stream
-                else transcription_create_params.TranscriptionCreateParamsNonStreaming,
-            ),
+            "/stt/create",
+            body=data,
             files=files,
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
-            cast_to=_get_response_format_type(response_format),
-            stream=stream or False,
-            stream_cls=AsyncStream[TranscriptionStreamEvent],
+            cast_to=object,
+            stream=False,
         )
 
 
