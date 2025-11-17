@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from collections.abc import MutableMapping, Sequence
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from typing_extensions import override
 
@@ -15,9 +15,14 @@ from openai._client import (
     AsyncOpenAIWithStreamedResponse as _AsyncOpenAIWithStreamedResponse,
 )
 from openai._models import FinalRequestOptions
+from openai._compat import cached_property
 from openai.lib.azure import AzureOpenAI as _AzureOpenAI, AsyncAzureOpenAI as _AsyncAzureOpenAI
 
+if TYPE_CHECKING:
+    from .resources.chat import Chat as _AimlChat, AsyncChat as _AimlAsyncChat
+
 DEFAULT_BASE_URL = "https://api.aimlapi.com/v1"
+AZURE_DEFAULT_BASE_URL = "https://api.aimlapi.com/openai/"
 _API_KEY_ENV_VARS = ("AIML_API_KEY", "AIMLAPI_API_KEY")
 _BASE_URL_ENV_VARS = ("AIML_API_BASE", "AIMLAPI_API_BASE")
 
@@ -30,14 +35,19 @@ def _first_env(*names: str) -> str | None:
     return None
 
 
-def _apply_default_client_options(kwargs: dict[str, Any]) -> None:
+def _apply_default_client_options(
+    kwargs: dict[str, Any],
+    *,
+    include_base_url: bool = True,
+    default_base_url: str = DEFAULT_BASE_URL,
+) -> None:
     if kwargs.get("api_key") is None:
         api_key = _first_env(*_API_KEY_ENV_VARS)
         if api_key is not None:
             kwargs["api_key"] = api_key
 
-    if kwargs.get("base_url") is None:
-        base_url = _first_env(*_BASE_URL_ENV_VARS) or DEFAULT_BASE_URL
+    if include_base_url and kwargs.get("base_url") is None:
+        base_url = _first_env(*_BASE_URL_ENV_VARS) or default_base_url
         kwargs["base_url"] = base_url
 
 
@@ -99,6 +109,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
 
+    @cached_property
+    def chat(self) -> "_AimlChat":
+        from .resources.chat import Chat as _AimlChatImpl
+
+        return _AimlChatImpl(self)
+
 
 class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
     """Asynchronous client for the AIML API."""
@@ -112,23 +128,59 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
 
+    @cached_property
+    def chat(self) -> "_AimlAsyncChat":
+        from .resources.chat import AsyncChat as _AimlAsyncChatImpl
+
+        return _AimlAsyncChatImpl(self)
+
 
 class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
     """Synchronous Azure client with AIMLAPI overrides."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        include_base_url = kwargs.get("azure_endpoint") is None
+        _apply_default_client_options(
+            kwargs,
+            include_base_url=include_base_url,
+            default_base_url=AZURE_DEFAULT_BASE_URL,
+        )
+        super().__init__(*args, **kwargs)
 
     @override
     def _build_request(self, options: FinalRequestOptions, *, retries_taken: int = 0):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
+
+    @cached_property
+    def chat(self) -> "_AimlChat":
+        from .resources.chat import Chat as _AimlChatImpl
+
+        return _AimlChatImpl(self)
 
 
 class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
     """Asynchronous Azure client with AIMLAPI overrides."""
 
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        include_base_url = kwargs.get("azure_endpoint") is None
+        _apply_default_client_options(
+            kwargs,
+            include_base_url=include_base_url,
+            default_base_url=AZURE_DEFAULT_BASE_URL,
+        )
+        super().__init__(*args, **kwargs)
+
     @override
     def _build_request(self, options: FinalRequestOptions, *, retries_taken: int = 0):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
+
+    @cached_property
+    def chat(self) -> "_AimlAsyncChat":
+        from .resources.chat import AsyncChat as _AimlAsyncChatImpl
+
+        return _AimlAsyncChatImpl(self)
 
 
 class AIMLAPIWithRawResponse(_OpenAIWithRawResponse):
