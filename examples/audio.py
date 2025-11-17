@@ -2,17 +2,17 @@
 
 from pathlib import Path
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-# gets OPENAI_API_KEY from your environment variables
-openai = OpenAI()
+# gets AIML_API_KEY from your environment variables
+aimlapi = AIMLAPI()
 
 speech_file_path = Path(__file__).parent / "speech.mp3"
 
 
 def main() -> None:
     # Create text-to-speech audio file
-    with openai.audio.speech.with_streaming_response.create(
+    with aimlapi.audio.speech.with_streaming_response.create(
         model="tts-1",
         voice="alloy",
         input="the quick brown fox jumped over the lazy dogs",
@@ -20,14 +20,14 @@ def main() -> None:
         response.stream_to_file(speech_file_path)
 
     # Create transcription from audio file
-    transcription = openai.audio.transcriptions.create(
+    transcription = aimlapi.audio.transcriptions.create(
         model="whisper-1",
         file=speech_file_path,
     )
     print(transcription.text)
 
     # Create translation from audio file
-    translation = openai.audio.translations.create(
+    translation = aimlapi.audio.translations.create(
         model="whisper-1",
         file=speech_file_path,
     )

@@ -14,45 +14,21 @@ class Table(str, Enum):
     products = "products"
 
 
-class Column(str, Enum):
-    id = "id"
-    status = "status"
-    expected_delivery_date = "expected_delivery_date"
-    delivered_at = "delivered_at"
-    shipped_at = "shipped_at"
-    ordered_at = "ordered_at"
-    canceled_at = "canceled_at"
-
-
-class Operator(str, Enum):
-    eq = "="
-    gt = ">"
-    lt = "<"
-    le = "<="
-    ge = ">="
-    ne = "!="
-
-
-class OrderBy(str, Enum):
-    asc = "asc"
-    desc = "desc"
-
-
 class DynamicValue(BaseModel):
     column_name: str
 
 
 class Condition(BaseModel):
     column: str
-    operator: Operator
-    value: Union[str, int, DynamicValue]
+    operator: str  # e.g. "between", "=", ">=", etc.
+    value: Union[str, int, DynamicValue, List[str]]
 
 
 class Query(BaseModel):
     table_name: Table
-    columns: List[Column]
+    columns: List[str]
     conditions: List[Condition]
-    order_by: OrderBy
+    order_by: Union[str, List[str]]
 
 
 client = OpenAI()
@@ -70,7 +46,7 @@ completion = client.chat.completions.parse(
         },
     ],
     tools=[
-        openai.pydantic_function_tool(Query),
+        aimlapi.pydantic_function_tool(Query),
     ],
 )
 

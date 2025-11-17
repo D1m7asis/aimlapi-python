@@ -26,7 +26,7 @@ with client.chat.completions.stream(
     tools=[
         # because we're using `.parse_stream()`, the returned tool calls
         # will be automatically deserialized into this `GetWeather` type
-        openai.pydantic_function_tool(GetWeather, name="get_weather"),
+        aimlapi.pydantic_function_tool(GetWeather, name="get_weather"),
     ],
     parallel_tool_calls=True,
 ) as stream:

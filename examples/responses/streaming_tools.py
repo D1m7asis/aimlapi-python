@@ -61,7 +61,7 @@ with client.responses.stream(
     model="gpt-4o-2024-08-06",
     input="look up all my orders in november of last year that were fulfilled but not delivered on time",
     tools=[
-        openai.pydantic_function_tool(Query),
+        aimlapi.pydantic_function_tool(Query),
     ],
 ) as stream:
     for event in stream:

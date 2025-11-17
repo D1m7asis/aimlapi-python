@@ -1,18 +1,17 @@
-from openai import AzureOpenAI
+from aimlapi import AzureAIMLAPI
 
 # may change in the future
-# https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning
+# https://learn.microsoft.com/en-us/azure/ai-services/aimlapi/reference#rest-api-versioning
 api_version = "2023-07-01-preview"
 
-# gets the API Key from environment variable AZURE_OPENAI_API_KEY
-client = AzureOpenAI(
+# gets the API Key from environment variable AZURE_AIML_API_KEY
+client = AzureAIMLAPI(
     api_version=api_version,
-    # https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-endpoint.openai.azure.com",
+    # https://learn.microsoft.com/en-us/azure/cognitive-services/aimlapi/how-to/create-resource?pivots=web-portal#create-a-resource
 )
 
 completion = client.chat.completions.create(
-    model="deployment-name",  # e.g. gpt-35-instant
+    model="google/gemini-2.5-pro",  # e.g. gpt-35-instant
     messages=[
         {
             "role": "user",
@@ -23,16 +22,15 @@ completion = client.chat.completions.create(
 print(completion.to_json())
 
 
-deployment_client = AzureOpenAI(
+deployment_client = AzureAIMLAPI(
     api_version=api_version,
-    # https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-resource.azure.openai.com/",
+    # https://learn.microsoft.com/en-us/azure/cognitive-services/aimlapi/how-to/create-resource?pivots=web-portal#create-a-resource
     # Navigate to the Azure OpenAI Studio to deploy a model.
-    azure_deployment="deployment-name",  # e.g. gpt-35-instant
+    azure_deployment="google/gemini-2.5-pro",  # e.g. gpt-35-instant
 )
 
 completion = deployment_client.chat.completions.create(
-    model="<ignored>",
+    model="gpt-5.1-chat-latest",
     messages=[
         {
             "role": "user",

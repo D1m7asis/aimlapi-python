@@ -1,6 +1,6 @@
 import asyncio
 
-from openai.lib.azure import AzureOpenAI, AsyncAzureOpenAI, AzureADTokenProvider, AsyncAzureADTokenProvider
+from aimlapi.lib.azure import AzureAIMLAPI, AsyncAzureAIMLAPI, AzureADTokenProvider, AsyncAzureADTokenProvider
 
 scopes = "https://cognitiveservices.azure.com/.default"
 
@@ -9,7 +9,6 @@ scopes = "https://cognitiveservices.azure.com/.default"
 api_version = "2023-07-01-preview"
 
 # https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-endpoint = "https://my-resource.openai.azure.com"
 
 deployment_name = "deployment-name"  # e.g. gpt-35-instant
 
@@ -21,7 +20,6 @@ def sync_main() -> None:
 
     client = AzureOpenAI(
         api_version=api_version,
-        azure_endpoint=endpoint,
         azure_ad_token_provider=token_provider,
     )
 
