@@ -19,6 +19,7 @@ from openai._compat import cached_property
 from openai.lib.azure import AzureOpenAI as _AzureOpenAI, AsyncAzureOpenAI as _AsyncAzureOpenAI
 
 if TYPE_CHECKING:
+    from .resources.audio import Audio as _AimlAudio, AsyncAudio as _AimlAsyncAudio
     from .resources.chat import Chat as _AimlChat, AsyncChat as _AimlAsyncChat
 
 DEFAULT_BASE_URL = "https://api.aimlapi.com/v1"
@@ -115,6 +116,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
 
         return _AimlChatImpl(self)
 
+    @cached_property
+    def audio(self) -> "_AimlAudio":
+        from .resources.audio import Audio as _AimlAudioImpl
+
+        return _AimlAudioImpl(self)
+
 
 class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
     """Asynchronous client for the AIML API."""
@@ -133,6 +140,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         from .resources.chat import AsyncChat as _AimlAsyncChatImpl
 
         return _AimlAsyncChatImpl(self)
+
+    @cached_property
+    def audio(self) -> "_AimlAsyncAudio":
+        from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
+
+        return _AimlAsyncAudioImpl(self)
 
 
 class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
@@ -158,6 +171,12 @@ class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
 
         return _AimlChatImpl(self)
 
+    @cached_property
+    def audio(self) -> "_AimlAudio":
+        from .resources.audio import Audio as _AimlAudioImpl
+
+        return _AimlAudioImpl(self)
+
 
 class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
     """Asynchronous Azure client with AIMLAPI overrides."""
@@ -181,6 +200,12 @@ class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
         from .resources.chat import AsyncChat as _AimlAsyncChatImpl
 
         return _AimlAsyncChatImpl(self)
+
+    @cached_property
+    def audio(self) -> "_AimlAsyncAudio":
+        from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
+
+        return _AimlAsyncAudioImpl(self)
 
 
 class AIMLAPIWithRawResponse(_OpenAIWithRawResponse):
