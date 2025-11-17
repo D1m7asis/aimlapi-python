@@ -2,16 +2,16 @@
 
 import asyncio
 
-from openai import OpenAI, AsyncOpenAI
+from aimlapi import AIMLAPI, AsyncAIMLAPI
 
-# This script assumes you have the OPENAI_API_KEY environment variable set to a valid OpenAI API key.
+# This script assumes you have the AIML_API_KEY environment variable set to a valid OpenAI API key.
 #
 # You can run this script from the root directory like so:
 # `python examples/streaming.py`
 
 
 def sync_main() -> None:
-    client = OpenAI()
+    client = AIMLAPI()
     response = client.completions.create(
         model="gpt-3.5-turbo-instruct",
         prompt="1,2,3,",
@@ -31,7 +31,7 @@ def sync_main() -> None:
 
 
 async def async_main() -> None:
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
     response = await client.completions.create(
         model="gpt-3.5-turbo-instruct",
         prompt="1,2,3,",
