@@ -2,13 +2,13 @@
 
 import json
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 
 def main() -> None:
-    """Example of OpenAI image streaming with partial images."""
+    """Example of AI/ML API image streaming with partial images."""
     with client.images.generate(
             model="openai/gpt-image-1",
             prompt="A cute baby sea otter",

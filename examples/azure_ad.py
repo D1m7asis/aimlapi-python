@@ -1,26 +1,16 @@
 import asyncio
 
-from aimlapi.lib.azure import AzureAIMLAPI, AsyncAzureAIMLAPI, AzureADTokenProvider, AsyncAzureADTokenProvider
+from aimlapi import AzureAIMLAPI, AsyncAzureAIMLAPI
 
 scopes = "https://cognitiveservices.azure.com/.default"
 
-# May change in the future
-# https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning
-api_version = "2023-07-01-preview"
-
-# https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-
-deployment_name = "deployment-name"  # e.g. gpt-35-instant
+api_version = "2023-07-01-preview"  # ignore this value; any supported version will work
+deployment_name = "gpt-4o"  # set the model name (e.g., "gpt-4o", "gpt-3.5-turbo", etc.)
 
 
 def sync_main() -> None:
-    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-
-    token_provider: AzureADTokenProvider = get_bearer_token_provider(DefaultAzureCredential(), scopes)
-
-    client = AzureOpenAI(
+    client = AzureAIMLAPI(
         api_version=api_version,
-        azure_ad_token_provider=token_provider,
     )
 
     completion = client.chat.completions.create(
@@ -37,14 +27,8 @@ def sync_main() -> None:
 
 
 async def async_main() -> None:
-    from azure.identity.aio import DefaultAzureCredential, get_bearer_token_provider
-
-    token_provider: AsyncAzureADTokenProvider = get_bearer_token_provider(DefaultAzureCredential(), scopes)
-
-    client = AsyncAzureOpenAI(
+    client = AsyncAzureAIMLAPI(
         api_version=api_version,
-        azure_endpoint=endpoint,
-        azure_ad_token_provider=token_provider,
     )
 
     completion = await client.chat.completions.create(

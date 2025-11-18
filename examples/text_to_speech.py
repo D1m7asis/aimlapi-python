@@ -1,30 +1,27 @@
-#!/usr/bin/env rye run python
-
-import time
 import asyncio
 
-from openai import AsyncOpenAI
-from openai.helpers import LocalAudioPlayer
+from aimlapi import AsyncAIMLAPI
 
-# gets OPENAI_API_KEY from your environment variables
-openai = AsyncOpenAI()
+aimlapi = AsyncAIMLAPI()
 
+
+# Example: Text to Speech with streaming response
+# This will stream mp3 audio file and save it to disk
+# Gets AIML_API_KEY from your environment variables
 
 async def main() -> None:
-    start_time = time.time()
-
-    async with openai.audio.speech.with_streaming_response.create(
-        model="tts-1",
-        voice="alloy",
-        response_format="pcm",  # similar to WAV, but without a header chunk at the start.
-        input="""I see skies of blue and clouds of white
-                The bright blessed days, the dark sacred nights
-                And I think to myself
-                What a wonderful world""",
+    # Stream mp3 and save to file
+    async with aimlapi.audio.speech.with_streaming_response.create(
+            model="minimax/speech-2.5-turbo-preview",
+            voice="Vince Douglas",
+            input="Hello from AI/ML API text to speech!",
+            response_format="mp3",
     ) as response:
-        print(f"Time to first byte: {int((time.time() - start_time) * 1000)}ms")
-        await LocalAudioPlayer().play(response)
-        print(f"Time to play: {int((time.time() - start_time) * 1000)}ms")
+        with open("tts-output.mp3", "wb") as f:
+            async for chunk in response.iter_bytes():
+                f.write(chunk)
+
+    print("Saved to tts-output.mp3")
 
 
 if __name__ == "__main__":

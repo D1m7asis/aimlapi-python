@@ -8,6 +8,7 @@ from openai.helpers import Microphone
 # gets AIML_API_KEY from your environment variables
 aimlapi = AsyncAIMLAPI()
 
+# TODO: FIX FOR AIMLAPI + REMOVE COMMENTS
 
 async def main() -> None:
     print("Recording for the next 10 seconds...")
@@ -15,8 +16,8 @@ async def main() -> None:
     print("Recording complete")
 
     result = await aimlapi.audio.transcriptions.create(
-        model="#g1_whisper-large",  # наш STT-модельный ID
-        file=recording,  # bytes-like объект из Microphone
+        model="#g1_whisper-large",  # our STT model ID
+        file=recording,  # bytes-like object from Microphone
     )
 
     transcript = (

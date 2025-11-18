@@ -3,8 +3,8 @@ from __future__ import annotations
 import rich
 from pydantic import BaseModel
 
-import openai
-from openai import OpenAI
+import aimlapi
+from aimlapi import AIMLAPI
 
 
 class GetWeather(BaseModel):
@@ -12,8 +12,9 @@ class GetWeather(BaseModel):
     country: str
 
 
-client = OpenAI()
+client = AIMLAPI()
 
+# TODO: FIX MESSAGES
 
 with client.chat.completions.stream(
     model="gpt-4o-2024-08-06",

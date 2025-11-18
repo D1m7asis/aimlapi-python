@@ -1,9 +1,9 @@
 #!/usr/bin/env -S poetry run python
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-# gets API Key from environment variable OPENAI_API_KEY
-client = OpenAI()
+# gets API Key from environment variable AIML_API_KEY
+client = AIMLAPI()
 
 # Non-streaming:
 print("----- standard request -----")

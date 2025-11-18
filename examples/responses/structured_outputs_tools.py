@@ -4,8 +4,8 @@ from typing import List, Union
 import rich
 from pydantic import BaseModel
 
-import openai
-from openai import OpenAI
+import aimlapi
+from aimlapi import AIMLAPI
 
 
 class Table(str, Enum):
@@ -49,19 +49,21 @@ class Condition(BaseModel):
 
 
 class Query(BaseModel):
+    """Query e-commerce tables for orders, customers or products."""
+
     table_name: Table
     columns: List[Column]
     conditions: List[Condition]
     order_by: OrderBy
 
 
-client = OpenAI()
+client = AIMLAPI()
 
 response = client.responses.parse(
     model="gpt-4o-2024-08-06",
     input="look up all my orders in november of last year that were fulfilled but not delivered on time",
     tools=[
-        openai.pydantic_function_tool(Query),
+        aimlapi.pydantic_function_tool(Query),
     ],
 )
 

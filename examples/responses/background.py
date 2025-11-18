@@ -3,8 +3,9 @@ from typing import List
 import rich
 from pydantic import BaseModel
 
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
+# TODO
 
 class Step(BaseModel):
     explanation: str
@@ -16,7 +17,7 @@ class MathResponse(BaseModel):
     final_answer: str
 
 
-client = OpenAI()
+client = AIMLAPI()
 id = None
 
 with client.responses.create(

@@ -4,8 +4,8 @@ from typing import List, Union
 import rich
 from pydantic import BaseModel
 
-import openai
-from openai import OpenAI
+import aimlapi
+from aimlapi import AIMLAPI
 
 
 class Table(str, Enum):
@@ -49,13 +49,14 @@ class Condition(BaseModel):
 
 
 class Query(BaseModel):
+    """A database query request."""
     table_name: Table
     columns: List[Column]
     conditions: List[Condition]
     order_by: OrderBy
 
 
-client = OpenAI()
+client = AIMLAPI()
 
 with client.responses.stream(
     model="gpt-4o-2024-08-06",
