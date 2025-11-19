@@ -21,6 +21,7 @@ from openai.lib.azure import AzureOpenAI as _AzureOpenAI, AsyncAzureOpenAI as _A
 if TYPE_CHECKING:
     from .resources.audio import Audio as _AimlAudio, AsyncAudio as _AimlAsyncAudio
     from .resources.chat import Chat as _AimlChat, AsyncChat as _AimlAsyncChat
+    from .resources.videos import Videos as _AimlVideos, AsyncVideos as _AimlAsyncVideos
 
 DEFAULT_BASE_URL = "https://api.aimlapi.com/v1"
 AZURE_DEFAULT_BASE_URL = "https://api.aimlapi.com/openai/"
@@ -122,6 +123,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
 
         return _AimlAudioImpl(self)
 
+    @cached_property
+    def videos(self) -> "_AimlVideos":
+        from .resources.videos import Videos as _AimlVideosImpl
+
+        return _AimlVideosImpl(self)
+
 
 class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
     """Asynchronous client for the AIML API."""
@@ -146,6 +153,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
 
         return _AimlAsyncAudioImpl(self)
+
+    @cached_property
+    def videos(self) -> "_AimlAsyncVideos":
+        from .resources.videos import AsyncVideos as _AimlAsyncVideosImpl
+
+        return _AimlAsyncVideosImpl(self)
 
 
 class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
@@ -177,6 +190,12 @@ class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
 
         return _AimlAudioImpl(self)
 
+    @cached_property
+    def videos(self) -> "_AimlVideos":
+        from .resources.videos import Videos as _AimlVideosImpl
+
+        return _AimlVideosImpl(self)
+
 
 class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
     """Asynchronous Azure client with AIMLAPI overrides."""
@@ -206,6 +225,12 @@ class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
         from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
 
         return _AimlAsyncAudioImpl(self)
+
+    @cached_property
+    def videos(self) -> "_AimlAsyncVideos":
+        from .resources.videos import AsyncVideos as _AimlAsyncVideosImpl
+
+        return _AimlAsyncVideosImpl(self)
 
 
 class AIMLAPIWithRawResponse(_OpenAIWithRawResponse):
