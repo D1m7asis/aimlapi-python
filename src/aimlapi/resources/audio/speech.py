@@ -275,7 +275,29 @@ async def _async_resolve_audio_reference(
 
 
 def _extract_audio_payload(payload: object) -> _InlineAudio | _AudioURL | None:
-    return _walk_for_audio(payload, expect_audio=False, mime_hint=None)
+    mapping = _coerce_mapping(payload)
+
+    audio_value = mapping.get("audio")
+    if isinstance(audio_value, Mapping):
+        url = audio_value.get("url") or audio_value.get("href")
+        if isinstance(url, str) and _looks_like_url(url):
+            mime = (
+                audio_value.get("mime_type")
+                or audio_value.get("content_type")
+                or audio_value.get("type")
+            )
+            if isinstance(mime, str):
+                return _AudioURL(url=url, mime=mime)
+            return _AudioURL(url=url, mime=None)
+
+        if isinstance(audio_value, str) and _looks_like_url(audio_value):
+            return _AudioURL(url=audio_value, mime=None)
+
+    audio_url = mapping.get("audio_url")
+    if isinstance(audio_url, str) and _looks_like_url(audio_url):
+        return _AudioURL(url=audio_url, mime=None)
+
+    return _walk_for_audio(mapping, expect_audio=False, mime_hint=None)
 
 
 def _walk_for_audio(
@@ -287,7 +309,11 @@ def _walk_for_audio(
     if isinstance(value, Mapping):
         next_mime = mime_hint
         if expect_audio:
-            mime_value = value.get("mime_type") or value.get("content_type") or value.get("type")
+            mime_value = (
+                value.get("mime_type")
+                or value.get("content_type")
+                or value.get("type")
+            )
             if isinstance(mime_value, str) and mime_value.startswith("audio/"):
                 next_mime = mime_value
 
@@ -304,15 +330,26 @@ def _walk_for_audio(
                 "audio_content",
                 "audiofile",
                 "sound",
+                "audio_url",
             }
-            result = _walk_for_audio(child, expect_audio=child_expect_audio, mime_hint=next_mime)
+
+            result = _walk_for_audio(
+                child,
+                expect_audio=child_expect_audio,
+                mime_hint=next_mime,
+            )
             if result is not None:
                 return result
+
         return None
 
     if isinstance(value, list):
         for item in value:
-            result = _walk_for_audio(item, expect_audio=expect_audio, mime_hint=mime_hint)
+            result = _walk_for_audio(
+                item,
+                expect_audio=expect_audio,
+                mime_hint=mime_hint,
+            )
             if result is not None:
                 return result
         return None
@@ -321,8 +358,7 @@ def _walk_for_audio(
         if isinstance(value, bytes):
             return _InlineAudio(data=value, mime=mime_hint)
         if isinstance(value, str):
-            url = _looks_like_url(value)
-            if url:
+            if _looks_like_url(value):
                 return _AudioURL(url=value, mime=mime_hint)
 
             decoded = _decode_audio_string(value)

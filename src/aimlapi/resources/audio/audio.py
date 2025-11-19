@@ -9,8 +9,6 @@ from openai.resources.audio.audio import (
     AudioWithStreamingResponse,
     AsyncAudioWithStreamingResponse,
 )
-from openai.resources.audio.translations import AsyncTranslations, Translations
-
 from .speech import AsyncSpeech, Speech
 from .transcriptions import AsyncTranscriptions, Transcriptions
 
@@ -30,8 +28,11 @@ class Audio(OpenAIAudio):
         return Transcriptions(self._client)
 
     @cached_property
-    def translations(self) -> Translations:
-        return Translations(self._client)
+    def translations(self):  # type: ignore[override]
+        raise NotImplementedError(
+            "AIMLAPI does not support /v1/audio/translations for now. "
+            "Use audio.transcriptions.create(...) + chat.completions.create(...) instead."
+        )
 
     @cached_property
     def speech(self) -> Speech:
@@ -44,8 +45,11 @@ class AsyncAudio(OpenAIAsyncAudio):
         return AsyncTranscriptions(self._client)
 
     @cached_property
-    def translations(self) -> AsyncTranslations:
-        return AsyncTranslations(self._client)
+    def translations(self):  # type: ignore[override]
+        raise NotImplementedError(
+            "AIMLAPI does not support /v1/audio/translations for now. "
+            "Use audio.transcriptions.create(...) + chat.completions.create(...) instead."
+        )
 
     @cached_property
     def speech(self) -> AsyncSpeech:
