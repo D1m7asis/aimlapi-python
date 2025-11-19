@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, Mapping
 
+import httpx
+
 from openai._base_client import make_request_options
 from openai._types import Body, Headers, NotGiven, Query, Timeout, not_given
 from openai.resources.videos import (
@@ -61,6 +63,53 @@ def _video_api_url(base_url: Any, path: str) -> str:
     return f"{base}{normalized_path}"
 
 
+def _extract_video_url(payload: Mapping[str, Any]) -> str:
+    url = _find_video_url(payload)
+    if url:
+        return url
+    raise ValueError("Video generation result did not include a video URL")
+
+
+def _find_video_url(value: object) -> str | None:
+    if isinstance(value, Mapping):
+        url_value = value.get("url")
+        if isinstance(url_value, str) and url_value:
+            return url_value
+
+        for nested in value.values():
+            found = _find_video_url(nested)
+            if found:
+                return found
+
+    elif isinstance(value, list):
+        for item in value:
+            found = _find_video_url(item)
+            if found:
+                return found
+
+    elif isinstance(value, tuple):
+        for item in value:
+            found = _find_video_url(item)
+            if found:
+                return found
+
+    return None
+
+
+def _download_video_bytes(url: str) -> bytes:
+    with httpx.Client(follow_redirects=True, timeout=None) as client:
+        response = client.get(url)
+        response.raise_for_status()
+        return response.content
+
+
+async def _async_download_video_bytes(url: str) -> bytes:
+    async with httpx.AsyncClient(follow_redirects=True, timeout=None) as client:
+        response = await client.get(url)
+        response.raise_for_status()
+        return response.content
+
+
 class Videos(OpenAIVideos):
     """AIMLAPI specific video helpers."""
 
@@ -76,13 +125,19 @@ class Videos(OpenAIVideos):
         enhance_prompt: bool | None = None,
         poll_interval: float = _DEFAULT_POLL_INTERVAL,
         poll_timeout: float | None = _DEFAULT_POLL_TIMEOUT,
+        return_bytes: bool = False,
         status_callback: Callable[[Mapping[str, Any]], None] | None = None,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
-    ) -> Dict[str, Any]:
-        """Create a video generation job and poll until it finishes."""
+    ) -> Dict[str, Any] | bytes:
+        """Create a video generation job and poll until it finishes.
+
+        Args:
+            return_bytes: When ``True``, download and return the final video bytes
+                instead of the JSON payload.
+        """
 
         payload: Dict[str, Any] = {
             "model": model,
@@ -129,7 +184,12 @@ class Videos(OpenAIVideos):
             pending_statuses=_VIDEO_PENDING_STATUSES,
         )
 
-        return _coerce_mapping(result, context="video generation status")
+        final_payload = _coerce_mapping(result, context="video generation status")
+        if not return_bytes:
+            return final_payload
+
+        video_url = _extract_video_url(final_payload)
+        return _download_video_bytes(video_url)
 
 
 class AsyncVideos(OpenAIAsyncVideos):
@@ -147,12 +207,13 @@ class AsyncVideos(OpenAIAsyncVideos):
         enhance_prompt: bool | None = None,
         poll_interval: float = _DEFAULT_POLL_INTERVAL,
         poll_timeout: float | None = _DEFAULT_POLL_TIMEOUT,
+        return_bytes: bool = False,
         status_callback: Callable[[Mapping[str, Any]], None] | None = None,
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
-    ) -> Dict[str, Any]:
+    ) -> Dict[str, Any] | bytes:
         payload: Dict[str, Any] = {
             "model": model,
             "prompt": prompt,
@@ -198,5 +259,10 @@ class AsyncVideos(OpenAIAsyncVideos):
             pending_statuses=_VIDEO_PENDING_STATUSES,
         )
 
-        return _coerce_mapping(result, context="video generation status")
+        final_payload = _coerce_mapping(result, context="video generation status")
+        if not return_bytes:
+            return final_payload
+
+        video_url = _extract_video_url(final_payload)
+        return await _async_download_video_bytes(video_url)
 
