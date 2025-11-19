@@ -1,0 +1,1 @@
+# AIMLAPI specific smoke tests.
