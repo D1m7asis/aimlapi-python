@@ -4,6 +4,8 @@ import os
 from collections.abc import MutableMapping, Sequence
 from typing import Any, TYPE_CHECKING
 
+import httpx
+
 from typing_extensions import override
 
 from openai._client import (
@@ -16,6 +18,7 @@ from openai._client import (
 )
 from openai._models import FinalRequestOptions
 from openai._compat import cached_property
+from openai._types import ResponseT
 from openai.lib.azure import AzureOpenAI as _AzureOpenAI, AsyncAzureOpenAI as _AsyncAzureOpenAI
 
 if TYPE_CHECKING:
@@ -111,11 +114,29 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
 
+    @override
+    def _process_response_data(self, *, data: object, cast_to: type[ResponseT], response: httpx.Response) -> ResponseT:
+        result = super()._process_response_data(data=data, cast_to=cast_to, response=response)
+
+        from .resources.images import ensure_b64_json_images_response
+
+        return ensure_b64_json_images_response(
+            result,
+            response=response,
+            http_client=self._client,
+        )
+
     @cached_property
     def chat(self) -> "_AimlChat":
         from .resources.chat import Chat as _AimlChatImpl
 
         return _AimlChatImpl(self)
+
+    @cached_property
+    def images(self):
+        from .resources.images import Images as _AimlImages
+
+        return _AimlImages(self)
 
     @cached_property
     def audio(self) -> "_AimlAudio":
@@ -149,6 +170,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         return _AimlAsyncChatImpl(self)
 
     @cached_property
+    def images(self):
+        from .resources.images import AsyncImages as _AimlAsyncImages
+
+        return _AimlAsyncImages(self)
+
+    @cached_property
     def audio(self) -> "_AimlAsyncAudio":
         from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
 
@@ -178,11 +205,29 @@ class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
         self._cleanup_request(options)
         return super()._build_request(options, retries_taken=retries_taken)
 
+    @override
+    def _process_response_data(self, *, data: object, cast_to: type[ResponseT], response: httpx.Response) -> ResponseT:
+        result = super()._process_response_data(data=data, cast_to=cast_to, response=response)
+
+        from .resources.images import ensure_b64_json_images_response
+
+        return ensure_b64_json_images_response(
+            result,
+            response=response,
+            http_client=self._client,
+        )
+
     @cached_property
     def chat(self) -> "_AimlChat":
         from .resources.chat import Chat as _AimlChatImpl
 
         return _AimlChatImpl(self)
+
+    @cached_property
+    def images(self):
+        from .resources.images import Images as _AimlImages
+
+        return _AimlImages(self)
 
     @cached_property
     def audio(self) -> "_AimlAudio":
@@ -219,6 +264,12 @@ class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
         from .resources.chat import AsyncChat as _AimlAsyncChatImpl
 
         return _AimlAsyncChatImpl(self)
+
+    @cached_property
+    def images(self):
+        from .resources.images import AsyncImages as _AimlAsyncImages
+
+        return _AimlAsyncImages(self)
 
     @cached_property
     def audio(self) -> "_AimlAsyncAudio":
