@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import gzip
 import json
 import logging
 from typing import Any, Iterable
@@ -104,6 +105,16 @@ def ensure_b64_json_images_response(
                 resp = http_client.get(url)
                 resp.raise_for_status()
                 image_bytes = resp.content
+
+                if resp.headers.get("content-encoding", "").lower() == "gzip":
+                    try:
+                        # Decompress if gzipped
+                        image_bytes = gzip.decompress(image_bytes)
+                    except Exception:
+                        logger.warning(
+                            "Failed to decompress gzipped image content; using raw bytes",
+                            exc_info=True,
+                        )
             except Exception:
                 logger.warning("Failed to download image content for base64 enrichment", exc_info=True)
                 continue
@@ -144,6 +155,16 @@ async def async_ensure_b64_json_images_response(
                 resp = await http_client.get(url)
                 resp.raise_for_status()
                 image_bytes = resp.content
+
+                if resp.headers.get("content-encoding", "").lower() == "gzip":
+                    try:
+                        # Decompress if gzipped
+                        image_bytes = gzip.decompress(image_bytes)
+                    except Exception:
+                        logger.warning(
+                            "Failed to decompress gzipped image content; using raw bytes",
+                            exc_info=True,
+                        )
             except Exception:
                 logger.warning("Failed to download image content for base64 enrichment", exc_info=True)
                 continue
