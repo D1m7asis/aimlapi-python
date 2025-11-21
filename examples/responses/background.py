@@ -5,8 +5,6 @@ from pydantic import BaseModel
 
 from aimlapi import AIMLAPI
 
-# TODO
-
 class Step(BaseModel):
     explanation: str
     output: str
@@ -45,3 +43,6 @@ with client.responses.retrieve(
     for event in stream:
         if "output_text" in event.type:
             rich.print(event)
+        if event.type == "response.completed":
+            rich.print("Final output:")
+            rich.print(event.response.output_text)

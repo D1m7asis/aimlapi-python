@@ -118,6 +118,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
         return _AimlChatImpl(self)
 
     @cached_property
+    def responses(self):  # type: ignore[override]
+        from .resources.responses import Responses as _AimlResponsesImpl
+
+        return _AimlResponsesImpl(self)
+
+    @cached_property
     def audio(self) -> "_AimlAudio":
         from .resources.audio import Audio as _AimlAudioImpl
 
@@ -147,6 +153,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         from .resources.chat import AsyncChat as _AimlAsyncChatImpl
 
         return _AimlAsyncChatImpl(self)
+
+    @cached_property
+    def responses(self):  # type: ignore[override]
+        from .resources.responses import AsyncResponses as _AimlAsyncResponsesImpl
+
+        return _AimlAsyncResponsesImpl(self)
 
     @cached_property
     def audio(self) -> "_AimlAsyncAudio":

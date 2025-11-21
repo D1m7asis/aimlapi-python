@@ -4,7 +4,7 @@ from typing import List
 import rich
 from pydantic import BaseModel
 
-from openai._client import AsyncOpenAI
+from aimlapi._client import AsyncAIMLAPI
 
 
 class Step(BaseModel):
@@ -18,7 +18,7 @@ class MathResponse(BaseModel):
 
 
 async def main() -> None:
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
     id = None
 
     async with await client.responses.create(
@@ -44,7 +44,7 @@ async def main() -> None:
         starting_after=10,
     ) as stream:
         async for event in stream:
-            if "output_text" in event.type:
+            if event.type == "response.completed":
                 rich.print(event)
 
 

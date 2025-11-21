@@ -4,7 +4,7 @@ from typing import List
 import rich
 from pydantic import BaseModel
 
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 
 class Step(BaseModel):
@@ -18,7 +18,7 @@ class MathResponse(BaseModel):
 
 
 async def main() -> None:
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
     id = None
     async with client.responses.stream(
         input="solve 8x + 31 = 2",
@@ -46,7 +46,7 @@ async def main() -> None:
             if "output_text" in event.type:
                 rich.print(event)
 
-        rich.print(stream.get_final_response())
+        rich.print(await stream.get_final_response())
 
 
 if __name__ == "__main__":
