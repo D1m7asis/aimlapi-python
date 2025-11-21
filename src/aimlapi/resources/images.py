@@ -95,7 +95,7 @@ class _ImageStream(Stream[ImageGenStreamEvent]):
     ) -> None:
         super().__init__(cast_to=cast_to, response=response, client=client)
         self._response_format = response_format
-        self._http_client = client._client._client
+        self._http_client = client._client
         self._final_response: ImagesResponse | None = None
         self._body_chunks: list[bytes] = []
 
@@ -191,7 +191,7 @@ class _AsyncImageStream(AsyncStream[ImageGenStreamEvent]):
     ) -> None:
         super().__init__(cast_to=cast_to, response=response, client=client)
         self._response_format = response_format
-        self._http_client = client._client._client
+        self._http_client = client._client
         self._final_response: ImagesResponse | None = None
         self._body_chunks: list[bytes] = []
 
