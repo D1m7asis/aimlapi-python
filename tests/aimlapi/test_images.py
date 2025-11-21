@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import gzip
+import json
 
 import httpx
 import pytest
@@ -91,6 +92,30 @@ def test_image_generation_b64_json_download_failure(aiml_client, respx_mock: Moc
 
     assert image.data[0].b64_json is None
     assert image.data[0].url == "https://cdn.example/image.png"
+
+
+@pytest.mark.respx(base_url=AIML_BASE_URL)
+def test_image_generation_stream_gzipped_body(aiml_client, respx_mock: MockRouter) -> None:
+    image_bytes = b"stream-bytes"
+    response_payload = {"data": [{"b64_json": None, "url": "https://cdn.example/image.png"}]}
+    gzipped_body = gzip.compress(json.dumps(response_payload).encode())
+
+    respx_mock.post("/images/generations").mock(
+        return_value=httpx.Response(200, content=gzipped_body, headers={"content-encoding": "gzip"})
+    )
+    respx_mock.get("https://cdn.example/image.png").mock(return_value=httpx.Response(200, content=image_bytes))
+
+    with aiml_client.images.generate(prompt="a lighthouse", response_format="b64_json", stream=True) as stream:
+        body = b""
+        for chunk in stream.response.stream:
+            body += chunk
+
+        data = json.loads(body.decode("utf-8"))
+        assert data["data"][0]["url"] == "https://cdn.example/image.png"
+
+        final = stream.get_final_response()
+        assert final.data[0].b64_json == base64.b64encode(image_bytes).decode()
+        assert final.data[0].url == "https://cdn.example/image.png"
 
 
 @pytest.mark.asyncio
