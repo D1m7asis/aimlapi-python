@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from .resources.audio import Audio as _AimlAudio, AsyncAudio as _AimlAsyncAudio
     from .resources.chat import Chat as _AimlChat, AsyncChat as _AimlAsyncChat
     from .resources.images import Images as _AimlImages, AsyncImages as _AimlAsyncImages
+    from .resources.uploads import Uploads as _AimlUploads, AsyncUploads as _AimlAsyncUploads
     from .resources.videos import Videos as _AimlVideos, AsyncVideos as _AimlAsyncVideos
 
 DEFAULT_BASE_URL = "https://api.aimlapi.com/v1"
@@ -142,6 +143,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
         return _AimlImagesImpl(self)
 
     @cached_property
+    def uploads(self) -> "_AimlUploads":
+        from .resources.uploads import Uploads as _AimlUploadsImpl
+
+        return _AimlUploadsImpl(self)
+
+    @cached_property
     def videos(self) -> "_AimlVideos":
         from .resources.videos import Videos as _AimlVideosImpl
 
@@ -183,6 +190,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         from .resources.images import AsyncImages as _AimlAsyncImagesImpl
 
         return _AimlAsyncImagesImpl(self)
+
+    @cached_property
+    def uploads(self) -> "_AimlAsyncUploads":
+        from .resources.uploads import AsyncUploads as _AimlAsyncUploadsImpl
+
+        return _AimlAsyncUploadsImpl(self)
 
     @cached_property
     def videos(self) -> "_AimlAsyncVideos":
@@ -227,6 +240,12 @@ class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
         return _AimlImagesImpl(self)
 
     @cached_property
+    def uploads(self) -> "_AimlUploads":
+        from .resources.uploads import Uploads as _AimlUploadsImpl
+
+        return _AimlUploadsImpl(self)
+
+    @cached_property
     def videos(self) -> "_AimlVideos":
         from .resources.videos import Videos as _AimlVideosImpl
 
@@ -267,6 +286,12 @@ class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
         from .resources.images import AsyncImages as _AimlAsyncImagesImpl
 
         return _AimlAsyncImagesImpl(self)
+
+    @cached_property
+    def uploads(self) -> "_AimlAsyncUploads":
+        from .resources.uploads import AsyncUploads as _AimlAsyncUploadsImpl
+
+        return _AimlAsyncUploadsImpl(self)
 
     @cached_property
     def videos(self) -> "_AimlAsyncVideos":

@@ -1,3 +1,19 @@
 from __future__ import annotations
 
-from openai.resources.uploads import *  # noqa: F401, F403
+from .uploads import (
+    AsyncUploads,
+    AsyncUploadsWithRawResponse,
+    AsyncUploadsWithStreamingResponse,
+    Uploads,
+    UploadsWithRawResponse,
+    UploadsWithStreamingResponse,
+)
+
+__all__ = [
+    "Uploads",
+    "AsyncUploads",
+    "UploadsWithRawResponse",
+    "AsyncUploadsWithRawResponse",
+    "UploadsWithStreamingResponse",
+    "AsyncUploadsWithStreamingResponse",
+]
