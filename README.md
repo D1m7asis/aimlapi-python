@@ -1,39 +1,48 @@
-# OpenAI Python API library
+# AI/ML API Python SDK (OpenAI compatible)
 
-<!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/openai.svg?label=pypi%20(stable))](https://pypi.org/project/openai/)
+AI/ML API provides access to 300+ AI models (including DeepSeek, Gemini, and ChatGPT) with enterprise-grade rate limits and uptime. This package is an OpenAI-compatible fork of the official OpenAI Python client and defaults to the AI/ML API endpoints so you can reuse familiar APIs while targeting [api.aimlapi.com](https://api.aimlapi.com/v1/).
 
-The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.9+
-application. The library includes type definitions for all request params and response fields,
-and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
+- Models: https://aimlapi.com/models
+- REST API reference: https://docs.aimlapi.com/
+- Example endpoints: https://api.aimlapi.com/v1/ and https://api.aimlapi.com/v1/chat/completions
 
-It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
-
-## Documentation
-
-The REST API documentation can be found on [platform.openai.com](https://platform.openai.com/docs/api-reference). The full API of this library can be found in [api.md](api.md).
+The full typed surface area of the SDK is documented in [api.md](api.md).
 
 ## Installation
 
 ```sh
-# install from PyPI
-pip install openai
+pip install aimlapi
 ```
 
-## Usage
+## Quickstart
 
-The full API of this library can be found in [api.md](api.md).
-
-The primary API for interacting with OpenAI models is the [Responses API](https://platform.openai.com/docs/api-reference/responses). You can generate text from the model with the code below.
+The SDK exposes OpenAI-compatible sync and async clients while applying AI/ML defaults such as the base URL and header metadata. By default the client picks up your `AIML_API_KEY` (or `AIMLAPI_API_KEY`) environment variable and targets `https://api.aimlapi.com/v1`.
 
 ```python
 import os
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+client = AIMLAPI(
+    api_key=os.environ.get("AIML_API_KEY"),
 )
+
+completion = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "developer", "content": "Talk like a pirate."},
+        {"role": "user", "content": "How do I check if a Python object is an instance of a class?"},
+    ],
+)
+
+print(completion.choices[0].message.content)
+```
+
+You can also use the streaming-friendly [Responses API](https://docs.aimlapi.com/api-reference/responses) with the same interface:
+
+```python
+from aimlapi import AIMLAPI
+
+client = AIMLAPI()
 
 response = client.responses.create(
     model="gpt-4o",
@@ -44,32 +53,7 @@ response = client.responses.create(
 print(response.output_text)
 ```
 
-The previous standard (supported indefinitely) for generating text is the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can use that API to generate text from the model with the code below.
-
-```python
-from openai import OpenAI
-
-client = OpenAI()
-
-completion = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "developer", "content": "Talk like a pirate."},
-        {
-            "role": "user",
-            "content": "How do I check if a Python object is an instance of a class?",
-        },
-    ],
-)
-
-print(completion.choices[0].message.content)
-```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `OPENAI_API_KEY="My API Key"` to your `.env` file
-so that your API key is not stored in source control.
-[Get an API key here](https://platform.openai.com/settings/organization/api-keys).
+> **Note:** The remaining sections mirror the upstream OpenAI README for advanced scenarios. Replace `openai` imports with `aimlapi` to reuse the same APIs against the AI/ML API service.
 
 ### Vision
 
@@ -97,9 +81,9 @@ With the image as a base64 encoded string:
 
 ```python
 import base64
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 prompt = "What is in this image?"
 with open("path/to/image.png", "rb") as image_file:
@@ -121,16 +105,16 @@ response = client.responses.create(
 
 ## Async usage
 
-Simply import `AsyncOpenAI` instead of `OpenAI` and use `await` with each API call:
+Simply import `AsyncAIMLAPI` instead of `AIMLAPI` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI(
+client = AsyncAIMLAPI(
     # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=os.environ.get("AIML_API_KEY"),
 )
 
 
@@ -154,19 +138,18 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install openai[aiohttp]
+pip install aimlapi[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from openai import DefaultAioHttpClient
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI, DefaultAioHttpClient
 
 
 async def main() -> None:
-    async with AsyncOpenAI(
+    async with AsyncAIMLAPI(
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
@@ -189,9 +172,9 @@ asyncio.run(main())
 We provide support for streaming responses using Server Side Events (SSE).
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 stream = client.responses.create(
     model="gpt-4o",
@@ -207,9 +190,9 @@ The async client uses the exact same interface.
 
 ```python
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI()
+client = AsyncAIMLAPI()
 
 
 async def main():
@@ -238,10 +221,10 @@ Basic text based example:
 
 ```py
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
 async def main():
-    client = AsyncOpenAI()
+    client = AsyncAIMLAPI()
 
     async with client.realtime.connect(model="gpt-realtime") as connection:
         await connection.session.update(
@@ -277,7 +260,7 @@ However the real magic of the Realtime API is handling audio inputs / outputs, s
 Whenever an error occurs, the Realtime API will send an [`error` event](https://platform.openai.com/docs/guides/realtime-model-capabilities#error-handling) and the connection will stay open and remain usable. This means you need to handle it yourself, as _no errors are raised directly_ by the SDK when an `error` event comes in.
 
 ```py
-client = AsyncOpenAI()
+client = AsyncAIMLAPI()
 
 async with client.realtime.connect(model="gpt-realtime") as connection:
     ...
@@ -305,9 +288,9 @@ List methods in the OpenAI API are paginated.
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 all_jobs = []
 # Automatically fetches more pages as needed.
@@ -323,9 +306,9 @@ Or, asynchronously:
 
 ```python
 import asyncio
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI()
+client = AsyncAIMLAPI()
 
 
 async def main() -> None:
@@ -374,9 +357,9 @@ for job in first_page.data:
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 response = client.chat.responses.create(
     input=[
@@ -396,9 +379,9 @@ Request parameters that correspond to file uploads can be passed as `bytes`, or 
 
 ```python
 from pathlib import Path
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 client.files.create(
     file=Path("input.jsonl"),
@@ -416,16 +399,16 @@ For more information about webhooks, see [the API docs](https://platform.openai.
 
 ### Parsing webhook payloads
 
-For most use cases, you will likely want to verify the webhook and parse the payload at the same time. To achieve this, we provide the method `client.webhooks.unwrap()`, which parses a webhook request and verifies that it was sent by OpenAI. This method will raise an error if the signature is invalid.
+For most use cases, you will likely want to verify the webhook and parse the payload at the same time. To achieve this, we provide the method `client.webhooks.unwrap()`, which parses a webhook request and verifies that it was sent by the AI/ML API service. This method will raise an error if the signature is invalid.
 
-Note that the `body` parameter must be the raw JSON string sent from the server (do not parse it first). The `.unwrap()` method will parse this JSON for you into an event object after verifying the webhook was sent from OpenAI.
+Note that the `body` parameter must be the raw JSON string sent from the server (do not parse it first). The `.unwrap()` method will parse this JSON for you into an event object after verifying the webhook was sent from AI/ML API.
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 from flask import Flask, request
 
 app = Flask(__name__)
-client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
+client = AIMLAPI()
 
 
 @app.route("/webhook", methods=["POST"])
@@ -460,11 +443,11 @@ Note that the `body` parameter must be the raw JSON string sent from the server 
 
 ```python
 import json
-from openai import OpenAI
+from aimlapi import AIMLAPI
 from flask import Flask, request
 
 app = Flask(__name__)
-client = OpenAI()  # OPENAI_WEBHOOK_SECRET environment variable is used by default
+client = AIMLAPI()
 
 
 @app.route("/webhook", methods=["POST"])
@@ -490,30 +473,29 @@ if __name__ == "__main__":
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `openai.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `aimlapi.APIConnectionError` is raised.
 
-When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `openai.APIStatusError` is raised, containing `status_code` and `response` properties.
+When the API returns a non-success status code (that is, 4xx or 5xx response), a subclass of `aimlapi.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `openai.APIError`.
+All errors inherit from `aimlapi.APIError`.
 
 ```python
-import openai
-from openai import OpenAI
+import aimlapi
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 
 try:
     client.fine_tuning.jobs.create(
         model="gpt-4o",
         training_file="file-abc123",
     )
-except openai.APIConnectionError as e:
+except aimlapi.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except openai.RateLimitError as e:
+except aimlapi.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except openai.APIStatusError as e:
+except aimlapi.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -554,13 +536,13 @@ methods and modules are _private_.
 > If you need to access request IDs for failed requests you must catch the `APIStatusError` exception
 
 ```python
-import openai
+import aimlapi
 
 try:
     completion = await client.chat.completions.create(
         messages=[{"role": "user", "content": "Say this is a test"}], model="gpt-4"
     )
-except openai.APIStatusError as exc:
+except aimlapi.APIStatusError as exc:
     print(exc.request_id)  # req_123
     raise exc
 ```
@@ -574,10 +556,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 # Configure the default for all requests:
-client = OpenAI(
+client = AIMLAPI(
     # default is 2
     max_retries=0,
 )
@@ -600,16 +582,16 @@ By default requests time out after 10 minutes. You can configure this with a `ti
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 # Configure the default for all requests:
-client = OpenAI(
+client = AIMLAPI(
     # 20 seconds (default is 10 minutes)
     timeout=20.0,
 )
 
 # More granular control:
-client = OpenAI(
+client = AIMLAPI(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -635,10 +617,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `OPENAI_LOG` to `info`.
+You can enable logging by setting the environment variable `AIMLAPI_LOG` to `info`.
 
 ```shell
-$ export OPENAI_LOG=info
+$ export AIMLAPI_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -660,9 +642,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-client = OpenAI()
+client = AIMLAPI()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "user",
@@ -755,10 +737,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from openai import OpenAI, DefaultHttpxClient
+from aimlapi import AIMLAPI, DefaultHttpxClient
 
-client = OpenAI(
-    # Or use the `OPENAI_BASE_URL` env var
+client = AIMLAPI(
+    # Or use the `AIML_API_BASE` env var
     base_url="http://my.test.server.example.com:8083/v1",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -778,33 +760,30 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
-with OpenAI() as client:
+with AIMLAPI() as client:
   # make requests here
   ...
 
 # HTTP client is now closed
 ```
 
-## Microsoft Azure OpenAI
+## Microsoft Azure
 
-To use this library with [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/overview), use the `AzureOpenAI`
-class instead of the `OpenAI` class.
+To target Azure-hosted deployments, use the `AzureAIMLAPI` class instead of `AIMLAPI`.
 
 > [!IMPORTANT]
 > The Azure API shape differs from the core API shape which means that the static types for responses / params
 > won't always be correct.
 
 ```py
-from openai import AzureOpenAI
+from aimlapi import AzureAIMLAPI
 
-# gets the API Key from environment variable AZURE_OPENAI_API_KEY
-client = AzureOpenAI(
-    # https://learn.microsoft.com/azure/ai-services/openai/reference#rest-api-versioning
+# gets the API Key from environment variable AIML_API_KEY
+client = AzureAIMLAPI(
+    # Azure API versions are still required when targeting Azure endpoints
     api_version="2023-07-01-preview",
-    # https://learn.microsoft.com/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal#create-a-resource
-    azure_endpoint="https://example-endpoint.openai.azure.com",
 )
 
 completion = client.chat.completions.create(
@@ -819,12 +798,12 @@ completion = client.chat.completions.create(
 print(completion.to_json())
 ```
 
-In addition to the options provided in the base `OpenAI` client, the following options are provided:
+In addition to the options provided in the base `AIMLAPI` client, the following options are provided:
 
-- `azure_endpoint` (or the `AZURE_OPENAI_ENDPOINT` environment variable)
+- `azure_endpoint` (or the `AZURE_AIML_ENDPOINT` environment variable)
 - `azure_deployment`
-- `api_version` (or the `OPENAI_API_VERSION` environment variable)
-- `azure_ad_token` (or the `AZURE_OPENAI_AD_TOKEN` environment variable)
+- `api_version` (or the `AIML_API_VERSION` environment variable)
+- `azure_ad_token`
 - `azure_ad_token_provider`
 
 An example of using the client with Microsoft Entra ID (formerly known as Azure Active Directory) can be found [here](https://github.com/openai/openai-python/blob/main/examples/azure_ad.py).
@@ -848,8 +827,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import openai
-print(openai.__version__)
+import aimlapi
+print(aimlapi.__version__)
 ```
 
 ## Requirements

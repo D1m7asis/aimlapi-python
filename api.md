@@ -1,5 +1,8 @@
 # Shared Types
 
+> The examples below reference the upstream `openai` namespace. When using the AI/ML API package, you can import the same
+> classes and helpers from `aimlapi` while preserving compatibility with the OpenAI SDK surface.
+
 ```python
 from openai.types import (
     AllModels,

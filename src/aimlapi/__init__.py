@@ -33,6 +33,8 @@ from ._client import (
     AzureAIMLAPIWithStreamedResponse,
     Client,
 )
+from ._client import DEFAULT_BASE_URL
+from ._version import __title__, __version__
 
 AzureOpenAI = AzureAIMLAPI
 AsyncAzureOpenAI = AsyncAzureAIMLAPI
@@ -55,7 +57,7 @@ api_key: str | None = _first_env(*_API_KEY_ENV_VARS)
 organization: str | None = None
 project: str | None = None
 webhook_secret: str | None = None
-base_url: str | httpx.URL | None = _first_env(*_BASE_URL_ENV_VARS)
+base_url: str | httpx.URL | None = _first_env(*_BASE_URL_ENV_VARS) or DEFAULT_BASE_URL
 websocket_base_url: str | httpx.URL | None = None
 timeout: float | Timeout | None = DEFAULT_TIMEOUT
 max_retries: int = DEFAULT_MAX_RETRIES
@@ -117,6 +119,8 @@ __all__ = list(
     dict.fromkeys(
         [
             *_openai_all,
+            "__title__",
+            "__version__",
             "AIMLAPI",
             "AsyncAIMLAPI",
             "AIMLAPIWithRawResponse",

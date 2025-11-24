@@ -1,7 +1,4 @@
 {
-  "packages": {
-    ".": {}
-  },
   "$schema": "https://raw.githubusercontent.com/stainless-api/release-please/main/schemas/config.json",
   "include-v-in-tag": true,
   "include-component-in-tag": false,
@@ -11,6 +8,17 @@
   "bump-patch-for-minor-pre-major": false,
   "pull-request-header": "Automated Release PR",
   "pull-request-title-pattern": "release: ${version}",
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "package-name": "aimlapi",
+      "extra-files": [
+        "pyproject.toml",
+        "src/aimlapi/_version.py",
+        "src/openai/_version.py"
+      ]
+    }
+  },
   "changelog-sections": [
     {
       "type": "feat",

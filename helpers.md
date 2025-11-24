@@ -1,6 +1,6 @@
 # Structured Outputs Parsing Helpers
 
-The OpenAI API supports extracting JSON from the model with the `response_format` request param, for more details on the API, see [this guide](https://platform.openai.com/docs/guides/structured-outputs).
+The AI/ML API supports extracting JSON from the model with the `response_format` request param (see [the guide](https://docs.aimlapi.com/guides/structured-outputs)) and remains fully compatible with the upstream OpenAI client surface.
 
 The SDK provides a `client.chat.completions.parse()` method which is a wrapper over the `client.chat.completions.create()` that
 provides richer integrations with Python specific types & returns a `ParsedChatCompletion` object, which is a subclass of the standard `ChatCompletion` class.
@@ -13,7 +13,7 @@ into a JSON schema, send it to the API and parse the response content back into 
 ```py
 from typing import List
 from pydantic import BaseModel
-from openai import OpenAI
+from aimlapi import AIMLAPI
 
 class Step(BaseModel):
     explanation: str
@@ -23,7 +23,7 @@ class MathResponse(BaseModel):
     steps: List[Step]
     final_answer: str
 
-client = OpenAI()
+client = AIMLAPI()
 completion = client.chat.completions.parse(
     model="gpt-4o-2024-08-06",
     messages=[
@@ -45,7 +45,7 @@ else:
 
 The `.parse()` method will also automatically parse `function` tool calls if:
 
-- You use the `openai.pydantic_function_tool()` helper method
+- You use the `aimlapi.pydantic_function_tool()` helper method
 - You mark your tool schema with `"strict": True`
 
 For example:
@@ -54,7 +54,7 @@ For example:
 from enum import Enum
 from typing import List, Union
 from pydantic import BaseModel
-import openai
+import aimlapi
 
 class Table(str, Enum):
     orders = "orders"
@@ -96,7 +96,7 @@ class Query(BaseModel):
     conditions: List[Condition]
     order_by: OrderBy
 
-client = openai.OpenAI()
+client = aimlapi.AIMLAPI()
 completion = client.chat.completions.parse(
     model="gpt-4o-2024-08-06",
     messages=[
@@ -110,7 +110,7 @@ completion = client.chat.completions.parse(
         },
     ],
     tools=[
-        openai.pydantic_function_tool(Query),
+        aimlapi.pydantic_function_tool(Query),
     ],
 )
 
@@ -140,9 +140,9 @@ It also supports all aforementioned [parsing helpers](#structured-outputs-parsin
 Unlike `.create(stream=True)`, the `.stream()` method requires usage within a context manager to prevent accidental leakage of the response:
 
 ```py
-from openai import AsyncOpenAI
+from aimlapi import AsyncAIMLAPI
 
-client = AsyncOpenAI()
+client = AsyncAIMLAPI()
 
 async with client.chat.completions.stream(
     model='gpt-4o-2024-08-06',
@@ -223,7 +223,7 @@ Emitted when a function tool call's arguments are complete.
 - `name`: The name of the function being called
 - `index`: The index of the tool call
 - `arguments`: The full raw JSON string of arguments
-- `parsed_arguments`: The fully parsed arguments object. If you used `openai.pydantic_function_tool()` this will be an instance of the given model.
+- `parsed_arguments`: The fully parsed arguments object. If you used `aimlapi.pydantic_function_tool()` this will be an instance of the given model.
 
 #### LogprobsContentDeltaEvent
 
@@ -294,11 +294,11 @@ You can subscribe to events by creating an event handler class and overloading t
 
 ```python
 from typing_extensions import override
-from openai import AssistantEventHandler, OpenAI
-from openai.types.beta.threads import Text, TextDelta
-from openai.types.beta.threads.runs import ToolCall, ToolCallDelta
+from aimlapi import AIMLAPI, AssistantEventHandler
+from aimlapi.types.beta.threads import Text, TextDelta
+from aimlapi.types.beta.threads.runs import ToolCall, ToolCallDelta
 
-client = openai.OpenAI()
+client = AIMLAPI()
 
 # First, we create a EventHandler class to define
 # how we want to handle the events in the response stream.
