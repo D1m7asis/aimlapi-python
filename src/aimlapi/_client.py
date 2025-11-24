@@ -21,6 +21,7 @@ from openai.lib.azure import AzureOpenAI as _AzureOpenAI, AsyncAzureOpenAI as _A
 if TYPE_CHECKING:
     from .resources.audio import Audio as _AimlAudio, AsyncAudio as _AimlAsyncAudio
     from .resources.chat import Chat as _AimlChat, AsyncChat as _AimlAsyncChat
+    from .resources.images import Images as _AimlImages, AsyncImages as _AimlAsyncImages
     from .resources.videos import Videos as _AimlVideos, AsyncVideos as _AimlAsyncVideos
 
 DEFAULT_BASE_URL = "https://api.aimlapi.com/v1"
@@ -130,6 +131,12 @@ class AIMLAPI(_ToolSchemaCleanupMixin, _OpenAI):
         return _AimlAudioImpl(self)
 
     @cached_property
+    def images(self) -> "_AimlImages":  # type: ignore[override]
+        from .resources.images import Images as _AimlImagesImpl
+
+        return _AimlImagesImpl(self)
+
+    @cached_property
     def videos(self) -> "_AimlVideos":
         from .resources.videos import Videos as _AimlVideosImpl
 
@@ -165,6 +172,12 @@ class AsyncAIMLAPI(_ToolSchemaCleanupMixin, _AsyncOpenAI):
         from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
 
         return _AimlAsyncAudioImpl(self)
+
+    @cached_property
+    def images(self) -> "_AimlAsyncImages":  # type: ignore[override]
+        from .resources.images import AsyncImages as _AimlAsyncImagesImpl
+
+        return _AimlAsyncImagesImpl(self)
 
     @cached_property
     def videos(self) -> "_AimlAsyncVideos":
@@ -203,6 +216,12 @@ class AzureAIMLAPI(_ToolSchemaCleanupMixin, _AzureOpenAI):
         return _AimlAudioImpl(self)
 
     @cached_property
+    def images(self) -> "_AimlImages":  # type: ignore[override]
+        from .resources.images import Images as _AimlImagesImpl
+
+        return _AimlImagesImpl(self)
+
+    @cached_property
     def videos(self) -> "_AimlVideos":
         from .resources.videos import Videos as _AimlVideosImpl
 
@@ -237,6 +256,12 @@ class AsyncAzureAIMLAPI(_ToolSchemaCleanupMixin, _AsyncAzureOpenAI):
         from .resources.audio import AsyncAudio as _AimlAsyncAudioImpl
 
         return _AimlAsyncAudioImpl(self)
+
+    @cached_property
+    def images(self) -> "_AimlAsyncImages":  # type: ignore[override]
+        from .resources.images import AsyncImages as _AimlAsyncImagesImpl
+
+        return _AimlAsyncImagesImpl(self)
 
     @cached_property
     def videos(self) -> "_AimlAsyncVideos":

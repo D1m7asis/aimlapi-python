@@ -9,6 +9,13 @@ from openai._utils import is_mapping
 from openai.lib.streaming.responses import _responses as streaming_responses
 from openai.resources.responses import responses as openai_responses
 from openai.resources.responses.responses import *  # noqa: F401, F403
+from openai.types.responses.response_image_gen_call_partial_image_event import (
+    ResponseImageGenCallPartialImageEvent,
+)
+from openai.types.responses.response_output_item import ImageGenerationCall
+from openai.types.responses.response_output_item_done_event import (
+    ResponseOutputItemDoneEvent,
+)
 
 _SyncStreamT = TypeVar("_SyncStreamT", bound="_openai_streaming.Stream[Any]")
 _AsyncStreamT = TypeVar("_AsyncStreamT", bound="_openai_streaming.AsyncStream[Any]")
@@ -134,6 +141,35 @@ def _patch_streaming() -> None:
 
 
 _patch_streaming()
+
+
+def _patch_image_events() -> None:
+    """Add compatibility aliases for image streaming payloads.
+
+    The AIML API returns base64-encoded image data using the `partial_image_b64`
+    field for streaming progress events and `result` for final output items. The
+    OpenAI SDK expects `b64_json` when working with image responses. To keep the
+    SDK ergonomic, we expose a `b64_json` property on the relevant event models
+    and their nested payloads.
+    """
+
+    if not hasattr(ResponseImageGenCallPartialImageEvent, "b64_json"):
+        ResponseImageGenCallPartialImageEvent.b64_json = property(  # type: ignore[attr-defined]
+            lambda self: getattr(self, "partial_image_b64", None)
+        )
+
+    if not hasattr(ImageGenerationCall, "b64_json"):
+        ImageGenerationCall.b64_json = property(  # type: ignore[attr-defined]
+            lambda self: getattr(self, "result", None)
+        )
+
+    if not hasattr(ResponseOutputItemDoneEvent, "b64_json"):
+        ResponseOutputItemDoneEvent.b64_json = property(  # type: ignore[attr-defined]
+            lambda self: getattr(getattr(self, "item", None), "b64_json", None)
+        )
+
+
+_patch_image_events()
 
 _BaseResponseStream = streaming_responses.ResponseStream
 _BaseAsyncResponseStream = streaming_responses.AsyncResponseStream
