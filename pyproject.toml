@@ -1,7 +1,7 @@
 [project]
 name = "aimlapi"
-version = "2.7.2"
-description = "AI/ML API Python SDK (OpenAI compatible)"
+version = "2.8.1"
+description = "AI/ML API Python SDK"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
